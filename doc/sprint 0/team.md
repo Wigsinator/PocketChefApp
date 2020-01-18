@@ -7,7 +7,8 @@
 | Jennifer Huynh    | huynhj16 | 416-908-9128 | jenniferr.huynh@mail.utoronto.ca   |
 | Michelle Lim      | limmich9 | 416-834-7327 | mich.lim@mail.utoronto.ca          |
 | Danica Navaretnam | navaret3 | 613-618-8216 | danica.navaretnam@mail.utoronto.ca |
-| Mengning Yang     | yangme16 | 647-688-2308 | coco.yang@mail.utoronto.ca         | 
+| Mengning Yang     | yangme16 | 647-688-2308 | coco.yang@mail.utoronto.ca         |
+| Oliver Roth       | rotholiv | 416-899-8252 | oliver.roth@mail.utoronto.ca       |
 
 ---
 
