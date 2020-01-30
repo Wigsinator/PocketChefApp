@@ -16,3 +16,8 @@ Build an android app that allows users to create, share, and download recipes fr
 
 - **Ease of creating and editing recipes:** \
 Users should feel that creating and editing recipes is quick and easy. Users should not have to worry about how to format the recipe and should just worry about the content of the recipe. 
+
+- **Connecting Users:** \ 
+Users should be able to share their recipes with ease and get feedback on their recipes through the rating system. Users who want to share their recipes should be connected to users who want to learn how to cook those recipes. Thus, connecting users with varied interests together. 
+
+- **Ease of Managing Recipes:**\ Users should feel it is easy to manage all their recipes on the app and have the option of storing it locally on their device or externally stored via a DB and accessed through wi-fi. 
