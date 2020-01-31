@@ -1,0 +1,3 @@
+The main competition for this project is allrecipes.com, another very popular recipe sharing website. The main difference between our app and theirs is ease of sharing, and fostering a sense of community. We want people to be able to build a following, something that can't be done on allrecipes. In this vein, we are going to allow people to follow specific creators, so that they can get many recipes they will like from a trusted source.
+
+Allrecipes has this functionality, but it's obfuscated and difficult to reach. They likely did this out of a desire to focus primarily on the recipes themselves, a brand decision that is fair, and while not wrong, not the direction we want to take our project. 
