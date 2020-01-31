@@ -4,15 +4,14 @@
 - Whatsapp for regular communication and sending links
 - Google Hangouts for online meetings since it can handle 6 people
 
-With the additional requirement for Microsoft Teams, we will migrate all of our documents, meetings and conversations over to that platform for the rest of the sprints. We can add all of our files and keep them localized to one place, create channels for specified topics, and even have group calls.
+With the requirement for Microsoft Teams we will migrate all of our documents, meetings and conversations over to Teams for the rest of the sprints. This is easier to keep track of since everything will be in one place.
 
 ### How did you make decisions?
 Each team member will make suggestions and all team members will then vote for ideas that they are interested in. The idea with the most votes wins.
 
 ### How did you define priority and/or points of user stories? How many rounds of voting (on average) did you need to come to a consensus for the point estimate?
 
-We evaluated whether the absence of certain features will significantly tarnish user experience with our application, if it does, we consider the feature to be high priority, otherwise, we consider it to be low priority. 
-Priority, skills required, time it takes to implement and level of difficulty are the factors that were taken into account when we were deciding the points for each user stories. Tasks that only takes one step and can be implemented very easily were assigned with 1 point. For example, unit conversion of ingredients. On the other hand, other tasks such as sharing a recipe is assigned with more points accordingly.
+We evaluated whether the absence of certain features will significantly tarnish user experience with our application, if it does, we consider the feature to be high priority, otherwise, we consider it to be low priority. Priority, skills required, time it takes to implement and level of difficulty are the factors that were taken into account when we were deciding the points for each user stories. Tasks that only takes one step and can be implemented very easily were assigned with 1 point. For example, unit conversion of ingredients. On the other hand, other tasks such as sharing a recipe is assigned with more points accordingly.
 We need roughly 2 rounds of voting to come to a consensus for the point estimate.
 
 ### Did you meet in person or online? 
@@ -22,7 +21,7 @@ We have group calls through Google Hangouts as our primary way of meetings on Fr
 We usually meet at least twice a week. We ensure that we meet in-person at every tutorial, and online on fridays. If we needed more time to discuss topics, we would schedule another online meeting on Sunday evenings or when most if not all team members are available.
 
 ### What lessons should you take forward to the next phase?
-- Team members may have different understandings of user stories. As a result, it is important to be clear in communication and ensure that every team member is on the same page.
+- Team members may have different understandings of user stories. So, it is important to be clear in communication and ensure that every team member is on the same page.
 - Things may take longer than expected, so always plan things ahead of time. 
 
 
