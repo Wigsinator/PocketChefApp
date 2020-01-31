@@ -1,26 +1,28 @@
-#### Reflect on how your team worked together. Here are a few questions that can guide you.
+### How did you organize the team? Which tools did you use, if any?
+- We use Google Docs to record everything we have planned for our project, and we make sure that everything is agreed upon by every team member.
+- We also use Doodle Polls to determine availability of each team members for meetings and work sessions.
+- Whatsapp for regular communication and sending links
+- Google Hangouts for online meetings since it can handle 6 people
 
-##### How did you organize the team? Which tools did you use, if any? 
-We use Google Docs to record everything we have planned for our project, and we make sure that everything is agreed upon by every team member. We also use Doodle Polls to determine availability of each team members for meetings and work sessions. And we use Whatsapp and Google Hangouts for communication.
+With the additional requirement for Microsoft Teams, we will migrate all of our documents, meetings and conversations over to that platform for the rest of the sprints. We can add all of our files and keep them localized to one place, create channels for specified topics, and even have group calls.
 
-With the addition of Microsoft Teams, we will primarily migrate all of our documentations, meetings and conversations over to that platform for the rest of the sprints.
+### How did you make decisions?
+Each team member will make suggestions and all team members will then vote for ideas that they are interested in. The idea with the most votes wins.
 
-##### How did you make decisions? 
-Each team member will make suggestions and all team members will vote for ideas that they are interested in. The idea with the most votes wins.
+### How did you define priority and/or points of user stories? How many rounds of voting (on average) did you need to come to a consensus for the point estimate?
 
-##### How did you define priority and/or points of user stories? How many rounds of voting (on average) did you need to come to a consensus for the point estimate? 
 We evaluated whether the absence of certain features will significantly tarnish user experience with our application, if it does, we consider the feature to be high priority, otherwise, we consider it to be low priority. 
 Priority, skills required, time it takes to implement and level of difficulty are the factors that were taken into account when we were deciding the points for each user stories. Tasks that only takes one step and can be implemented very easily were assigned with 1 point. For example, unit conversion of ingredients. On the other hand, other tasks such as sharing a recipe is assigned with more points accordingly.
 We need roughly 2 rounds of voting to come to a consensus for the point estimate.
 
-##### Did you meet in person or online? 
-We have group calls through Google Hangouts as our primary way of meetings on Fridays (5-6PM) and we use Whatsapp for instant messages. We also have in person meetings during tutorials (TUT102 9-10am) at MN.
+### Did you meet in person or online? 
+We have group calls through Google Hangouts as our primary way of meetings on Fridays (5-6PM) and we use Whatsapp for instant messages. We also have in-person meetings during tutorials (TUT102 9-10am) at MN2266.
 
-##### How frequently did you meet?
-We usually meet at least twice a week. We ensure that we meet in-person at every tutorial, and online on fridays. If we needed more time to discuss topics, we would schedule another online meeting on Sunday evenings.
+### How frequently did you meet?
+We usually meet at least twice a week. We ensure that we meet in-person at every tutorial, and online on fridays. If we needed more time to discuss topics, we would schedule another online meeting on Sunday evenings or when most if not all team members are available.
 
-##### What lessons should you take forward to the next phase?
-- Team members may have different understandings of user stories.
-- Things may take longer than expected, so always plan things ahead of time.
+### What lessons should you take forward to the next phase?
+- Team members may have different understandings of user stories. As a result, it is important to be clear in communication and ensure that every team member is on the same page.
+- Things may take longer than expected, so always plan things ahead of time. 
 
 
