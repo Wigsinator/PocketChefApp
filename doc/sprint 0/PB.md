@@ -31,7 +31,7 @@ so that the public and my followers will be able to see my recipes.
 2. Created recipe is saved on a database
 3. The public can see user's posted recipes
 
-### **LIONS-7 Convert Between Units**
+### **LION-7 Convert Between Units**
 - Priority: Low
 - Points: 1
 
@@ -41,7 +41,7 @@ As a reader of a recipe, I would like to be able to convert between the metric a
 1. For each recipe, there is a button that converts the existing measurements to the desired measurement system.
 2. There is a conversion between the metric and imperial system for volume, weight, and temperature.
 
-### **Lion-8 Search Dictionary for Cooking Term**
+### **LION-8 Search Dictionary for Cooking Term**
 - Priority: Lowest
 - Points: 1
 
