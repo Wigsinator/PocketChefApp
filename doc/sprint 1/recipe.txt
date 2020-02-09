@@ -1,0 +1,34 @@
+Recipe Paramter Types:
+
+title : string
+serving size : int
+ingredients : array of ingredients
+steps : array of strings
+tags : array of strings
+
+Ingredient Parameter Types:
+
+ingredient_name : string
+quantity : float
+quantity_type : string
+
+
+{
+	"title": "",
+	"serving size": 0,
+	"ingredients":[
+		{
+			"ingredient_name": "",
+			"quantity": 0.0,
+			"quantity_type": ""
+		}
+	],
+	"steps":[
+		"",
+		""
+	],
+	"tags":[
+		"",
+		""
+	]
+}
