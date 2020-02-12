@@ -1,5 +1,9 @@
 package com.lions.cookbook;
 
+
+import androidx.room.Entity;
+
+@Entity
 public class Recipe {
     private String title;
     private int serving_size;
