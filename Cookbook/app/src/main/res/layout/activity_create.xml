@@ -227,7 +227,6 @@
 <!--                app:icon="@drawable/ic_add"-->
 <!--                app:iconPadding="5dp"-->
 <!--                app:iconTint="#4d4d4d"-->
-<!--                tools:text="Add New Step" />-->
 
             <!--         Button to Create the Recipe-->
             <com.google.android.material.button.MaterialButton
@@ -246,7 +245,6 @@
                 app:iconPadding="10dp"
                 app:iconTint="#4d4d4d"
                 tools:text="CREATE RECIPE" />
-
         </LinearLayout>
 
     </ScrollView>
