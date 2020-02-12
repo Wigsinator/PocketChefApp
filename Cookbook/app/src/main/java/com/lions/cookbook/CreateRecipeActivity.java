@@ -5,9 +5,18 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * VIEW: Displays the create recipe screen
@@ -15,6 +24,8 @@ import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
 public class CreateRecipeActivity extends AppCompatActivity implements CreateRecipeContract.CreateRecipeMVPView {
     private CreateRecipeModel model;
     private CreateRecipePresent presenter;
+    private ArrayList<String> recipesteps;
+    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +35,11 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
         presenter = new CreateRecipePresent(this, model);
         CreateRecipeActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.create_recipe_activity);
         binding.setPresenter(presenter);
-
+        String[] filler = {"one"};
+        ListView lv = (ListView) findViewById(R.id.steps);
+        recipesteps = new ArrayList<>(Arrays.asList(filler));
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recipesteps);
+        lv.setAdapter(arrayAdapter);
     }
 
     @Override
@@ -58,8 +73,9 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
 
     @Override
     public Integer getServingSize() {
-        //findViewById()
-        return null;
+        EditText text = findViewById(R.id.serving_size);
+        String value = text.getText().toString();
+        return Integer.parseInt(value);
     }
 
     @Override
@@ -69,6 +85,35 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
 
     @Override
     public String getRecipeTitle() {
-        return null;
+        EditText text = findViewById(R.id.recipe_title);
+        String title = text.getText().toString();
+        return title;
+    }
+
+    @Override
+    public String getNewStep() {
+        EditText text = findViewById(R.id.stepField);
+        String aStep = text.getText().toString();
+        return aStep;
+    }
+
+    @Override
+    public void addNewStep(String new_step) {
+        Log.d("test", "Adding new step");
+        recipesteps.add(new_step);
+        arrayAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "Added new step", Toast.LENGTH_SHORT).show();
+ /**
+        this.recipesteps.add(new_step);
+        arrayAdapter.clear();
+        arrayAdapter.addAll(this.recipesteps);
+        arrayAdapter.notifyDataSetChanged();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
+  **/
     }
 }

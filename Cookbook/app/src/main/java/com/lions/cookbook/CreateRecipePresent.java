@@ -1,10 +1,15 @@
 package com.lions.cookbook;
 
+import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVPPresenter{
     private CreateRecipeContract.CreateRecipeMVPView nView;
     private CreateRecipeContract.CreateRecipeModel nModel;
+    private List<String> recipesteps;
 
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeModel model){
         nView = view;
@@ -17,6 +22,7 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
         String ingredients = nView.getRecipeIngredients();
         String title = nView.getRecipeTitle();
         Integer serving_size = nView.getServingSize();
+        Log.d("Retrieve info", "Title:" + title + " serving_size" + serving_size);
 
         //Error checking here
         boolean any_errors = false;
@@ -38,5 +44,11 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     @Override
     public void handleGoToCookBookScreen(View view) {
         nView.goToCookBookScreen();
+    }
+
+    @Override
+    public void handleAddSteps(View view) {
+        String new_step = nView.getNewStep();
+        nView.addNewStep(new_step);
     }
 }

@@ -2,6 +2,8 @@ package com.lions.cookbook;
 
 import android.view.View;
 
+import java.util.List;
+
 /**
  * Defines contract between View {@link CreateRecipeActivity} and Presneter {@link CreateRecipePresent}
  * */
@@ -16,12 +18,15 @@ public interface CreateRecipeContract {
         Integer getServingSize();
         String getRecipeSteps();
         String getRecipeTitle();
+        String getNewStep();
+        void addNewStep(String new_step);
     }
 
 
     interface CreateRecipeMVPPresenter{
         void handleCreateRecipeClicked(View view);
         void handleGoToCookBookScreen(View view);
+        void handleAddSteps(View view);
     }
 
     interface CreateRecipeModel {
