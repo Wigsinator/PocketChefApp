@@ -12,7 +12,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateRecipeActivity">
-
     <ScrollView android:layout_marginTop="10dp"
         android:layout_marginBottom="60dp"
         android:layout_width="fill_parent"
@@ -101,14 +100,18 @@
                     android:textStyle="bold"/>
             </RelativeLayout>
 
-            <ListView
-                android:id="@+id/ingredients"
-                android:layout_width="350dp"
+            <RelativeLayout
+                android:layout_width="390dp"
                 android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true">
-            </ListView>
+                android:layout_height="400dp">
+
+                <ListView
+                    android:id="@+id/ingredients"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"></ListView>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/ingredientEntry"
@@ -137,7 +140,8 @@
                     android:layout_alignParentRight="true"
                     android:backgroundTint="#FFA843"
                     android:textSize="20dp"
-                    android:text="Add"  />
+                    android:text="Add"
+                    android:onClick="@{presenter::handleAddIngredient;}"/>
             </RelativeLayout>
 
             <!--            <com.google.android.material.button.MaterialButton-->
@@ -171,13 +175,18 @@
                 android:textSize="18dp"
                 android:textStyle="bold"/>
 
-            <ListView
-                android:id="@+id/steps"
-                android:layout_width="349dp"
-                android:layout_height="108dp"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"></ListView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+                <ListView
+                    android:id="@+id/steps"
+                    android:layout_width="350dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true">
+                </ListView>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/stepEntry"
@@ -265,8 +274,7 @@
             app:itemIconTint="#ffffff"
             app:itemTextColor="#ffffff"
             app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/bottom_navigation_menu"
-            android:onClick="@{presenter::handleGoToCookBookScreen;}"/>
+            app:menu="@menu/bottom_navigation_menu" />
     </FrameLayout>
 
 </RelativeLayout>
