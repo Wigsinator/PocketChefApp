@@ -14,7 +14,7 @@ public class RecipeModel{
     private RecipeRepository mRepository;
     private LiveData<List<Recipe>> mAllRecipes;
 
-    private RecipeModel(Application application) {
+    public RecipeModel(Application application) {
         mRepository = new RecipeRepository(application);
         mAllRecipes = mRepository.getAllRecipes();
     }
