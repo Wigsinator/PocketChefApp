@@ -1,23 +1,27 @@
 package com.lions.cookbook;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
-public class RecipeModel {
+import java.util.List;
 
-    private static RecipeModel model = null;
+public class RecipeModel{
+
     private Recipe recipe;
-    private RecipeDatabase db;
+    private RecipeRepository mRepository;
+    private LiveData<List<Recipe>> mAllRecipes;
 
-    private RecipeModel() {
-        this.recipe = null;
+    private RecipeModel(Application application) {
+        mRepository = new RecipeRepository(application);
+        mAllRecipes = mRepository.getAllRecipes();
     }
 
-    public static RecipeModel getRecipeModel() {
-        if (model == null) {
-            model = new RecipeModel();
-        }
-        return model;
-    }
+    LiveData<List<Recipe>> getAllRecipes() {return mAllRecipes;}
+
+    public void insert(Recipe recipe) {mRepository.insert(recipe);}
 
     public Recipe createBlankRecipe() {
         Ingredient[] ingredients = new Ingredient[50];
@@ -31,11 +35,4 @@ public class RecipeModel {
         return this.recipe;
     }
 
-    public void saveRecipe() {
-        //TODO
-    }
-
-    public void loadRecipe() {
-        //TODO
-    }
 }
