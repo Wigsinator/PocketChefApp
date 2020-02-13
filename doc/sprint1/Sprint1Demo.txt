@@ -1,0 +1,25 @@
+Marking Rubric for the Sprint 1 class demo
+==========================================
+Team name: Lions
+
+Attendance: 2 marks full team is attending, 1 mark if at least one member not present, 0 marks the whole team not present
+Your mark: 2
+
+Working software: 8 marks if at least 4 features work flawlessly, take away 1 mark for each error or missing records on Jira.
+Your mark: 8
+
+Notes:
+- All work was done under LION-6, each sub-task was a "feature"
+- Used DataBinding for buttons
+
+Features:
+- Focus was "Create Recipe"
+  - Able to enter a recipe title [good]
+  - Enter a serving size [good]
+  - Enter the ingredient steps [good]
+  - Able to enter ingredients [good]
+  - Show all recipes that exist [good]
+  - Viewing recipe details [good]
+
+
+Total demo mark: 10/10
