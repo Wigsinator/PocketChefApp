@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public interface CookBookContract {
     interface CookBookMVPView{
         void goToCreateRecipeScreen();
-        void goToViewRecipe(String recipeName, Integer servingSize, String ingredients, List steps);
-        String getNameRecipeClicked();
+        void goToViewRecipe(String recipeName, String servingSize, String ingredients, List steps);
 
     }
 
@@ -16,13 +15,13 @@ public interface CookBookContract {
         List getRecipeNamesDB();
         List getRecipeSteps(String recipeName);
         String getRecipeIngredients(String recipeName);
-        Integer getRecipeServingSize(String recipeName);
+        String getRecipeServingSize(String recipeName);
     }
 
     interface CookBookMVPPresenter{
-        List getRecipeNames();
+        ArrayList getRecipeNames();
         void handleCreateRecipeClicked();
-        void handleRecipeClicked();
+        void handleRecipeClicked(String recipeName);
 
 
     }

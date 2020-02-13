@@ -1,5 +1,7 @@
 package com.lions.cookbook;
 
+import java.util.ArrayList;
+
 public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeModel{
     CreateRecipeModel(){
 
@@ -11,7 +13,7 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMode
     }
 
     @Override
-    public Boolean addRecipeSteps(String recipe_steps) {
+    public Boolean addRecipeSteps(ArrayList recipe_steps) {
         return null;
     }
 
@@ -21,7 +23,7 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMode
     }
 
     @Override
-    public Boolean addRecipeIngredients(String recipe_ingredients) {
+    public Boolean addRecipeIngredients(ArrayList recipe_ingredients) {
         return null;
     }
 }

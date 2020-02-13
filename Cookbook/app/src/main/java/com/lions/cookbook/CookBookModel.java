@@ -19,7 +19,7 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
     }
 
     @Override
-    public Integer getRecipeServingSize(String recipeName) {
+    public String getRecipeServingSize(String recipeName) {
         return null;
     }
 }

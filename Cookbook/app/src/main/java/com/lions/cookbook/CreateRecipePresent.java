@@ -18,27 +18,39 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     @Override
     public void handleCreateRecipeClicked(View view) {
         //Get Input from user
-        String recipe_steps = nView.getRecipeSteps();
-        String ingredients = nView.getRecipeIngredients();
+        boolean any_errors = false;
+        if (nView.getRecipeSteps().isEmpty()){
+            any_errors = true;
+        }
+        if (nView.getRecipeIngredients().isEmpty()){
+            any_errors = true;
+        }
+        if (nView.getRecipeTitle() == null || nView.getRecipeTitle().equals("")){
+            any_errors = true;
+        }
+        if (nView.getServingSize() == null || nView.getServingSize().equals("")){
+            any_errors = true;
+        }
+        /**
         String title = nView.getRecipeTitle();
         Integer serving_size = nView.getServingSize();
         Log.d("Retrieve info", "Title:" + title + " serving_size" + serving_size);
+        **/
 
-        //Error checking here
-        boolean any_errors = false;
-        //Fill in error checking here!
         if (any_errors){
             nView.showUnfilledError();
         } else {
             //Add Information to database
+            /**
             nModel.addRecipeTitle(title);
             nModel.addRecipeIngredients(ingredients);
             nModel.addServingSize(serving_size);
             nModel.addRecipeSteps(recipe_steps);
+            **/
+            nView.showSuccessfulCreation();
+            nView.goToCookBookScreen();
         }
 
-        nView.showSuccessfulCreation();
-        nView.goToCookBookScreen();
     }
 
     @Override
@@ -50,5 +62,11 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     public void handleAddSteps(View view) {
         String new_step = nView.getNewStep();
         nView.addNewStep(new_step);
+    }
+
+    @Override
+    public void handleAddIngredient(View view) {
+        String new_ingredient = nView.getNewIngredient();
+        nView.addNewIngredient(new_ingredient);
     }
 }

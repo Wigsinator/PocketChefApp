@@ -26,6 +26,8 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
     private CreateRecipePresent presenter;
     private ArrayList<String> recipesteps;
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> ingredients;
+    private ArrayAdapter<String> ingredientsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,17 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
         presenter = new CreateRecipePresent(this, model);
         CreateRecipeActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.create_recipe_activity);
         binding.setPresenter(presenter);
-        String[] filler = {"one"};
+        //String[] filler = {"one"};
         ListView lv = (ListView) findViewById(R.id.steps);
-        recipesteps = new ArrayList<>(Arrays.asList(filler));
+        recipesteps = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recipesteps);
         lv.setAdapter(arrayAdapter);
+
+        ListView ingredients_lv = (ListView) findViewById(R.id.ingredients);
+        ingredients = new ArrayList<>();
+        ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingredients);
+        ingredients_lv.setAdapter(ingredientsAdapter);
+
     }
 
     @Override
@@ -67,20 +75,20 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
     }
 
     @Override
-    public String getRecipeIngredients() {
-        return null;
+    public ArrayList getRecipeIngredients() {
+        return this.ingredients;
     }
 
     @Override
-    public Integer getServingSize() {
+    public String getServingSize() {
         EditText text = findViewById(R.id.serving_size);
         String value = text.getText().toString();
-        return Integer.parseInt(value);
+        return value;
     }
 
     @Override
-    public String getRecipeSteps() {
-        return null;
+    public ArrayList getRecipeSteps() {
+        return this.recipesteps;
     }
 
     @Override
@@ -99,21 +107,23 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
 
     @Override
     public void addNewStep(String new_step) {
-        Log.d("test", "Adding new step");
         recipesteps.add(new_step);
         arrayAdapter.notifyDataSetChanged();
         Toast.makeText(this, "Added new step", Toast.LENGTH_SHORT).show();
- /**
-        this.recipesteps.add(new_step);
-        arrayAdapter.clear();
-        arrayAdapter.addAll(this.recipesteps);
-        arrayAdapter.notifyDataSetChanged();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                arrayAdapter.notifyDataSetChanged();
-            }
-        });
-  **/
+    }
+
+    @Override
+    public String getNewIngredient() {
+        EditText text = findViewById(R.id.ingredientField);
+        String ingredient = text.getText().toString();
+        return ingredient;
+    }
+
+    @Override
+    public void addNewIngredient(String new_ingredient) {
+        ingredients.add(new_ingredient);
+        ingredientsAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "Added new ingredients", Toast.LENGTH_SHORT).show();
+
     }
 }

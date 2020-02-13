@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +19,7 @@ import java.util.List;
 public class CookBookActivity extends AppCompatActivity implements CookBookContract.CookBookMVPView{
     private CookBookPresent presenter;
     private CookBookModel model1;
+    private ArrayAdapter<String> arrayAdapter;
 
     //Good Tutorial on listView: https://abhiandroid.com/ui/listview for texts and pictures
     @Override
@@ -25,10 +29,22 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         model1 = new CookBookModel();
         presenter = new CookBookPresent(this, model1);
         //Populate with List of Recipe names
-        ListView simpleList = (ListView)findViewById(R.id.simpleListView); //Fill in with actual id of List view
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.cook_book_activity, R.id.textView, presenter.getRecipeNames());
-        simpleList.setAdapter(arrayAdapter);
+        final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, presenter.getRecipeNames());
+        RecipeList.setAdapter(arrayAdapter);
+        RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String recipeName = (String) RecipeList.getItemAtPosition(i);
+                presenter.handleRecipeClicked(recipeName);
+            }
+        });
+
     }
+
+
+
+
 
 
     @Override
@@ -39,12 +55,11 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
     }
 
     @Override
-    public void goToViewRecipe(String recipeName, Integer servingSize, String ingredients, List steps) {
+    public void goToViewRecipe(String recipeName, String servingSize, String ingredients, List steps) {
+        Intent intent = new Intent(this, ViewRecipeActivity.class);
+        intent.putExtra("RECIPE_NAME", recipeName);
+        startActivity(intent);
 
     }
 
-    @Override
-    public String getNameRecipeClicked() {
-        return null;
-    }
 }
