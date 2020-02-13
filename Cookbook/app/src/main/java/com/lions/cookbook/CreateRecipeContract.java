@@ -15,7 +15,7 @@ public interface CreateRecipeContract {
         void showUnfilledError();
         void showSuccessfulCreation();
         void showCreationError();
-        ArrayList getRecipeIngredients();
+        ArrayList<String> getRecipeIngredients();
         String getServingSize();
         ArrayList getRecipeSteps();
         String getRecipeTitle();

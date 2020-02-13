@@ -103,7 +103,7 @@
             <RelativeLayout
                 android:layout_width="390dp"
                 android:layout_gravity="center"
-                android:layout_height="400dp">
+                android:layout_height="200dp">
 
                 <ListView
                     android:id="@+id/ingredients"
@@ -177,7 +177,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp">
+                android:layout_height="200dp">
                 <ListView
                     android:id="@+id/steps"
                     android:layout_width="350dp"

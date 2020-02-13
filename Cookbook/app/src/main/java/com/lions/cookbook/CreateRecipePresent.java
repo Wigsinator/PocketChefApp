@@ -9,11 +9,13 @@ import java.util.List;
 public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVPPresenter{
     private CreateRecipeContract.CreateRecipeMVPView nView;
     private CreateRecipeContract.CreateRecipeModel nModel;
+    //private RecipeModel firebase_db;
     private List<String> recipesteps;
 
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeModel model){
         nView = view;
         nModel = model;
+        //firebase_db = new RecipeModel();
     }
     @Override
     public void handleCreateRecipeClicked(View view) {
@@ -36,11 +38,30 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
         Integer serving_size = nView.getServingSize();
         Log.d("Retrieve info", "Title:" + title + " serving_size" + serving_size);
         **/
+        /*
+
+        String[] steps = new String[nView.getRecipeSteps().size()];
+        for (int i = 0; i < nView.getRecipeSteps().size(); i++){
+            steps[i] = (String) nView.getRecipeSteps().get(i);
+        }
+
+        String title = nView.getRecipeTitle();
+        Integer serving_size = Integer.parseInt(nView.getServingSize());
+        String username = "Bob";
+        Ingredient[] ingredients = new Ingredient[nView.getRecipeIngredients().size()];
+        for (int i = 0; i < nView.getRecipeIngredients().size(); i++){
+            String[] values = nView.getRecipeIngredients().get(i).split(",");
+            Ingredient new_ingredient = new Ingredient(values[0], Float.parseFloat(values[1]), values[2]);
+            ingredients[i] = new_ingredient;
+        }
+        */
 
         if (any_errors){
             nView.showUnfilledError();
         } else {
             //Add Information to database
+            //Recipe new_recipe = new Recipe(nView.getRecipeTitle(), "Bob", serving_size, ingredients, null, steps );
+
             /**
             nModel.addRecipeTitle(title);
             nModel.addRecipeIngredients(ingredients);
