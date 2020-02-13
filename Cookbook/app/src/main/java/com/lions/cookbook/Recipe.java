@@ -3,16 +3,18 @@ package com.lions.cookbook;
 
 import androidx.room.Entity;
 
-@Entity
+@Entity(primaryKeys = {"title","username"},tableName = "recipe_database")
 public class Recipe {
     private String title;
+    private String username;
     private int serving_size;
     private Ingredient[] ingredients;
     private String[] tags;
     private String[] steps;
 
-    public Recipe(String title, int serving_size, Ingredient[] ingredients, String[] tags, String[] steps){
+    public Recipe(String title, String username,int serving_size, Ingredient[] ingredients, String[] tags, String[] steps){
         this.title = title;
+        this.username = username;
         this.serving_size = serving_size;
         this.ingredients = ingredients;
         this.tags = tags;
@@ -21,6 +23,10 @@ public class Recipe {
 
     public void changeTitle(String title){
         this.title = title;
+    }
+
+    public void changeUsername(String username){
+        this.username = username;
     }
 
     public void changeServingSize(int size){
@@ -42,6 +48,8 @@ public class Recipe {
     public String getTitle(){
         return this.title;
     }
+
+    public String getUsername() { return this.username; }
 
     public int getServingSize(){
         return this.serving_size;
