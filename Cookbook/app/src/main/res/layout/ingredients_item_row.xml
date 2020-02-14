@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="390dp"
+    android:layout_height="60dp"
+    android:layout_gravity="center"
+    android:orientation="horizontal" >
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeleteIngredient"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:backgroundTint="#DF5252"
+        app:icon="@drawable/ic_delete"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"/>
+
+    <EditText
+        android:id="@+id/itemIngredient"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:inputType="text"
+        android:padding="10dp"
+        android:layout_margin="6dp"
+        android:background="@drawable/text_frame"
+        android:layout_toRightOf="@id/btnDeleteIngredient"
+        android:hint="New Ingredient"
+        android:textColorHint="#4d4d4d"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/stepAmount"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="text"
+        android:padding="10dp"
+        android:layout_margin="6dp"
+        android:background="@drawable/text_frame"
+        android:layout_toRightOf="@id/itemIngredient"
+        android:hint="New Step"
+        android:textColorHint="#4d4d4d"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
