@@ -1,18 +1,22 @@
 package com.lions.cookbook;
-
-
+import java.util.*;
 import androidx.room.Entity;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 @Entity(primaryKeys = {"title","username"},tableName = "recipe_database")
 public class Recipe {
     private String title;
     private String username;
     private int serving_size;
-    private Ingredient[] ingredients;
-    private String[] tags;
-    private String[] steps;
+    @TypeConverters(RecipeListConverter.class)
+    private List<Ingredient> ingredients;
+    @TypeConverters(RecipeListConverter.class)
+    private List<String> tags;
+    @TypeConverters(RecipeListConverter.class)
+    private List<String> steps;
 
-    public Recipe(String title, String username,int serving_size, Ingredient[] ingredients, String[] tags, String[] steps){
+    public Recipe(String title, String username,int serving_size, List<Ingredient> ingredients, List<String>tags, List<String> steps){
         this.title = title;
         this.username = username;
         this.serving_size = serving_size;
@@ -33,15 +37,15 @@ public class Recipe {
         this.serving_size = size;
     }
 
-    public void changeIngredients(Ingredient[] ingredients){
+    public void changeIngredients(List<Ingredient> ingredients){
         this.ingredients = ingredients;
     }
 
-    public void changeTags(String[] tags){
+    public void changeTags(List<String> tags){
         this.tags = tags;
     }
 
-    public void changeSteps(String[] steps){
+    public void changeSteps(List<String> steps){
         this.steps = steps;
     }
 
@@ -55,15 +59,15 @@ public class Recipe {
         return this.serving_size;
     }
 
-    public Ingredient[] getIngredients(){
+    public List<Ingredient> getIngredients(){
         return this.ingredients;
     }
 
-    public String[] getTags(){
+    public List<String> getTags(){
         return this.tags;
     }
 
-    public String[] getSteps(){
+    public List<String> getSteps(){
         return this.steps;
     }
 }

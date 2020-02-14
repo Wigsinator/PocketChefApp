@@ -5,11 +5,13 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import 	androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Recipe.class}, version = 1)
+@TypeConverters({RecipeListConverter.class})
 public abstract class RecipeDatabase extends RoomDatabase{
     public abstract RecipeDao recipeDao();
     private static volatile RecipeDatabase INSTANCE;
