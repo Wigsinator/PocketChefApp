@@ -56,16 +56,13 @@ All the tasks for these user stories are broken down below and are separated int
     - **Model (Jennifer & William)**:
         - LION-27: Set up Database
         - LION-33: Create a Blank Recipe
-        - LION-34: Set Recipe Title
-        - LION-35: Set Serving Size
-        - LION-36: Add Ingredient
-        - LION-37: Add Step (Cooking)
-        - LION-38: Add Tag (Keywords)
-    
+
     - **Presenter (Michelle & Coco)**:
-        - LION-28: Add listeners for each section of the view
+        - LION-28: Obtain information from View
         - LION-29: Conduct validation check for entered information
         - LION-30: Change view to CookBook view once a recipe is created
+        - LION-45: Create presenter and contract for viewing cookbook
+        - LION-48: Presenter: Given a list of recipe titles, display this in listView in the CookBook
 
     - **View (Harsh & Danica)**:
         - LION-31: Setup CookBook View
