@@ -1,3 +1,4 @@
+/*
 package com.lions.cookbook;
 
 import androidx.lifecycle.LiveData;
@@ -16,3 +17,4 @@ public interface RecipeDao {
     @Query("SELECT * from recipe_database ORDER BY recipe ASC")
     LiveData<List<Recipe>> getAlphabetizedRecipes();
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.lions.cookbook;
 import java.util.*;
 import androidx.room.Entity;
@@ -71,3 +72,5 @@ public class Recipe {
         return this.steps;
     }
 }
+
+ */
