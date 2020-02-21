@@ -2,28 +2,18 @@ package com.lions.cookbook;
 
 import java.util.ArrayList;
 
-public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeModel{
+public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPModel{
     CreateRecipeModel(){
 
     }
 
     @Override
-    public Boolean addRecipeTitle(String recipe_title) {
-        return null;
+    public Boolean ExistRecipeName(String recipe_name) {
+        return false;
     }
 
     @Override
-    public Boolean addRecipeSteps(ArrayList recipe_steps) {
-        return null;
-    }
-
-    @Override
-    public Boolean addServingSize(Integer serving_size) {
-        return null;
-    }
-
-    @Override
-    public Boolean addRecipeIngredients(ArrayList recipe_ingredients) {
-        return null;
+    public Boolean addRecipe(Recipe new_recipe) {
+        return true;
     }
 }

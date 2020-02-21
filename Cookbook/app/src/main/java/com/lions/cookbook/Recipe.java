@@ -1,20 +1,21 @@
-/*
 package com.lions.cookbook;
 import java.util.*;
+/*
 import androidx.room.Entity;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
 @Entity(primaryKeys = {"title","username"},tableName = "recipe_database")
+*/
 public class Recipe {
     private String title;
     private String username;
     private int serving_size;
-    @TypeConverters(RecipeListConverter.class)
+    //@TypeConverters(RecipeListConverter.class)
     private List<Ingredient> ingredients;
-    @TypeConverters(RecipeListConverter.class)
+    //@TypeConverters(RecipeListConverter.class)
     private List<String> tags;
-    @TypeConverters(RecipeListConverter.class)
+    //@TypeConverters(RecipeListConverter.class)
     private List<String> steps;
 
     public Recipe(String title, String username,int serving_size, List<Ingredient> ingredients, List<String>tags, List<String> steps){
@@ -73,4 +74,3 @@ public class Recipe {
     }
 }
 
- */

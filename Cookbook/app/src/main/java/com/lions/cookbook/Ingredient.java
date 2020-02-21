@@ -1,4 +1,3 @@
-/*
 package com.lions.cookbook;
 
 public class Ingredient {
@@ -36,4 +35,3 @@ public class Ingredient {
         return this.quantity_type;
     }
 }
-*/
