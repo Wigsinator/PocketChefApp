@@ -165,6 +165,15 @@
             android:textSize="20dp"
             android:textStyle="bold"/>
 
+            <ListView
+                android:id="@+id/steps"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="415dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true">
+            </ListView>
+
         </LinearLayout>
 
         <!--NAVIGATION BAR AT THE BOTTOM-->
