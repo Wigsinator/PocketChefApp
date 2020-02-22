@@ -137,7 +137,7 @@
 
                 <!--         Button to Create Account-->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCreate"
+                    android:id="@+id/btnCreateAcct"
                     android:layout_width="350dp"
                     android:layout_height="56dp"
                     android:layout_marginTop="10dp"
@@ -147,7 +147,7 @@
                     android:textAllCaps="true"
                     android:textColor="#FFFFFF"
                     android:textSize="18dp"
-                    android:backgroundTint="#078658"
+                    android:backgroundTint="#124FA9"
                     app:iconGravity="textStart"
                     app:iconPadding="10dp"
                     app:iconTint="#4d4d4d"
@@ -159,14 +159,14 @@
         <FrameLayout
             android:id="@+id/navBar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true">
             <!-- Main content -->
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                app:itemIconSize="40dp"
+                app:itemIconSize="35dp"
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:background="#4d4d4d"
                 app:itemIconTint="#ffffff"
