@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Pocket Chef</string>
+
+    <string name="measurement_prompt">Choose Measurement</string>
+
+    <string-array name="measurement_array">
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>fl. oz.</item>
+        <item>cup</item>
+        <item>quart</item>
+        <item>gallon</item>
+        <item>ml</item>
+        <item>L</item>
+        <item>oz.</item>
+        <item>lb</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>NULL</item> <!--This is for items like 6 tomatoes (no actual measurement?) -->
+    </string-array>
 </resources>

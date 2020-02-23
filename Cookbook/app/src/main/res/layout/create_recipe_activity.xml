@@ -130,10 +130,36 @@
                     android:layout_marginStart="20dp"
                     android:layout_margin="6dp"
                     android:background="@drawable/text_frame"
-                    android:layout_toLeftOf="@id/btnAddIngredient"
                     android:hint="New Ingredient"
                     android:textColorHint="#4d4d4d"
                     android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:id="@+id/amountField"
+                    android:layout_width="145dp"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:layout_marginStart="20dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/text_frame"
+                    android:layout_toLeftOf="@id/measurements"
+                    android:hint="New Amount"
+                    android:textColorHint="#4d4d4d"
+                    android:textStyle="bold"/>
+
+                <Spinner
+                    android:id="@+id/measurements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/btnAddIngredient"
+                    android:entries="@array/measurement_array"
+                    android:prompt="@string/measurement_prompt" />
 
                 <Button
                     android:id="@+id/btnAddIngredient"
@@ -145,6 +171,7 @@
                     android:text="Add"
                     android:onClick="@{presenter::handleAddIngredient;}"/>
             </RelativeLayout>
+
 
 <!--                        <com.google.android.material.button.MaterialButton-->
 <!--                            android:id="@+id/btnIngredientNew"-->
