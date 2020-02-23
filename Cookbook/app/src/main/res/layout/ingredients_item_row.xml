@@ -6,16 +6,6 @@
     android:layout_gravity="center"
     android:orientation="horizontal" >
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDeleteIngredient"
-        android:layout_width="60dp"
-        android:layout_height="55dp"
-        android:layout_alignParentLeft="true"
-        android:backgroundTint="#DF5252"
-        app:icon="@drawable/ic_delete"
-        app:iconPadding="0dp"
-        app:iconSize="30dp"/>
-
     <EditText
         android:id="@+id/itemIngredient"
         android:layout_width="200dp"
@@ -24,22 +14,47 @@
         android:padding="10dp"
         android:layout_margin="6dp"
         android:background="@drawable/text_frame"
-        android:layout_toRightOf="@id/btnDeleteIngredient"
-        android:hint="New Ingredient"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/Amount"
+        android:hint="Ingredient"
         android:textColorHint="#4d4d4d"
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/stepAmount"
-        android:layout_width="match_parent"
+        android:id="@+id/Amount"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
         android:inputType="text"
         android:padding="10dp"
         android:layout_margin="6dp"
         android:background="@drawable/text_frame"
-        android:layout_toRightOf="@id/itemIngredient"
-        android:hint="New Step"
+        android:layout_toLeftOf="@id/amtMeasurement"
+        android:hint="Amt"
         android:textColorHint="#4d4d4d"
         android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/amtMeasurement"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:inputType="text"
+        android:padding="10dp"
+        android:layout_margin="6dp"
+        android:background="@drawable/text_frame"
+        android:layout_toLeftOf="@id/btnDeleteIngredient"
+        android:hint="Wgt"
+        android:textColorHint="#4d4d4d"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeleteIngredient"
+        android:layout_width="30dp"
+        android:layout_height="55dp"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="#DF5252"
+        app:iconGravity="textEnd"
+        android:gravity="center"
+        app:icon="@drawable/ic_delete"
+        app:iconSize="30dp"/>
 
 </RelativeLayout>
