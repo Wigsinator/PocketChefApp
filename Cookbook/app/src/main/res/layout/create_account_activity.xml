@@ -28,12 +28,54 @@
                     android:textSize="30dp"
                     android:textStyle="bold"/>
 
+                <!-- Edit Text for Username -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
+                    app:endIconDrawable="@drawable/ic_pencil"
+                    app:endIconMode="custom">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_frame"
+                        android:hint="USERNAME"
+                        android:textAlignment="center"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:textColorHint="#4d4d4d"
+                        android:id="@+id/username"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Edit Text for Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    app:endIconDrawable="@drawable/ic_pencil"
+                    app:endIconMode="custom">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/text_frame"
+                        android:hint="PASSWORD"
+                        android:inputType="textPassword"
+                        android:textAlignment="center"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:textColorHint="#4d4d4d"
+                        android:id="@+id/password"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <!-- Edit Text for First Name -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     app:endIconMode="custom"
                     app:endIconDrawable="@drawable/ic_pencil">
@@ -70,27 +112,6 @@
                         android:textSize="18dp"
                         android:textColorHint="#4d4d4d"
                         android:id="@+id/last_name"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Edit Text for Username -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="350dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15dp"
-                    app:endIconDrawable="@drawable/ic_pencil"
-                    app:endIconMode="custom">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/text_frame"
-                        android:hint="USERNAME"
-                        android:textAlignment="center"
-                        android:padding="10dp"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:textColorHint="#4d4d4d"
-                        android:id="@+id/username"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Edit Text for Phone Number -->
