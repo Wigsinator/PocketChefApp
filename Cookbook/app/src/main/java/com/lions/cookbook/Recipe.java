@@ -21,13 +21,13 @@ public class Recipe {
     @TypeConverters(RecipeListConverter.class)
     private List<String> steps;
 
-    public Recipe(String tit, String user, int size, List<Ingredient> ings, List<String>tag, List<String> step){
-        this.title = tit;
-        this.username = user;
-        this.servingSize = size;
-        this.ingredients = ings;
-        this.tags = tag;
-        this.steps = step;
+    public Recipe(String title, String username, int servingSize, List<Ingredient> ingredients, List<String> tags, List<String> steps){
+        this.title = title;
+        this.username = username;
+        this.servingSize = servingSize;
+        this.ingredients = ingredients;
+        this.tags = tags;
+        this.steps = steps;
     }
 
     public void setTitle(String title){
