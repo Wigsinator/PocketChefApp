@@ -1,4 +1,3 @@
-/*
 package com.lions.cookbook;
 
 import android.app.Application;
@@ -25,7 +24,8 @@ public class RecipeRepository {
     void insert(final Recipe recipe) {
         RecipeDatabase.databaseWriteExecutor.execute(() -> {mRecipeDao.insert(recipe);});
     }
+
+    void update(final Recipe recipe) {
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {mRecipeDao.update(recipe);});
+    }
 }
-
-
- */

@@ -1,4 +1,3 @@
-/*
 package com.lions.cookbook;
 
 import java.util.*;
@@ -38,4 +37,3 @@ public class RecipeModel{
     }
 
 }
-*/

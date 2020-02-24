@@ -33,7 +33,7 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.create_recipe_activity);
-        model = new CreateRecipeModel();
+        model = new CreateRecipeModel(this.getApplication());
         presenter = new CreateRecipePresent(this, model);
         CreateRecipeActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.create_recipe_activity);
         binding.setPresenter(presenter);
