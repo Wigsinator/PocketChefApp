@@ -1,6 +1,7 @@
 package com.lions.cookbook;
 import java.util.*;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
@@ -8,7 +9,9 @@ import androidx.room.TypeConverters;
 @Entity(primaryKeys = {"title","username"},tableName = "recipe_database")
 
 public class Recipe {
+    @NonNull
     private String title;
+    @NonNull
     private String username;
     private int serving_size;
     @TypeConverters(RecipeListConverter.class)

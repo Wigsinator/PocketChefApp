@@ -15,7 +15,7 @@ public interface RecipeDao {
     @Insert
     void insert(Recipe recipe);
 
-    @Query("SELECT * from recipe_database ORDER BY recipe ASC")
+    @Query("SELECT * from recipe_database ORDER BY title ASC")
     LiveData<List<Recipe>> getAlphabetizedRecipes();
 
     @Update
