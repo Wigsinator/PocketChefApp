@@ -6,7 +6,7 @@
 
         <variable
             name="presenter"
-            type = "com.lions.cookbook.CreateRecipePresent"/>
+            type = "com.lions.cookbook.CreateRecipeContract.CreateRecipeMVPPresenter"/>
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
