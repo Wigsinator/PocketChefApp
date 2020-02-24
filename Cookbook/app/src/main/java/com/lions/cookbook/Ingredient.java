@@ -34,4 +34,6 @@ public class Ingredient {
     public String getQuantityType(){
         return this.quantity_type;
     }
+
 }
+

@@ -1,10 +1,13 @@
 package com.lions.cookbook;
 
-import java.util.ArrayList;
+import android.app.Application;
+
 
 public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPModel{
-    CreateRecipeModel(){
+    private RecipeRepository mRepository;
 
+    public CreateRecipeModel(Application application){
+        mRepository = new RecipeRepository(application);
     }
 
     @Override
@@ -14,6 +17,7 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
 
     @Override
     public Boolean addRecipe(Recipe new_recipe) {
+        mRepository.insert(new_recipe);
         return true;
     }
 }
