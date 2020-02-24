@@ -31,7 +31,7 @@ public class RecipeListConverter {
     }
 
     @TypeConverter
-    public static List<String> stringToIngredientList(String data) {
+    public static List<Ingredient> stringToIngredientList(String data) {
         if (data == null) {
             return Collections.emptyList();
         }
