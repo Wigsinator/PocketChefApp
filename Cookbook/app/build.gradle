@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -41,4 +42,8 @@ android {
         // Test helpers
         testImplementation "androidx.room:room-testing:$room_version"
     }
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
 }
