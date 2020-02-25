@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
@@ -125,16 +126,37 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
     }
 
     @Override
-    public void addNewIngredient(String new_ingredient) {
-        ingredients.add(new_ingredient);
+    public String getNewIngredientAmount() {
+        EditText text = findViewById(R.id.amountField);
+        return text.getText().toString();
+    }
+
+    @Override
+    public String getNewIngredientType() {
+        Spinner mySpinner = (Spinner) findViewById(R.id.measurements);
+        return mySpinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public void showIngredientAddError() {
+        Toast.makeText(this, "Please fill in all fields for ingredients correctly", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addNewIngredient(String new_ingredient, String amount, String type) {
+        String compile = new_ingredient + ", " + amount + ", " + type;
+        ingredients.add(compile);
         ingredientsAdapter.notifyDataSetChanged();
         Toast.makeText(this, "Added new ingredients", Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void clearIngredientText(){
         EditText text = findViewById(R.id.ingredientField);
         text.setText("");
+        EditText amount = findViewById(R.id.amountField);
+        amount.setText("");
     }
 
     @Override
