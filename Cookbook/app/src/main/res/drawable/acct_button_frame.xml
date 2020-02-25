@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--  Button frame for different buttons on Account Page  -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval" android:padding="10dp">
-    <solid android:color="#7Fc4c4c4"/>
-    <corners
-        android:bottomRightRadius="40dp"
-        android:bottomLeftRadius="40dp"
-        android:topLeftRadius="40dp"
-        android:topRightRadius="40dp"/>
-    <size android:width="250dp" android:height="250dp"/>
-</shape>
+<selector xmlns:android = "http://schemas.android.com/apk/res/android">
+<item android:state_pressed = "false">
+    <shape android:shape = "oval">
+        <solid android:color = "#7Fc4c4c4"/>
+    </shape>
+</item>
+<item android:state_pressed = "true">
+    <shape android:shape = "oval">
+        <solid android:color = "#c4c4c4"/>
+    </shape>
+</item>
+</selector>
