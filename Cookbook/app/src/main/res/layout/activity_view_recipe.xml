@@ -84,11 +84,38 @@
                 android:background="@drawable/text_frame"
                 android:layout_alignParentBottom="true">
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:background="@drawable/text_frame"
+                        android:hint="Change Serving Size"
+                        android:padding="10dp"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColorHint="#1d1d1d"
+                        android:layout_height="match_parent"
+                        android:id="@+id/recipe_title"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
+
+                <Button
+                    android:id="@+id/btnAddIngredient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/colorGreen"
+                    android:textSize="18dp"
+                    android:text="Alter"
+                    android:textColor="#FFFFFF"
+                    android:onClick="@{presenter:handleAlterPressed;}"/>
             </RelativeLayout>
 
-
-            <!--   List of all the Ingredients & Amounts Header  -->
+            <!--  Header for Ingredients and Amounts List  -->
             <RelativeLayout
                 android:id="@+id/ingredientLayout"
                 android:layout_width="match_parent"
@@ -121,7 +148,7 @@
                     android:textStyle="bold"/>
             </RelativeLayout>
 
-            <!--   List of all the Ingredients & Amounts  -->
+            <!--  List of all the Ingredients & Amounts  -->
             <RelativeLayout
                 android:layout_width="370dp"
                 android:layout_gravity="center"
@@ -137,7 +164,7 @@
                 </ListView>
             </RelativeLayout>
 
-            <!--   List of all the steps header -->
+            <!--  Header of the Steps List  -->
             <TextView
                 android:id="@+id/StepsText"
                 android:layout_width="wrap_content"
@@ -151,7 +178,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"/>
 
-            <!--   List of all the steps  -->
+            <!--  List of all Steps  -->
             <RelativeLayout
                 android:layout_width="370dp"
                 android:layout_height="match_parent"
@@ -170,7 +197,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!--NAVIGATION BAR AT THE BOTTOM-->
+    <!-- NAVIGATION BAR AT THE BOTTOM -->
     <FrameLayout
         android:id="@+id/navBar"
         android:layout_width="match_parent"
