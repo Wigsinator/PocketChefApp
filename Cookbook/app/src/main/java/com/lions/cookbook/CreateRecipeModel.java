@@ -17,7 +17,11 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
 
     @Override
     public Boolean addRecipe(Recipe new_recipe) {
-        mRepository.insert(new_recipe);
-        return true;
+        try {
+            mRepository.insert(new_recipe);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }
