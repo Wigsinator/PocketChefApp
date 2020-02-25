@@ -14,6 +14,6 @@
         <item>lb</item>
         <item>g</item>
         <item>kg</item>
+        <item>count</item>
     </string-array>
-
 </resources>
