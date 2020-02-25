@@ -75,6 +75,7 @@
             android:textSize="20dp"
             tools:text="LOG IN" />
 
+        <!--  Text to prompt the sign up link -->
         <TextView
             android:id="@+id/new_acct"
             android:layout_width="wrap_content"
@@ -87,6 +88,7 @@
             android:textColor="#000000"
             android:textSize="16dp" />
 
+        <!--  Sign up link (THIS IS A CLICKABLE "LINK") -->
         <TextView
             android:id="@+id/signUpLink"
             android:layout_width="wrap_content"
