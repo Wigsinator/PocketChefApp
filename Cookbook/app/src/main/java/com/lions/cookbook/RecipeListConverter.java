@@ -2,6 +2,8 @@
 package com.lions.cookbook;
 import androidx.room.TypeConverter;
 import java.util.*;
+
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import com.google.gson.Gson;
@@ -10,7 +12,8 @@ public class RecipeListConverter {
     private static Gson gson;
 
     public RecipeListConverter(){
-        gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gson = gsonBuilder.create();
     }
 
     @TypeConverter
