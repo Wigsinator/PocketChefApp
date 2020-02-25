@@ -15,9 +15,13 @@ public interface RecipeDao {
     @Insert
     void insert(Recipe recipe);
 
+    @Update
+    void update(Recipe recipe);
+
     @Query("SELECT * from recipe_database ORDER BY title ASC")
     LiveData<List<Recipe>> getAlphabetizedRecipes();
 
-    @Update
-    void update(Recipe recipe);
+    @Query("SELECT * from recipe_database WHERE title = :searchTitle")
+    List<Recipe> getRecipeByTitle(String searchTitle);
+
 }
