@@ -1,6 +1,7 @@
 package com.lions.cookbook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.lions.cookbook.databinding.ActivityViewRecipeBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +27,12 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_recipe);
+        //setContentView(R.layout.activity_view_recipe);
+
+        //Set binding for createRecipe_activity and presenter
+        ActivityViewRecipeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_view_recipe);
+        binding.setPresenter(this.presenter);
+
         //Set up values
         model = new ViewRecipeModel();
         presenter = new ViewRecipePresenter(this, model);
