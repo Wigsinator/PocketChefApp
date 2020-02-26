@@ -12,6 +12,9 @@ import java.util.List;
 @Dao
 public interface RecipeDao {
 
+    @Query("DELETE FROM recipe_database")
+    void deleteAll();
+
     @Insert
     void insert(Recipe recipe);
 
@@ -21,7 +24,10 @@ public interface RecipeDao {
     @Query("SELECT * from recipe_database ORDER BY title ASC")
     LiveData<List<Recipe>> getAlphabetizedRecipes();
 
+    @Query("SELECT title from recipe_database ORDER BY title ASC")
+    LiveData<List<String>> getAlphabetizedRecipeTitles();
+
     @Query("SELECT * from recipe_database WHERE title = :searchTitle")
-    List<Recipe> getRecipeByTitle(String searchTitle);
+    LiveData<List<Recipe>> getRecipeByTitle(String searchTitle);
 
 }

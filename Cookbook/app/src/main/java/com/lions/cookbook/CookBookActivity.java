@@ -29,7 +29,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         setContentView(R.layout.cook_book_activity);
 
         //Set up values
-        model1 = new CookBookModel();
+        model1 = new CookBookModel(this.getApplication(), this);
         presenter = new CookBookPresent(this, model1);
 
         //Populate with List of Recipe names

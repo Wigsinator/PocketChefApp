@@ -2,6 +2,8 @@ package com.lions.cookbook;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 
@@ -14,8 +16,11 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
 
     @Override
     public Boolean ExistRecipeName(String recipe_name) {
-        List<Recipe> matches = mRepository.searchByTitle(recipe_name);
-        return !matches.isEmpty();
+        //List<Recipe> matches = mRepository.searchByTitle(recipe_name).getValue();
+        LiveData<List<Recipe>> matches = mRepository.getAllRecipes();
+        List<Recipe> bleh = matches.getValue();
+        System.out.println(bleh==null);
+        return !(bleh == null || bleh.isEmpty());
     }
 
     @Override
