@@ -7,19 +7,17 @@ import java.util.ArrayList;
 public interface CookBookContract {
     interface CookBookMVPView{
         void goToCreateRecipeScreen();
-        void goToViewRecipe(String recipeName, String servingSize, String ingredients, List steps);
+        void goToViewRecipe(String recipeClickedOn);
 
     }
 
     interface CookBookMVPModel{
-        List getRecipeNamesDB();
-        List getRecipeSteps(String recipeName);
-        String getRecipeIngredients(String recipeName);
-        String getRecipeServingSize(String recipeName);
+        ArrayList<String> getRecipeNamesDB(); //Return ArrayList of all recipe names stored in DB.
+        List<String> getRecipeImages(); //THIS WILL BE HARDCODED FOR THE DEMO. Do not change this.
     }
 
     interface CookBookMVPPresenter{
-        ArrayList getRecipeNames();
+        ArrayList<String> getRecipeNames(); //Retrieve Recipe names from Model
         void handleCreateRecipeClicked();
         void handleRecipeClicked(String recipeName);
 

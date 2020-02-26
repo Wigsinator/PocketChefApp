@@ -24,7 +24,10 @@ public interface CreateRecipeContract {
         String getNewStep();
         void addNewStep(String new_step);
         String getNewIngredient();
-        void addNewIngredient(String new_ingredient);
+        String getNewIngredientAmount();
+        String getNewIngredientType();
+        void showIngredientAddError();
+        void addNewIngredient(String new_ingredient, String amount, String type);
         void clearIngredientText();
         void clearStepText();
     }
@@ -35,6 +38,7 @@ public interface CreateRecipeContract {
         void handleGoToCookBookScreen(View view);
         void handleAddSteps(View view);
         void handleAddIngredient(View view);
+        Boolean checkIngredient();
         Boolean conductEmptyErrorChecks();
         Boolean conductUniqueNameCheck();
         List<Ingredient> createIngredientList(ArrayList<String> ingredientList);

@@ -29,17 +29,17 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
             String username = "Bob"; //CHANGE THIS
             List<Ingredient> ingredients = createIngredientList(nView.getRecipeIngredients());
             List<String> steps = nView.getRecipeSteps();
-            Recipe new_recipe = new Recipe(title, username, serving_size, ingredients, null, steps); //Note: Tags feature has not been added
+            List<String> fake_tags = new ArrayList<String>();
+            fake_tags.add("Beginner");
+            Recipe new_recipe = new Recipe(title, username, serving_size, ingredients, fake_tags, steps); //Note: Tags feature has not been added
+            for (int i =0; i<ingredients.size();i++){
+                Log.d("test", new_recipe.getIngredients().get(i).getName());
+            }
+
             Boolean addSuccess = nModel.addRecipe(new_recipe);
             if (addSuccess){
                 nView.showSuccessfulCreation();
                 nView.goToCookBookScreen();
-                /*
-                List<Ingredient> ingredient_check = new_recipe.getIngredients();
-                for (int i =0; i < ingredient_check.size(); i++){
-                    Log.d("INGREDIENT", "ingredient: " + ingredient_check.get(i).getName());
-                }
-                */
             } else {
                 nView.showCreationError();
             }
@@ -60,9 +60,33 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
 
     @Override
     public void handleAddIngredient(View view) {
-        String new_ingredient = nView.getNewIngredient();
-        nView.addNewIngredient(new_ingredient);
-        nView.clearIngredientText();
+        if (checkIngredient()){
+            nView.showIngredientAddError();
+        } else {
+            //Add Ingredients to list
+            nView.addNewIngredient(nView.getNewIngredient(), nView.getNewIngredientAmount(), nView.getNewIngredientType());
+            nView.clearIngredientText();
+        }
+    }
+
+    @Override
+    public Boolean checkIngredient() {
+        boolean any_empty =false;
+        if (nView.getNewIngredient().isEmpty()){
+            any_empty = true;
+        }
+        if (nView.getNewIngredientAmount().isEmpty()){
+            any_empty = true;
+        }
+        if (nView.getNewIngredientType().isEmpty()){
+            any_empty = true;
+        }
+        try {
+            float temp = Float.parseFloat(nView.getNewIngredientAmount());
+        } catch (NumberFormatException ex) {
+            any_empty = true;
+        }
+        return any_empty;
     }
 
     @Override

@@ -46,7 +46,6 @@
                         android:id="@+id/recipe_title"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-
                 <!--        Edit Text for Determining the Recipe Serving Size-->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="350dp"
@@ -168,6 +167,7 @@
                         android:backgroundTint="#FFA843"
                         android:textSize="20dp"
                         android:text="Add"
+                        android:textColor="#FFFFFF"
                         android:onClick="@{presenter::handleAddIngredient;}"/>
                 </RelativeLayout>
 
@@ -244,6 +244,7 @@
                         android:backgroundTint="#FFA843"
                         android:textSize="20dp"
                         android:text="Add"
+                        android:textColor="#FFFFFF"
                         android:onClick="@{presenter::handleAddSteps;}"/>
                 </RelativeLayout>
 
@@ -281,7 +282,6 @@
                     tools:text="CREATE RECIPE"
                     android:onClick="@{presenter::handleCreateRecipeClicked;}"/>
             </LinearLayout>
-
         </ScrollView>
 
         <!--NAVIGATION BAR AT THE BOTTOM-->
