@@ -1,11 +1,12 @@
 package com.lions.cookbook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+//import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,11 +31,11 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_view_recipe);
+        setContentView(R.layout.activity_view_recipe);
 
         //Set binding for createRecipe_activity and presenter
-        ActivityViewRecipeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_view_recipe);
-        binding.setPresenter(this.presenter);
+        //ActivityViewRecipeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_view_recipe);
+        //binding.setPresenter(this.presenter);
 
         //Set up values
         model = new ViewRecipeModel();
@@ -68,7 +69,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
 
     @Override
     public String getServingSize() {
-        EditText text = findViewById(R.id.recipe_title);
+        EditText text = findViewById(R.id.newServingSize);
         String value = text.getText().toString();
         return value;
     }
@@ -93,5 +94,9 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         ingredientsAdapter.notifyDataSetChanged();
         Toast.makeText(this, "Serving size scaled", Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void test (View view){
+        presenter.handleAlterPressed();
     }
 }

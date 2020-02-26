@@ -15,7 +15,7 @@ public interface ViewRecipeContract {
 
     interface ViewRecipeMVPPresenter{
         Recipe fetchRecipe(String recipeName);
-        void handleAlterPressed(View view);
+        void handleAlterPressed();
         List<Ingredient> sizeScaleIngredients(List<Ingredient> ingredients, int originalSize, int NewSize);
         List<Ingredient> unitConversionIngredients(List<Ingredient> ingredients, String units); //units: Metric or Imperial
         Boolean checkEnteredServingSize();
