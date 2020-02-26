@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.lions.cookbook.databinding.ActivityViewRecipeBinding;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +44,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         presenter = new ViewRecipePresenter(this, model);
         String recipeName = getIntent().getStringExtra("RECIPE_NAME");
         Recipe recipeClicked = presenter.fetchRecipe(recipeName);
-        this.originalRecipe = recipeClicked;
+        originalRecipe = recipeClicked;
 
         //Populate Recipe Title
         TextView tv = (TextView)findViewById(R.id.RecipeTitle) ;
@@ -55,7 +57,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         RecipeList.setAdapter(arrayAdapter);
 
         //Populate Recipe ingredients
-        List<Ingredient> ingredients = recipeClicked.getIngredients();
+        List<Ingredient> ingredients = originalRecipe.getIngredients();
         ingredients_list = new ArrayList<String>();
         for (int i = 0; i< ingredients.size(); i ++){
             String ingredient_compiled = ingredients.get(i).getName() + ", " + String.valueOf(ingredients.get(i).getQuantity()) + ", " + ingredients.get(i).getQuantityType();
@@ -64,6 +66,10 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         final ListView ingredients_view = (ListView)findViewById(R.id.ingredients); //Fill in with actual id of List view
         ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingredients_list);
         ingredients_view.setAdapter(ingredientsAdapter);
+
+        //Populate Serving size
+        TextView servingSize = findViewById(R.id.ServingSize);
+        servingSize.setText(String.valueOf(recipeClicked.getServingSize()));
 
     }
 

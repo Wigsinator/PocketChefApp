@@ -1,5 +1,6 @@
 package com.lions.cookbook;
 
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -34,12 +35,16 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
 
     @Override
     public List<Ingredient> sizeScaleIngredients(List<Ingredient> ingredients, int originalSize, int NewSize) {
+        List<Ingredient> new_list = new ArrayList<Ingredient>();
         for (int i = 0; i < ingredients.size() ; i++){
             float originalQuantity = ingredients.get(i).getQuantity();
+            String originalName = ingredients.get(i).getName();
+            String originalType = ingredients.get(i).getQuantityType();
             float newQuantity = (originalQuantity/originalSize)*NewSize;
-            ingredients.get(i).changeQuantity(newQuantity);
+            Ingredient changed = new Ingredient(originalName, newQuantity, originalType);
+            new_list.add(changed);
         }
-        return ingredients;
+        return new_list;
     }
 
     @Override
@@ -54,7 +59,7 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
             any_errors = true;
         } else {
             try {
-                float temp = Float.parseFloat(nView.getServingSize());
+                float temp = Integer.parseInt(nView.getServingSize());
             } catch (NumberFormatException ex) {
                 any_errors = true;
             }
