@@ -2,6 +2,7 @@ package com.lions.cookbook;
 
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPresenter {
@@ -20,6 +21,14 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
 
     @Override
     public void handleAlterPressed(View view) {
+        if (checkEnteredServingSize()){
+            nView.showServingNull();
+        } else {
+            Recipe originalRecipe = nView.getOriginalRecipe();
+            ArrayList<Ingredient> newList = new ArrayList<Ingredient>(sizeScaleIngredients(originalRecipe.getIngredients(), originalRecipe.getServingSize(), Integer.parseInt(nView.getServingSize())));
+            nView.updateIngredients(newList);
+        }
+
 
     }
 
@@ -36,5 +45,20 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     @Override
     public List<Ingredient> unitConversionIngredients(List<Ingredient> ingredients, String units) {
         return null;
+    }
+
+    @Override
+    public Boolean checkEnteredServingSize() {
+        boolean any_errors = false;
+        if (nView.getServingSize() == null || nView.getServingSize().equals("")){
+            any_errors = true;
+        } else {
+            try {
+                float temp = Float.parseFloat(nView.getServingSize());
+            } catch (NumberFormatException ex) {
+                any_errors = true;
+            }
+        }
+        return any_errors;
     }
 }

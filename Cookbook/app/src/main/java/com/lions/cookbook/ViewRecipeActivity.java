@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lions.cookbook.databinding.ActivityViewRecipeBinding;
 
@@ -23,6 +25,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> ingredients_list;
     private ArrayAdapter<String> ingredientsAdapter;
+    private Recipe originalRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         presenter = new ViewRecipePresenter(this, model);
         String recipeName = getIntent().getStringExtra("RECIPE_NAME");
         Recipe recipeClicked = presenter.fetchRecipe(recipeName);
+        this.originalRecipe = recipeClicked;
 
         //Populate Recipe Title
         TextView tv = (TextView)findViewById(R.id.RecipeTitle) ;
@@ -59,6 +63,35 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         final ListView ingredients_view = (ListView)findViewById(R.id.ingredients); //Fill in with actual id of List view
         ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingredients_list);
         ingredients_view.setAdapter(ingredientsAdapter);
+
+    }
+
+    @Override
+    public String getServingSize() {
+        EditText text = findViewById(R.id.recipe_title);
+        String value = text.getText().toString();
+        return value;
+    }
+
+    @Override
+    public void showServingNull() {
+        Toast.makeText(this, "Please enter a valid Serving size", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Recipe getOriginalRecipe() {
+        return this.originalRecipe;
+    }
+
+    @Override
+    public void updateIngredients(ArrayList<Ingredient> ingredients) {
+        ingredients_list.clear();
+        for (int i = 0 ; i< ingredients.size(); i++){
+            String new_ingredient = ingredients.get(i).getName() + ", " + ingredients.get(i).getQuantity() + ", " + ingredients.get(i).getQuantityType();
+            ingredients_list.add(new_ingredient);
+        }
+        ingredientsAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "Serving size scaled", Toast.LENGTH_SHORT).show();
 
     }
 }
