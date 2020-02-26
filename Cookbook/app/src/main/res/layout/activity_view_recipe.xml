@@ -112,7 +112,7 @@
                     android:textSize="18dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
-                    android:onClick="@{presenter:handleAlterPressed;}"/>
+                    android:onClick="@{presenter::handleAlterPressed;}"/>
             </RelativeLayout>
 
             <!--  Header for Ingredients and Amounts List  -->
