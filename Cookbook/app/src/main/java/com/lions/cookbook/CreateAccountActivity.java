@@ -2,8 +2,8 @@ package com.lions.cookbook;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
+import android.view.View.OnClickListener;
+import android.view.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
@@ -22,7 +23,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     private CreateAccountContract.CreateAccountMVPModel model;
 
 
-   // private Button createButton;
+    private Button btnSignup;
 
     private TextView textViewHeader;
 
@@ -42,7 +43,16 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         model = new CreateAccountModel();
         presenter = new CreateAccountPresent(this, model);
 
-      //  createButton = (Button) findViewById(R.id.clickButton);
+        btnSignup = (Button) findViewById(R.id.btnCreateAcct);
+
+        //set event handler to sign up button
+        btnSignup.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                presenter.handleCreateAccountClicked(v);
+            }
+        });
 
     }
 
