@@ -2,12 +2,13 @@ package com.lions.cookbook;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.View;
 
 
-public class CreateAccountPresenter implements CreateAccountContract.CreateAccountPresenter {
+public class CreateAccountPresent implements CreateAccountContract.CreateAccountMVPPresenter{
 
-    private CreateAccountContract.CreateAccountView view;
-    private CreateAccountContract.CreateAccountModel model;
+    private CreateAccountContract.CreateAccountMVPView view;
+    private CreateAccountContract.CreateAccountMVPModel model;
 
     private String username;
     private String userPassword;
@@ -17,8 +18,7 @@ public class CreateAccountPresenter implements CreateAccountContract.CreateAccou
     private String userPhoneNumber;
 
 
-
-    public CreateAccountPresenter(CreateAccountContract.CreateAccountView nView,CreateAccountContract.CreateAccountModel nModel) {
+    CreateAccountPresent(CreateAccountContract.CreateAccountMVPView nView,CreateAccountContract.CreateAccountMVPModel nModel) {
         view = nView;
         model = nModel;
 
@@ -29,12 +29,12 @@ public class CreateAccountPresenter implements CreateAccountContract.CreateAccou
     	//Get Input from user
         boolean any_errors = false;
 
-        this.username = nView.getUsername();
-        this.userPassword = nView.getPassword();
-    	this.userFirstName = nView.getFirstName();
-    	this.userLastName = nView.getLastName();
-    	this.userPhoneNumber = getPhoneNumber();
-    	this.userEmail = nView.getEmail();
+        this.username = this.view.getUsername();
+        this.userPassword = this.view.getPassword();
+    	this.userFirstName = this.view.getFirstName();
+    	this.userLastName = this.view.getLastName();
+    	this.userPhoneNumber = this.view.getPhoneNumber();
+    	this.userEmail = this.view.getEmail();
 
 
         if (this.username == null || this.username.equals("")){
@@ -53,25 +53,18 @@ public class CreateAccountPresenter implements CreateAccountContract.CreateAccou
 
         if (any_errors){
 
-            nView.showUnfilledError();
-
-        } else if (nModel.userExists()){
-
-            nView.showCreateAccountFailure();
+            this.view.showUnfilledError();
 
         } else{
         	//add new user's info to the database
-            Boolean res = nModel.addNewUser(this.username,this.userPassword,
-        					  this.userFirstName,this.userLastName,
-        					  this.userPhoneNumber,this.userEmail);
+            Boolean res = model.addNewUser(this.username,this.userPassword);
 
             if (res){
-                nView.showCreateAccountSuccess()();
-                nView.goToLoginScreen();
-            }else{
-                nView.showCreateAccountFailure();
+                this.view.showCreateAccountSuccess();
+                this.view.goToLoginScreen();
+            }else {
+                this.view.showCreateAccountFailure();
             }
-        	
 
         }
 
@@ -79,8 +72,8 @@ public class CreateAccountPresenter implements CreateAccountContract.CreateAccou
 
 
     @Override
-    public void handleGoToCookBookScreen(View view) {
-        view.goToCookBookScreen();
+    public void handleGoToLoginScreen(View view) {
+        this.view.goToLoginScreen();
     }
 
 

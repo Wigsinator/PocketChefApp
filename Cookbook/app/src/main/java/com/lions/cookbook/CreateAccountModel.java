@@ -3,7 +3,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
 
-public class CreateAccountModel implements CreateAccountContract.CreateAccountModel {
+public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
 
     public CreateAccountModel(){}
 

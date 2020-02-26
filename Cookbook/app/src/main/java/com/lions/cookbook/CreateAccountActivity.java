@@ -16,10 +16,13 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
 
-public class CreateAccountActivity extends AppCompatActivity implements CreateAccountContract.CreateAccountView {
+public class CreateAccountActivity extends AppCompatActivity implements CreateAccountContract.CreateAccountMVPView {
 
-	private CreateAccountContract.CreateAccountPresenter presenter;
-    private CreateAccountContract.CreateAccountModel model;
+	private CreateAccountContract.CreateAccountMVPPresenter presenter;
+    private CreateAccountContract.CreateAccountMVPModel model;
+
+
+   // private Button createButton;
 
     private TextView textViewHeader;
 
@@ -37,7 +40,9 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         setContentView(R.layout.create_account_activity);
 
         model = new CreateAccountModel();
-        presenter = new CreateAccountPresenter(this, model);
+        presenter = new CreateAccountPresent(this, model);
+
+      //  createButton = (Button) findViewById(R.id.clickButton);
 
     }
 
