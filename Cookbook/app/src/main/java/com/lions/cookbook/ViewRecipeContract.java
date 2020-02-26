@@ -11,6 +11,7 @@ public interface ViewRecipeContract {
         void showServingNull();
         Recipe getOriginalRecipe();
         void updateIngredients(ArrayList<Ingredient> ingredients);
+        void alterPressed(View view);
     }
 
     interface ViewRecipeMVPPresenter{

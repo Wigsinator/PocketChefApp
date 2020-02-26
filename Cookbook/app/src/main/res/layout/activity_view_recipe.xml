@@ -102,7 +102,7 @@
                     android:textSize="14dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
-                    android:onClick="test"/>
+                    android:onClick="alterPressed"/>
             </RelativeLayout>
 
             <!--  Header for Ingredients and Amounts List  -->

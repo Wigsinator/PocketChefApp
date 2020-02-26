@@ -101,8 +101,8 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         Toast.makeText(this, "Serving size scaled", Toast.LENGTH_SHORT).show();
 
     }
-
-    public void test (View view){
+    @Override
+    public void alterPressed (View view){
         presenter.handleAlterPressed();
     }
 }
