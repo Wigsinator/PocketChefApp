@@ -20,7 +20,7 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     }
 
     @Override
-    public void handleAlterPressed(View view) {
+    public void handleAlterPressed() {
         if (checkEnteredServingSize()){
             nView.showServingNull();
         } else {
