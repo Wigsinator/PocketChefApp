@@ -85,8 +85,8 @@
                 android:layout_alignParentBottom="true">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="150dp"
-                    android:layout_height="45dp"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -96,20 +96,20 @@
                         android:textAlignment="center"
                         android:textStyle="bold"
                         android:textSize="15dp"
-                        android:textColorHint="#1d1d1d"
+                        android:textColorHint="@drawable/btn_selector"
                         android:layout_height="match_parent"
-                        android:id="@+id/recipe_title"/>
+                        android:id="@+id/newServingSize"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <Button
                     android:id="@+id/btnAddIngredient"
-                    android:layout_width="wrap_content"
+                    android:layout_width="75dp"
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="@color/colorGreen"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
                     android:onClick="@{presenter:handleAlterPressed;}"/>
