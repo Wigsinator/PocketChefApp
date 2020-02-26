@@ -105,6 +105,12 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
         }
         if (nView.getServingSize() == null || nView.getServingSize().equals("")){
             any_empty = true;
+        } else {
+            try {
+                int temp = Integer.parseInt(nView.getServingSize());
+            } catch (NumberFormatException ex) {
+                any_empty = true;
+            }
         }
 
         return any_empty;
