@@ -2,6 +2,8 @@ package com.lions.cookbook;
 
 import android.app.Application;
 
+import java.util.List;
+
 
 public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPModel{
     private RecipeRepository mRepository;
@@ -12,12 +14,17 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
 
     @Override
     public Boolean ExistRecipeName(String recipe_name) {
-        return false;
+        List<Recipe> matches = mRepository.searchByTitle(recipe_name);
+        return !matches.isEmpty();
     }
 
     @Override
     public Boolean addRecipe(Recipe new_recipe) {
-        mRepository.insert(new_recipe);
-        return true;
+        try {
+            mRepository.insert(new_recipe);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }

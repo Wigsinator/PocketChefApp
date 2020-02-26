@@ -28,4 +28,8 @@ public class RecipeRepository {
     void update(final Recipe recipe) {
         RecipeDatabase.databaseWriteExecutor.execute(() -> {mRecipeDao.update(recipe);});
     }
+
+    List<Recipe> searchByTitle(String recipeTitle){
+        RecipeDatabase.databaseWriteExecutor.execute(() -> {mRecipeDao.getRecipeByTitle(recipeTitle);});
+    }
 }
