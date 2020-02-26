@@ -84,32 +84,26 @@
                 android:background="@drawable/text_frame"
                 android:layout_alignParentBottom="true">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:background="@drawable/text_frame"
-                        android:hint="Change Serving Size"
-                        android:padding="10dp"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textSize="15dp"
-                        android:textColorHint="@drawable/btn_selector"
-                        android:layout_height="match_parent"
-                        android:id="@+id/newServingSize"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
+                <EditText
+                    android:id="@+id/newServingSize"
+                    android:layout_width="145dp"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/text_frame"
+                    android:hint="Change Serving Size"
+                    android:textColorHint="#4d4d4d"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
 
                 <Button
-                    android:id="@+id/btnAddIngredient"
-                    android:layout_width="75dp"
+                    android:id="@+id/btnAlterRecipe"
+                    android:layout_width="80dp"
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="@color/colorGreen"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
                     android:onClick="@{presenter::handleAlterPressed;}"/>
