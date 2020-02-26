@@ -30,6 +30,6 @@ public class RecipeRepository {
     }
 
     List<Recipe> searchByTitle(String recipeTitle){
-        RecipeDatabase.databaseWriteExecutor.execute(() -> {mRecipeDao.getRecipeByTitle(recipeTitle);});
+        return mRecipeDao.getRecipeByTitle(recipeTitle);
     }
 }
