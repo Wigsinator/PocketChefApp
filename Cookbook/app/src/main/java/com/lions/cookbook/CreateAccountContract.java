@@ -7,7 +7,7 @@ import android.view.View;
  * */
 public interface CreateAccountContract {
 
-    interface CreateAccountPresenter{
+    interface CreateAccountMVPPresenter{
 
         void handleCreateAccountClicked(View view);
 
@@ -15,13 +15,13 @@ public interface CreateAccountContract {
 
     }
 
-    interface CreateAccountModel {
+    interface CreateAccountMVPModel {
         //add new user to the database
         Boolean addNewUser(String username,String userPassword);
         }
 
 
-    interface CreateAccountView{
+    interface CreateAccountMVPView{
 
         void goToLoginScreen();
 

@@ -2,8 +2,8 @@ package com.lions.cookbook;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
+import android.view.View.OnClickListener;
+import android.view.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +12,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
 
-public class CreateAccountActivity extends AppCompatActivity implements CreateAccountContract.CreateAccountView {
+public class CreateAccountActivity extends AppCompatActivity implements CreateAccountContract.CreateAccountMVPView {
 
-	private CreateAccountContract.CreateAccountPresenter presenter;
-    private CreateAccountContract.CreateAccountModel model;
+	private CreateAccountContract.CreateAccountMVPPresenter presenter;
+    private CreateAccountContract.CreateAccountMVPModel model;
+
+
+    private Button btnSignup;
 
     private TextView textViewHeader;
 
@@ -37,7 +41,18 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         setContentView(R.layout.create_account_activity);
 
         model = new CreateAccountModel();
-        presenter = new CreateAccountPresenter(this, model);
+        presenter = new CreateAccountPresent(this, model);
+
+        btnSignup = (Button) findViewById(R.id.btnCreateAcct);
+
+        //set event handler to sign up button
+        btnSignup.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                presenter.handleCreateAccountClicked(v);
+            }
+        });
 
     }
 
