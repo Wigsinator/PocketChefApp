@@ -17,7 +17,7 @@ public class LoginModel implements LoginContract.LoginModel {
     }
 
     @Override
-    public int checkUserValidity(String name, String password){
-        return 0;
+    public Boolean checkUserLoginCredentials(String userName, String userPass){
+        return true;
     }
 }

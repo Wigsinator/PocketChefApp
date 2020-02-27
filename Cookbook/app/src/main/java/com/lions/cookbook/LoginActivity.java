@@ -13,10 +13,10 @@ import android.view.View.OnClickListener;
 public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
     private EditText userEmail, userPassword;
 
-    private Button   btnLogin;
-    private Button   btnSignup;
+    private Button btnLogin;
+    private Button btnSignup;
 
-    private LoginPresent presenter;
+    private LoginPresent LoginPresenter;
     private LoginModel model;
 
 
@@ -26,19 +26,26 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);//set layout name with actual name
 
-        //find view
-        userEmail = (EditText) this.findViewById(R.id.user_id);
-        userPassword = (EditText) this.findViewById(R.id.user_password);
+        model = new LoginModel();
+        LoginPresenter = new LoginPresent(this,model);
+
 
         btnLogin = (Button) this.findViewById(R.id.login_btn);
         btnSignup = (Button) this.findViewById(R.id.signUpLink);
 
         //set event handler to sign up button
         btnSignup.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 goToCreateAccountScreen();
+            }
+        });
+
+        //set event handler to sign up button
+        btnLogin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginPresenter.handleLoginClicked(v);
             }
         });
 
@@ -47,11 +54,48 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     }
 
     @Override
+    public String getEmail(){
+        this.userEmail = (EditText) this.findViewById(R.id.user_id);
+        String value = this.userEmail.getText().toString();
+        return value;
+    }
+
+    @Override
+    public String getPassword(){
+        this.userPassword = (EditText) this.findViewById(R.id.user_password);
+        String value = this.userPassword.getText().toString();
+        return value;
+    }
+
+    @Override
     public void goToCreateAccountScreen() {
         Intent intent = new Intent(this, CreateAccountActivity.class);
         startActivity(intent);
         Toast.makeText(this, "Taking user to Registration Screen", Toast.LENGTH_SHORT).show();
 
+    }
+
+
+    @Override
+    public void goToCookBookScreen() {
+        Intent intent = new Intent(this, CookBookActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Taking user to Cookbook Screen", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showUnfilledError(){
+        Toast.makeText(this, "All fields must be filled in!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoginFailure(){
+        Toast.makeText(this, "There was an error logging in!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoginSuccess(){
+        Toast.makeText(this, "Login is successful!", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -91,21 +135,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
      super.onResume();
      presenter.setView(this);
      presenter.getCurrentUser();
-     }
-
-     @Override
-     public String getUsername() {
-     return username.getText().toString();
-     }
-
-     @Override
-     public void showInputError() {
-     Toast.makeText(this, "username or password cannot be empty", Toast.LENGTH_SHORT).show();
-     }
-
-     @Override
-     public void setUsername(String user) {
-     this.username.setText(user);
      }
 
      */

@@ -2,12 +2,17 @@ package com.lions.cookbook;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 
 
 public class LoginPresent implements LoginContract.LoginPresenter {
 
     private LoginContract.LoginView view;
     private LoginContract.LoginModel model;
+
+    private String username;
+    private String userPassword;
 
    // UserPreferences mDatabase = new UserPreferencesImpl();
 
@@ -16,35 +21,46 @@ public class LoginPresent implements LoginContract.LoginPresenter {
         model = nModel;
     }
 
-
     @Override
-    public void checkUserLoginCredentials(String userName, String userPass){
-        return;
-    }
+    public void handleLoginClicked(View view) {
+        //Get Input from user
+        boolean any_errors = false;
 
-    @Override
-    public void goToCreateAccountScreen(){
-        return;
-    }
+        this.username = this.view.getEmail();
+        this.userPassword = this.view.getPassword();
 
-    /**
-     * validate login data here
-     * and if data valid, redirect to main screen.
-     */
-    /**
-    public void login(String username, String password) {
-        if(TextUtils.isEmpty(username)){
-            this.view.showError("Please enter username");
-        }else if(username.length() < 6){
-            this.view.showError("Username must contains 6 letters");
-        }else if(TextUtils.isEmpty(password)){
-            this.view.showError("Please enter password");
-        }else if(password.length() < 6){
-            this.view.showError("Password must contains 6 letters");
-        }else {
-          //  mDatabase.setUserLogin(true);
-            this.view.showMainActivity();
+
+        if (this.username == null || this.username.equals("")){
+            any_errors = true;
+        }else if (this.userPassword == null || this.userPassword.equals("")){
+            any_errors = true;
         }
+
+        if (any_errors){
+
+            this.view.showUnfilledError();
+
+        } else{
+            Log.d("Retrieve info","Username:" + this.username + "password" + this.userPassword);
+            Boolean res = true;
+
+            //validate user's info from the database
+            //res = this.model.checkUserLoginCredentials(username, userPassword);
+            if (this.username.equals("test@gmail.com") && this.userPassword.equals("123456")){
+                res = true;
+            }else{
+                res = false;
+            }
+
+            if (res){
+                this.view.showLoginSuccess();
+                this.view.goToCookBookScreen();
+            }else {
+                this.view.showLoginFailure();
+            }
+
+        }
+
     }
-     */
+
 }
