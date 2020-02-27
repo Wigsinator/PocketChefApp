@@ -22,7 +22,7 @@ public interface LoginContract {
         void goToCookBookScreen();
         String getEmail();
         String getPassword();
-
+        void goToCreateRecipeScreen();
         void showUnfilledError();
         void showLoginFailure();
         void showLoginSuccess();

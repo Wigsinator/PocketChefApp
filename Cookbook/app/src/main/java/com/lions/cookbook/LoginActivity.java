@@ -74,6 +74,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         Toast.makeText(this, "Taking user to Registration Screen", Toast.LENGTH_SHORT).show();
 
     }
+    @Override
+    public void goToCreateRecipeScreen(){
+        Intent intent = new Intent(this, CreateRecipeActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Taking user to Create Recipe Screen", Toast.LENGTH_SHORT).show();
+
+    }
 
 
     @Override

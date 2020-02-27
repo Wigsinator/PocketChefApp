@@ -30,28 +30,26 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     	//Get Input from user
         boolean any_errors = false;
 
-        this.username = this.view.getUsername();
+        //this.username = this.view.getUsername();
         this.userPassword = this.view.getPassword();
     	//this.userFirstName = this.view.getFirstName();
     	//this.userLastName = this.view.getLastName();
     	//this.userPhoneNumber = this.view.getPhoneNumber();
-    	//this.userEmail = this.view.getEmail();
+    	this.userEmail = this.view.getEmail();
 
 
-        if (this.username == null || this.username.equals("")){
+        if (this.userEmail == null || this.userEmail.equals("")){
             any_errors = true;
         }else if (this.userPassword == null || this.userPassword.equals("")){
             any_errors = true;
         }
 
         if (any_errors){
-
             this.view.showUnfilledError();
-
         } else{
-            Log.d("Retrieve info","Username:" + this.username + "password" + this.userPassword);
+            Log.d("Retrieve info","Username:" + this.userEmail + "password" + this.userPassword);
         	//add new user's info to the database
-            Boolean res = model.addNewUser(this.username,this.userPassword);
+            Boolean res = model.addNewUser(this.userEmail,this.userPassword);
          
             if (res){
                 this.view.showCreateAccountSuccess();

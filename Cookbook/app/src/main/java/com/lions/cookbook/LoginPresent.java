@@ -54,7 +54,7 @@ public class LoginPresent implements LoginContract.LoginPresenter {
 
             if (res){
                 this.view.showLoginSuccess();
-                this.view.goToCookBookScreen();
+                this.view.goToCreateRecipeScreen();
             }else {
                 this.view.showLoginFailure();
             }
