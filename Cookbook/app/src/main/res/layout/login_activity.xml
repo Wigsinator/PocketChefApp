@@ -63,7 +63,7 @@
 
 
         <!--  Login Button -->
-        <MaterialButton
+        <Button
             android:id="@+id/login_btn"
             android:layout_width="330dp"
             android:layout_height="45dp"
