@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Pocket Chef</string>
-    <string name="regis_link"><u>Sign up now!</u></string>
+
+    <string-array name="measurement_array">
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>fl. oz.</item>
+        <item>cup</item>
+        <item>gallon</item>
+        <item>quart</item>
+        <item>ml</item>
+        <item>L</item>
+        <item>oz</item>
+        <item>lb</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>count</item>
+    </string-array>
 </resources>

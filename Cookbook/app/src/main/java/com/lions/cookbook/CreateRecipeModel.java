@@ -1,29 +1,34 @@
 package com.lions.cookbook;
 
-import java.util.ArrayList;
+import android.app.Application;
 
-public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeModel{
-    CreateRecipeModel(){
+import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
+
+public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPModel{
+    private RecipeRepository mRepository;
+
+    public CreateRecipeModel(Application application){
+        mRepository = new RecipeRepository(application);
     }
 
     @Override
-    public Boolean addRecipeTitle(String recipe_title) {
-        return null;
+    public Boolean ExistRecipeName(String recipe_name) {
+        //List<Recipe> matches = mRepository.searchByTitle(recipe_name).getValue();
+        LiveData<List<Recipe>> matches = mRepository.getAllRecipes();
+        List<Recipe> bleh = matches.getValue();
+        return !(bleh == null || bleh.isEmpty());
     }
 
     @Override
-    public Boolean addRecipeSteps(ArrayList recipe_steps) {
-        return null;
-    }
-
-    @Override
-    public Boolean addServingSize(Integer serving_size) {
-        return null;
-    }
-
-    @Override
-    public Boolean addRecipeIngredients(ArrayList recipe_ingredients) {
-        return null;
+    public Boolean addRecipe(Recipe new_recipe) {
+        try {
+            mRepository.insert(new_recipe);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }
