@@ -86,16 +86,16 @@
                     android:background="@drawable/acct_button_frame"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:drawableLeft="@drawable/ic_account"
+                    android:drawableLeft="@drawable/ic_acct_following"
                     android:layout_marginStart="75dp"
-                    android:paddingLeft="13dp"/>
+                    android:paddingLeft="9dp"/>
 
                 <Button
                     android:id="@+id/followingBtn"
                     android:background="@drawable/acct_button_frame"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:drawableLeft="@drawable/ic_account"
+                    android:drawableLeft="@drawable/ic_acct_followers"
                     android:layout_toRightOf="@id/dietaryBtn"
                     android:layout_marginStart="20dp"
                     android:paddingLeft="13dp"
@@ -106,10 +106,10 @@
                     android:background="@drawable/acct_button_frame"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:drawableLeft="@drawable/ic_account"
+                    android:drawableLeft="@drawable/ic_acct_follow"
                     android:layout_toRightOf="@id/followingBtn"
                     android:layout_marginStart="20dp"
-                    android:paddingLeft="13dp"
+                    android:paddingLeft="9dp"
                     />
 
 <!--                <Button-->

@@ -63,7 +63,7 @@
 
 
         <!--  Login Button -->
-        <com.google.android.material.button.MaterialButton
+        <MaterialButton
             android:id="@+id/login_btn"
             android:layout_width="330dp"
             android:layout_height="45dp"
@@ -89,7 +89,7 @@
             android:textSize="16dp" />
 
         <!--  Sign up Button -->
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/signUpLink"
             android:layout_width="100dp"
             android:layout_height="40dp"

@@ -155,7 +155,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!--         Button to Create Account-->
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/btnCreateAcct"
                     android:layout_width="350dp"
                     android:layout_height="56dp"
