@@ -19,7 +19,6 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
         //List<Recipe> matches = mRepository.searchByTitle(recipe_name).getValue();
         LiveData<List<Recipe>> matches = mRepository.getAllRecipes();
         List<Recipe> bleh = matches.getValue();
-        System.out.println(bleh==null);
         return !(bleh == null || bleh.isEmpty());
     }
 

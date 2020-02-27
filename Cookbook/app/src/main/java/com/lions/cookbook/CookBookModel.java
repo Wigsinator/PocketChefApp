@@ -15,21 +15,27 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
     private RecipeRepository mRepository;
 
     private LiveData<List<Recipe>> mAllRecipes;
-    private List<String> mAllRecipeTitles;
+    private LiveData<List<String>> mLiveRecipeTitles;
+    private ArrayList<String> mAllRecipeTitles;
 
     public CookBookModel(Application application, AppCompatActivity activity){
         mRepository = new RecipeRepository(application);
         mAllRecipes = mRepository.getAllRecipes();
-        mRepository.getAllRecipeTitles().observe(activity, new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> strings) {
-                mAllRecipeTitles = strings;
-            }
-        });
+        mLiveRecipeTitles = mRepository.getAllRecipeTitles();
+        mAllRecipeTitles = new ArrayList<>();
+    }
+
+
+    public LiveData<List<String>> getLiveRecipeNamesDB() {
+        return mLiveRecipeTitles;
+    }
+
+    public void setAllRecipeTitles(List<String> strings) {
+        mAllRecipeTitles = new ArrayList<>(strings);
     }
 
     @Override
-    public ArrayList<String> getRecipeNamesDB() { //Fill in this function
+    public ArrayList<String> getRecipeNamesDB() {//Fill in this function
         //Return ArrayList of all recipe names stored in DB.
         //Feel free to comment out the code below as they are hard coded values
         /*
@@ -43,7 +49,7 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
         return RecipeList;
 
         */
-        return new ArrayList<>(mAllRecipeTitles);
+        return mAllRecipeTitles;
     }
 
     @Override

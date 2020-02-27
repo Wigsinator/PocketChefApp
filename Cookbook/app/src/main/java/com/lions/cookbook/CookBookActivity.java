@@ -1,6 +1,8 @@
 package com.lions.cookbook;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,7 +45,12 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
                 presenter.handleRecipeClicked(recipeName);
             }
         });
-
+        model1.getLiveRecipeNamesDB().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(@Nullable final List<String> strings) {
+                model1.setAllRecipeTitles(strings);
+            }
+        });
     }
 
 

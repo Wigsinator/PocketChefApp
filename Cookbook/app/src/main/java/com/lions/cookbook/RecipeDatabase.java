@@ -1,6 +1,7 @@
 package com.lions.cookbook;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -34,14 +35,15 @@ public abstract class RecipeDatabase extends RoomDatabase{
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
-
             // If you want to keep data through app restarts,
             // comment out the following block
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
+                Log.d("Database Creation", "Starting new DB");
                 RecipeDao dao = INSTANCE.recipeDao();
                 dao.deleteAll();
+                Log.d("Database Creation", "Deleted all old content");
 
                 Ingredient ingredient = new Ingredient("noodles", 350, "g");
                 List<Ingredient> ingredients = new ArrayList<Ingredient>();
@@ -55,7 +57,7 @@ public abstract class RecipeDatabase extends RoomDatabase{
 
                 Recipe first = new Recipe("Spaghetti", "Bob", 4, ingredients, tags, steps);
                 dao.insert(first);
-
+                Log.d("Database Creation", "Added Spaghetti");
             });
         }
     };
