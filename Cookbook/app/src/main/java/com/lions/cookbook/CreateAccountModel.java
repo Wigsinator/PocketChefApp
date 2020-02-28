@@ -10,10 +10,22 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
 
     public CreateAccountModel(){}
 
+    public Boolean passwordStrong(String password){
+        return (password.length() >= 6);
+    }
+
+    public Boolean validEmail(String email){
+        return (email.endsWith("@gmail.com"));
+    }
+
     public Boolean addNewUser(String email,String userPassword){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        Task<AuthResult> res  = mAuth.createUserWithEmailAndPassword(email, userPassword);
-        //return res.isSuccessful();
-        return true;
+        if (passwordStrong(userPassword)){
+            if (validEmail(email)){
+                mAuth.createUserWithEmailAndPassword(email, userPassword);
+                return true;
+            }
+        }
+        return false;
     }
 }
