@@ -26,9 +26,8 @@
             android:layout_alignParentRight="true"
             android:paddingLeft="7dp"
             android:backgroundTint="#DF5252"
-            app:iconGravity="textEnd"
             android:gravity="center"
-            app:icon="@drawable/ic_delete"
+            android:drawableStart="@drawable/ic_delete"
             app:iconSize="30dp"/>
 
 
