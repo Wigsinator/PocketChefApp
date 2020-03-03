@@ -20,7 +20,7 @@
                 <ImageView
                     android:layout_width="350dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/create_acct_logo"
+                    android:background="@drawable/img_create_acct"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"/>
 
