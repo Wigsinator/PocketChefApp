@@ -24,13 +24,16 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
 
     @Override
     public void handleAlterPressed() {
+        //Log.d("TEST", "Handle alter pressed");
         if (checkEnteredServingSize()){
             nView.showServingNull();
         } else {
             Recipe originalRecipe = nView.getOriginalRecipe();
             ArrayList<Ingredient> newList = new ArrayList<Ingredient>(sizeScaleIngredients(originalRecipe.getIngredients(), originalRecipe.getServingSize(), Integer.parseInt(nView.getServingSize())));
+            //Log.d("TEST", "scale done");
             String alterUnits = nView.getUnits();
             ArrayList<Ingredient> unitUpdateList = new ArrayList<>(unitConversionIngredients(newList, alterUnits));
+            //Log.d("TEST", "Units done");
             nView.updateIngredients(unitUpdateList);
         }
 
@@ -62,55 +65,103 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
             String originalName = ingredients.get(i).getName();
             String originalType = ingredients.get(i).getQuantityType();
             String ingredientType = getIngredientType(originalType);
+            /*
+            Log.d("TEST", "ingredientType" + ingredientType);
+            Log.d("TEST", "originalName" + originalName);
+            Log.d("TEST", "originalType" + originalType);
+            Log.d("TEST", "originalQuantity" + Float.toString(originalQuantity));
+             */
 
             if (!(units.equals(ingredientType))){
+                //Log.d("TEST", "Does not match units needed");
                 float newQuantity;
                 String newType;
-                switch(ingredientType){
+                switch(originalType){
                     case "tsp":
+                        //Log.d("TEST", "tsp");
                         newType = "ml";
                         newQuantity = 5 * originalQuantity;
                         break;
 
-                    case "tbs":
+                    case "tbsp":
+                        //Log.d("TEST", "tbsp");
                         newType = "ml";
                         newQuantity = 15 * originalQuantity;
                         break;
 
-                    case "cups":
+                    case "cup":
+                        //Log.d("TEST", "cup");
                         newType = "ml";
-                        newQuantity = 250 * originalQuantity;
+                        newQuantity = 237 * originalQuantity;
+                        break;
+
+                    case "fl. oz.":
+                        //Log.d("TEST", "fl. oz.");
+                        newType = "ml";
+                        newQuantity = (float)(originalQuantity *29.57);
+                        break;
+
+                    case "gallon":
+                        //Log.d("TEST", "gallon");
+                        newType = "ml";
+                        newQuantity = (float) ( 3785 *originalQuantity);
+                        break;
+
+                    case "quart":
+                        //Log.d("TEST", "quart");
+                        newType = "ml";
+                        newQuantity = (float)(946*originalQuantity);
                         break;
 
                     case "ml":
+                        //Log.d("TEST", "ml");
                         newType = "cup";
-                        newQuantity = originalQuantity / 60;
+                        newQuantity = (float)(originalQuantity / 237);
+                        break;
+
+                    case "L":
+                        //Log.d("TEST", "L");
+                        newType = "cup";
+                        newQuantity = (float)(originalQuantity * 4.227);
                         break;
 
                     case "oz":
+                        //Log.d("TEST", "oz");
                         newType = "g";
                         newQuantity = originalQuantity * 30;
                         break;
 
                     case "lb":
+                        //Log.d("TEST", "lb");
                         newType = "g";
-                        newQuantity = originalQuantity * 500;
+                        newQuantity = originalQuantity * 454;
                         break;
 
                     case "g":
+                        //Log.d("TEST", "g");
                         newType = "lb";
-                        newQuantity = originalQuantity/500;
+                        newQuantity = originalQuantity/454;
+                        break;
+
+                    case "kg":
+                        //Log.d("TEST", "kg");
+                        newType = "lb";
+                        newQuantity = (float) (originalQuantity * 2.205);
                         break;
 
                     default:
+                        //Log.d("TEST", "default");
                         newType = originalType;
                         newQuantity = originalQuantity;
-                        break;
+
 
                 }
+                //Log.d("TEST", "New type" + newType);
+                //Log.d("TEST", "New Quantity" + newQuantity);
                 Ingredient changed = new Ingredient(originalName, newQuantity, newType);
                 new_list.add(changed);
             } else {
+                //Log.d("TEST", "Used original quantity and type for final");
                 Ingredient changed = new Ingredient(originalName, originalQuantity, originalType);
                 new_list.add(changed);
             }
@@ -123,17 +174,18 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     public String getIngredientType(String givenType){
         Set<String> metricSet = new HashSet<String>();
         Set<String> imperialSet = new HashSet<String>();
-        Set<String> othersSet = new HashSet<String>();
         metricSet.add("g");
         metricSet.add("kg");
         metricSet.add("ml");
-        metricSet.add("l");
+        metricSet.add("L");
         imperialSet.add("oz");
+        imperialSet.add("fl. oz.");
+        imperialSet.add("gallon");
+        imperialSet.add("quart");
         imperialSet.add("lb");
         imperialSet.add("tsp");
-        imperialSet.add("tbs");
+        imperialSet.add("tbsp");
         imperialSet.add("cup");
-        othersSet.add("count");
 
         if (metricSet.contains(givenType)){
             return "metric";
