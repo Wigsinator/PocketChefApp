@@ -1,11 +1,13 @@
 package com.lions.cookbook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lions.cookbook.databinding.ActivityViewRecipeBinding;
 
 import org.w3c.dom.Text;
@@ -70,6 +73,27 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         //Populate Serving size
         TextView servingSize = findViewById(R.id.ServingSize);
         servingSize.setText(String.valueOf(recipeClicked.getServingSize()));
+
+        //Set up Navigation panel
+        BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigationPanel.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.navigation_create:
+                                Intent intent1 = new Intent(ViewRecipeActivity.this, CreateRecipeActivity.class);
+                                startActivity(intent1);
+                                break;
+
+                            case R.id.navigation_cookbook:
+                                Intent intent2 = new Intent(ViewRecipeActivity.this, CookBookActivity.class);
+                                startActivity(intent2);
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
     }
 
