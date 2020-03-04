@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,5 +105,11 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     @Override
     public void alterPressed (View view){
         presenter.handleAlterPressed();
+    }
+
+    @Override
+    public String getUnits() {
+        Spinner mySpinner = (Spinner) findViewById(R.id.newMeasurementTypes);
+        return mySpinner.getSelectedItem().toString();
     }
 }

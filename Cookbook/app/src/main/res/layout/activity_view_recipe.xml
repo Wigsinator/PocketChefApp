@@ -44,6 +44,14 @@
                 android:background="@drawable/text_frame"
                 android:layout_alignParentBottom="true">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_toLeftOf="@+id/Recommended"
+                    android:background="@drawable/view_recipe_serving_size"
+                    />
+
                 <TextView
                     android:id="@+id/Recommended"
                     android:layout_width="wrap_content"
@@ -92,6 +100,13 @@
                     android:textSize="15dp"
                     android:textStyle="bold"/>
 
+                <Spinner
+                    android:id="@+id/newMeasurementTypes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/btnAlterRecipe"
+                    android:entries="@array/measurement_type" />
+
                 <Button
                     android:id="@+id/btnAlterRecipe"
                     android:layout_width="80dp"
@@ -99,7 +114,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="@color/colorGreen"
-                    android:textSize="14dp"
+                    android:textSize="13dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
                     android:onClick="alterPressed"/>

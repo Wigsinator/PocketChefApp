@@ -170,7 +170,7 @@
                     app:iconGravity="textStart"
                     app:iconPadding="10dp"
                     app:iconTint="#4d4d4d"
-                    tools:text="CREATE ACCOUNT" />
+                    android:text="CREATE ACCOUNT" />
             </LinearLayout>
 
         <!--NAVIGATION BAR AT THE BOTTOM-->

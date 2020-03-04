@@ -16,4 +16,10 @@
         <item>kg</item>
         <item>count</item>
     </string-array>
+
+    <string-array name="measurement_type">
+        <item>metric</item>
+        <item>imperial</item>
+    </string-array>
+
 </resources>
