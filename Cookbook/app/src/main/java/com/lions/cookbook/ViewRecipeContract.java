@@ -12,6 +12,7 @@ public interface ViewRecipeContract {
         Recipe getOriginalRecipe();
         void updateIngredients(ArrayList<Ingredient> ingredients);
         void alterPressed(View view);
+        String getUnits();
     }
 
     interface ViewRecipeMVPPresenter{
