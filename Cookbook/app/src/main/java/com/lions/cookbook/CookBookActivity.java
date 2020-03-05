@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,7 @@ import java.util.List;
 public class CookBookActivity extends AppCompatActivity implements CookBookContract.CookBookMVPView{
     private CookBookPresent presenter;
     private CookBookModel model1;
+    private DatabaseReference mDatabase;
     private ArrayAdapter<String> arrayAdapter;
 
     //Good Tutorial on listView: https://abhiandroid.com/ui/listview for texts and pictures
@@ -31,7 +35,8 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         setContentView(R.layout.cook_book_activity);
 
         //Set up values
-        model1 = new CookBookModel(this.getApplication(), this);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        model1 = new CookBookModel(mDatabase);
         presenter = new CookBookPresent(this, model1);
 
         //Populate with List of Recipe names
@@ -43,12 +48,6 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String recipeName = (String) RecipeList.getItemAtPosition(i);
                 presenter.handleRecipeClicked(recipeName);
-            }
-        });
-        model1.getLiveRecipeNamesDB().observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(@Nullable final List<String> strings) {
-                model1.setAllRecipeTitles(strings);
             }
         });
     }
