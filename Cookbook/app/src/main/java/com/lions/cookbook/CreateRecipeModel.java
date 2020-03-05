@@ -22,7 +22,11 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
 
     @Override
     public Boolean addRecipe(Recipe new_recipe) {
-        //TODO Create this function
-        return false;
+        try {
+            mDatabase.child("recipes").child(new_recipe.getUsername()).child(new_recipe.getTitle()).setValue(new_recipe);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
