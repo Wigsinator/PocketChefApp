@@ -13,14 +13,17 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.Button;
+import com.google.firebase.database.DatabaseReference;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
 
 public class CreateAccountActivity extends AppCompatActivity implements CreateAccountContract.CreateAccountMVPView {
 
 	private CreateAccountContract.CreateAccountMVPPresenter presenter;
     private CreateAccountContract.CreateAccountMVPModel model;
+    private DatabaseReference mDatabase;
 
 
     private Button btnSignup;
@@ -39,8 +42,9 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_activity);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        model = new CreateAccountModel();
+        model = new CreateAccountModel(mDatabase);
         presenter = new CreateAccountPresent(this, model);
 
         btnSignup = (Button) findViewById(R.id.btnCreateAcct);
