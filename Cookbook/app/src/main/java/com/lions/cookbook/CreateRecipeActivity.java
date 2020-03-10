@@ -1,17 +1,22 @@
 package com.lions.cookbook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
 
 import java.util.ArrayList;
@@ -55,6 +60,27 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
         ingredients = new ArrayList<>();
         ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingredients);
         ingredients_lv.setAdapter(ingredientsAdapter);
+
+        //Set up Navigation panel
+        BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigationPanel.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.navigation_create:
+                                Intent intent1 = new Intent(CreateRecipeActivity.this, CreateRecipeActivity.class);
+                                startActivity(intent1);
+                                break;
+
+                            case R.id.navigation_cookbook:
+                                Intent intent2 = new Intent(CreateRecipeActivity.this, CookBookActivity.class);
+                                startActivity(intent2);
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
     }
 

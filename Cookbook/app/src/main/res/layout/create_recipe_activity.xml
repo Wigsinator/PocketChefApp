@@ -279,7 +279,7 @@
                     app:iconGravity="textStart"
                     app:iconPadding="10dp"
                     app:iconTint="#4d4d4d"
-                    tools:text="CREATE RECIPE"
+                    android:text="CREATE RECIPE"
                     android:onClick="@{presenter::handleCreateRecipeClicked;}"/>
             </LinearLayout>
         </ScrollView>

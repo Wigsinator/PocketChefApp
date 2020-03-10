@@ -73,7 +73,7 @@
             android:textColor="#1D1D1D"
             android:background="@drawable/login_btn"
             android:textSize="20dp"
-            tools:text="LOG IN" />
+            android:text="LOG IN" />
 
         <!--  Text to prompt the sign up link -->
         <TextView
@@ -96,7 +96,7 @@
             android:layout_marginTop="605dp"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="210dp"
-            android:background="#c4c4c4"
+            android:background="#00c4c4c4"
             android:textSize="15dp"
             android:textColor="#124FA9"
             tools:text="Sign Up Now!" />

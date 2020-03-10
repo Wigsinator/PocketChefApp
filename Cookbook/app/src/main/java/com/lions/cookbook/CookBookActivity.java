@@ -1,5 +1,6 @@
 package com.lions.cookbook;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -7,14 +8,18 @@ import androidx.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +55,28 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
                 presenter.handleRecipeClicked(recipeName);
             }
         });
+
+        //Set up Navigation panel
+        BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigationPanel.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.navigation_create:
+                                Intent intent1 = new Intent(CookBookActivity.this, CreateRecipeActivity.class);
+                                startActivity(intent1);
+                                break;
+
+                            case R.id.navigation_cookbook:
+                                Intent intent2 = new Intent(CookBookActivity.this, CookBookActivity.class);
+                                startActivity(intent2);
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
     }
 
 
