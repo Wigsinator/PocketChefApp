@@ -1,30 +1,13 @@
 package com.lions.cookbook;
 import java.util.*;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
 
-@Entity(primaryKeys = {"title","username"},tableName = "recipe_database")
 public class Recipe {
-    @NonNull
-    @ColumnInfo(name="title")
     private String title;
-    @NonNull
-    @ColumnInfo(name="username")
     private String username;
-    @ColumnInfo(name="servingSize")
     private int servingSize;
-    @TypeConverters(RecipeListConverter.class)
-    @ColumnInfo(name="ingredients")
     private List<Ingredient> ingredients;
-    @TypeConverters(RecipeListConverter.class)
-    @ColumnInfo(name="tags")
     private List<String> tags;
-    @TypeConverters(RecipeListConverter.class)
-    @ColumnInfo(name="steps")
     private List<String> steps;
 
     public Recipe(String title, String username, int servingSize, List<Ingredient> ingredients, List<String> tags, List<String> steps){

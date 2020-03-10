@@ -6,39 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CookBookModel implements CookBookContract.CookBookMVPModel {
 
-    private RecipeRepository mRepository;
+    private DatabaseReference mDatabase;
 
-    private LiveData<List<Recipe>> mAllRecipes;
-    private LiveData<List<String>> mLiveRecipeTitles;
-    private ArrayList<String> mAllRecipeTitles;
-
-    public CookBookModel(Application application, AppCompatActivity activity){
-        mRepository = new RecipeRepository(application);
-        mAllRecipes = mRepository.getAllRecipes();
-        mLiveRecipeTitles = mRepository.getAllRecipeTitles();
-        mAllRecipeTitles = new ArrayList<>();
-    }
-
-
-    public LiveData<List<String>> getLiveRecipeNamesDB() {
-        return mLiveRecipeTitles;
-    }
-
-    public void setAllRecipeTitles(List<String> strings) {
-        mAllRecipeTitles = new ArrayList<>(strings);
+    public CookBookModel(DatabaseReference database){
+        mDatabase = database;
     }
 
     @Override
     public ArrayList<String> getRecipeNamesDB() {//Fill in this function
         //Return ArrayList of all recipe names stored in DB.
         //Feel free to comment out the code below as they are hard coded values
-        /*
+        //TODO This also needs done
         String[] filler_recipes = {"Spaghetti", "Whole Wheat Bread", "Bread Pudding", "Chow Mein",
                 "Potato Bread", "Guac", "Quinoa Salad", "Chicken Salad", "Terriyaki Chicken",
                 "Wedges", "Brownies", "Black Forest Cake", "FlatBread", "Butter Chicken", "Potato Curry",
@@ -48,8 +34,7 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
 
         return RecipeList;
 
-        */
-        return mAllRecipeTitles;
+
     }
 
     @Override

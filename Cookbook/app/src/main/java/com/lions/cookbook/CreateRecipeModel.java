@@ -1,33 +1,31 @@
 package com.lions.cookbook;
 
-import android.app.Application;
 
-import androidx.lifecycle.LiveData;
+
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
 
 public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPModel{
-    private RecipeRepository mRepository;
+    private DatabaseReference mDatabase;
 
-    public CreateRecipeModel(Application application){
-        mRepository = new RecipeRepository(application);
+    public CreateRecipeModel(DatabaseReference database){
+        mDatabase = database;
     }
 
     @Override
     public Boolean ExistRecipeName(String recipe_name) {
-        //List<Recipe> matches = mRepository.searchByTitle(recipe_name).getValue();
-        LiveData<List<Recipe>> matches = mRepository.getAllRecipes();
-        List<Recipe> bleh = matches.getValue();
-        return !(bleh == null || bleh.isEmpty());
+        //TODO Create this function
+        return false;
     }
 
     @Override
     public Boolean addRecipe(Recipe new_recipe) {
         try {
-            mRepository.insert(new_recipe);
+            mDatabase.child("recipes").child(new_recipe.getUsername()).child(new_recipe.getTitle()).setValue(new_recipe);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
