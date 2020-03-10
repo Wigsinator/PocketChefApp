@@ -2,6 +2,7 @@ package com.lions.cookbook;
 
 import android.view.View;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,24 @@ import java.util.List;
 public interface CreateRecipeContract {
 
     interface CreateRecipeMVPView{
-        void goToCookBookScreen();
-        void showUnfilledError();
-        void showSuccessfulCreation();
-        void showCreationError();
+        void goToCookBookScreen(); //Change screen to CookBook
+        void showUnfilledError(); //Error if user did not fill up all fields
+        void showRecipeNameError(); // Error if recipe name is already taken
+        void showSuccessfulCreation(); //Toast for successful Recipe creation
+        void showCreationError(); //Toast for unsuccessful Recipe creation
         ArrayList<String> getRecipeIngredients();
         String getServingSize();
-        ArrayList getRecipeSteps();
+        ArrayList<String> getRecipeSteps();
         String getRecipeTitle();
         String getNewStep();
         void addNewStep(String new_step);
         String getNewIngredient();
-        void addNewIngredient(String new_ingredient);
+        String getNewIngredientAmount();
+        String getNewIngredientType();
+        void showIngredientAddError();
+        void addNewIngredient(String new_ingredient, String amount, String type);
+        void clearIngredientText();
+        void clearStepText();
     }
 
 
@@ -31,13 +38,15 @@ public interface CreateRecipeContract {
         void handleGoToCookBookScreen(View view);
         void handleAddSteps(View view);
         void handleAddIngredient(View view);
+        Boolean checkIngredient();
+        Boolean conductEmptyErrorChecks();
+        Boolean conductUniqueNameCheck();
+        List<Ingredient> createIngredientList(ArrayList<String> ingredientList);
     }
 
-    interface CreateRecipeModel {
-        Boolean addRecipeTitle(String recipe_title);
-        Boolean addRecipeSteps(ArrayList recipe_steps);
-        Boolean addServingSize(Integer serving_size);
-        Boolean addRecipeIngredients(ArrayList recipe_ingredients);
+    interface CreateRecipeMVPModel {
+        Boolean ExistRecipeName(String recipe_name); //Checks if Recipe name already exists, returns True if it already exists. Will be used to ensure Recipe names are unique
+        Boolean addRecipe(Recipe new_recipe); //Adds Recipe object to DB. True if successful.
     }
 
 }

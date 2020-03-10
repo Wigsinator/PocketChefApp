@@ -1,22 +1,31 @@
 package com.lions.cookbook;
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
-public class CreateAccountModel {
-    private FirebaseAuth mAuth;
+public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
 
-    public CreateAccountModel(){
-        mAuth = FirebaseAuth.getInstance();
+    public CreateAccountModel(){}
+
+    public Boolean passwordStrong(String password){
+        return (password.length() >= 6);
     }
 
-    public boolean AddNewUser(String email,String userPassword){
-        Task<AuthResult> addUserResult = mAuth.createUserWithEmailAndPassword(email, userPassword);
-        //if successful returns true; if email already in use then return false
-        return addUserResult.isSuccessful();
+    public Boolean validEmail(String email){
+        return (email.endsWith("@gmail.com"));
     }
 
-    public FirebaseAuth getmAuth(){
-        return mAuth;
+    public Boolean addNewUser(String email,String userPassword){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if (passwordStrong(userPassword)){
+            if (validEmail(email)){
+                mAuth.createUserWithEmailAndPassword(email, userPassword);
+                return true;
+            }
+        }
+        return false;
     }
 }

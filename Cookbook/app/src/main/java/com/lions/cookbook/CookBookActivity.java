@@ -1,14 +1,21 @@
 package com.lions.cookbook;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +33,11 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cook_book_activity);
-        model1 = new CookBookModel();
+
+        //Set up values
+        model1 = new CookBookModel(this.getApplication(), this);
         presenter = new CookBookPresent(this, model1);
+
         //Populate with List of Recipe names
         final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, presenter.getRecipeNames());
@@ -39,11 +49,35 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
                 presenter.handleRecipeClicked(recipeName);
             }
         });
+        model1.getLiveRecipeNamesDB().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(@Nullable final List<String> strings) {
+                model1.setAllRecipeTitles(strings);
+            }
+        });
+
+        //Set up Navigation panel
+        BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigationPanel.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.navigation_create:
+                                Intent intent1 = new Intent(CookBookActivity.this, CreateRecipeActivity.class);
+                                startActivity(intent1);
+                                break;
+
+                            case R.id.navigation_cookbook:
+                                Intent intent2 = new Intent(CookBookActivity.this, CookBookActivity.class);
+                                startActivity(intent2);
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
     }
-
-
-
 
 
 
@@ -55,10 +89,12 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
     }
 
     @Override
-    public void goToViewRecipe(String recipeName, String servingSize, String ingredients, List steps) {
+    public void goToViewRecipe(String clickedRecipe) {
         Intent intent = new Intent(this, ViewRecipeActivity.class);
-        intent.putExtra("RECIPE_NAME", recipeName);
+        intent.putExtra("RECIPE", clickedRecipe);
+        Log.d("TEST", "Created recipe to be trasnferd to new intent");
         startActivity(intent);
+        Log.d("TEST", "Starting new intent");
 
     }
 

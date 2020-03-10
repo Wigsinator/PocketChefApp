@@ -1,4 +1,5 @@
 package com.lions.cookbook;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
@@ -20,7 +21,6 @@ public class LoginModel {
     public FirebaseUser getCurrentUser(){
         return mAuth.getCurrentUser();
     }
-
 
     public void signOut(){
         mAuth.signOut();
