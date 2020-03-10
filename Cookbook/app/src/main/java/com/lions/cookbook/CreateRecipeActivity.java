@@ -12,6 +12,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lions.cookbook.databinding.CreateRecipeActivityBinding;
 
@@ -23,6 +27,8 @@ import java.util.ArrayList;
 public class CreateRecipeActivity extends AppCompatActivity implements CreateRecipeContract.CreateRecipeMVPView {
     private CreateRecipeContract.CreateRecipeMVPModel model;
     private CreateRecipeContract.CreateRecipeMVPPresenter presenter;
+    private DatabaseReference mDatabase;
+
     //private CreateRecipePresent presenter;
     private ArrayList<String> recipeSteps;
     private ArrayAdapter<String> recipeStepsAdapter;
@@ -34,7 +40,8 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
         super.onCreate(savedInstanceState);
 
         //setContentView(R.layout.create_recipe_activity);
-        model = new CreateRecipeModel(this.getApplication());
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        model = new CreateRecipeModel(mDatabase);
         presenter = new CreateRecipePresent(this, model);
 
         //Set binding for createRecipe_activity and presenter
