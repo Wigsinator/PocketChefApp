@@ -38,7 +38,6 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     	this.userPhoneNumber = this.view.getPhoneNumber();
     	this.userEmail = this.view.getEmail();
 
-
         if (this.userEmail == null || this.userEmail.equals("")){
             any_errors = true;
         }else if (this.userPassword == null || this.userPassword.equals("")){
@@ -57,8 +56,7 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             this.view.showUnfilledError();
         } else{
         	//add new user's info to the database
-            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword)
-                    && this.model.isUsernameUnique(this.username);
+            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword);
 
             if (res){
                 this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName);
@@ -71,6 +69,4 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
         }
 
     }
-
-
 }

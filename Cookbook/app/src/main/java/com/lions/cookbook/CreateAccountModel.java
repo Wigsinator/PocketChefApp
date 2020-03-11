@@ -30,11 +30,6 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
         return (email.endsWith(".com"));
     }
 
-    public boolean isUsernameUnique(String username){
-        Query result = db.child("users").orderByChild("username").equalTo(username);
-        return result == null;
-        }
-
     public boolean addNewUser(String email,String userPassword){
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
