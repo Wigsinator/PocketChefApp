@@ -75,10 +75,4 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     }
 
 
-    @Override
-    public void handleGoToLoginScreen(View view) {
-        this.view.goToLoginScreen();
-    }
-
-
 }
