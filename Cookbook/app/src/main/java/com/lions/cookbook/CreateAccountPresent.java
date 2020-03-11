@@ -63,7 +63,7 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             if (res){
                 this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
                 this.model.setUsername(this.username);
-                
+
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
             }else {
@@ -72,12 +72,6 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
 
         }
 
-    }
-
-
-    @Override
-    public void handleGoToLoginScreen(View view) {
-        this.view.goToLoginScreen();
     }
 
 
