@@ -1,23 +1,35 @@
 package com.lions.cookbook;
 
-public class LoginModel implements LoginContract.LoginModel {
+import android.util.Log;
 
-    LoginModel(){
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
+public class LoginModel implements LoginContract.LoginModel{
+    private FirebaseAuth mAuth;
+
+    public LoginModel(){
+        mAuth = FirebaseAuth.getInstance();
     }
 
-    @Override
-    public String getUsername(){
-        return null;
+    public boolean signIn(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password);
+        Log.d("currUser", mAuth.getCurrentUser().getEmail());
+        return mAuth.getCurrentUser() != null && (mAuth.getCurrentUser().getEmail().equals(email));
     }
 
-    @Override
-    public String getPassword(){
-        return null;
+    //returns FirebaseUser if someone signed in, returns null otw
+    public FirebaseUser getCurrentUser(){
+        return mAuth.getCurrentUser();
     }
 
-    @Override
-    public Boolean checkUserLoginCredentials(String userName, String userPass){
-        return true;
+    public void signOut(){
+        mAuth.signOut();
+    }
+
+    public FirebaseAuth getmAuth() {
+        return mAuth;
     }
 }
