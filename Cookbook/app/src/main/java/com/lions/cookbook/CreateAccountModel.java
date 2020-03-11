@@ -10,13 +10,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
     private DatabaseReference db;
+    private FirebaseAuth mAuth;
 
     public CreateAccountModel(DatabaseReference db){
         this.db = db;
+        this.mAuth = FirebaseAuth.getInstance();
     }
 
     public boolean passwordStrong(String password){
@@ -27,46 +30,22 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
         return (email.endsWith(".com"));
     }
 
-    public boolean isUsernameUnique(String username){
-        return ! (db.child(username).getRoot() == null);
-    }
-
     public boolean addNewUser(String email,String userPassword){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
-                mAuth.createUserWithEmailAndPassword(email, userPassword);
-                FirebaseUser new_user = mAuth.getCurrentUser();
+                this.mAuth.createUserWithEmailAndPassword(email, userPassword);
+                this.mAuth.signInWithEmailAndPassword(email, userPassword);
                 //add user to recipe database
-                this.db.child("recipes").child(new_user.getUid().toString()).setValue("");
                 return true;
             }
         }
         return false;
     }
 
-    public boolean setUsername(String username){
-        if (isUsernameUnique(username)) {
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseUser new_user = mAuth.getCurrentUser();
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(username).build();
-            new_user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Log.d("profile update", "User profile updated.");
-                        Log.d("displayname", "displayname is: " + new_user.getDisplayName());
-                    }
-                }
-            });
-            return true;
-        }
-        return false;
-    }
-
-    public void storeUserInfo(String userName, String firstName, String lastName, String phone) {
+    public void storeUserInfo(String userName, String firstName, String lastName) {
+        FirebaseUser curr_user = mAuth.getCurrentUser();
         String fullname = firstName.concat((" ").concat((lastName)));
-        db.child("usernames/" + userName).setValue(fullname);
+        db.child("users").child(curr_user.getUid()).child("username").setValue(userName);
+        db.child("users").child(curr_user.getUid()).child("fullname").setValue(fullname);
     }
 }
