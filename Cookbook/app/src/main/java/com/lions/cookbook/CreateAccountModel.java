@@ -3,6 +3,7 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 
 import org.json.JSONObject;
@@ -36,5 +37,17 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
             }
         }
         return false;
+    }
+
+    public void setUsername(String username){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser new_user = mAuth.getCurrentUser();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(username).build();
+    }
+
+    public void storeUserInfo(String userName, String firstName, String lastName, String phone) {
+        String fullname = firstName.concat((" ").concat((lastName)));
+        db.child("usernames").child(userName).setValue(fullname, phone);
     }
 }
