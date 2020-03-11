@@ -4,21 +4,26 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPresent implements LoginContract.LoginPresenter {
 
     private LoginContract.LoginView view;
     private LoginContract.LoginModel model;
 
-    private String username;
+    private String userEmail;
     private String userPassword;
+
+    private FirebaseUser curr_user;
 
    // UserPreferences mDatabase = new UserPreferencesImpl();
 
     public LoginPresent(LoginContract.LoginView nView,LoginContract.LoginModel nModel) {
-        view = nView;
-        model = nModel;
+        this.view = nView;
+        this.model = nModel;
     }
 
     @Override
@@ -26,36 +31,26 @@ public class LoginPresent implements LoginContract.LoginPresenter {
         //Get Input from user
         boolean any_errors = false;
 
-        this.username = this.view.getEmail();
+        this.userEmail = this.view.getEmail();
         this.userPassword = this.view.getPassword();
 
 
-        if (this.username == null || this.username.equals("")){
-            any_errors = true;
-        }else if (this.userPassword == null || this.userPassword.equals("")){
-            any_errors = true;
-        }
-
-        if (any_errors){
+        if (this.userEmail == null || this.userEmail.equals("")
+        || this.userPassword == null || this.userPassword.equals("") ){
 
             this.view.showUnfilledError();
 
         } else{
-            Log.d("Retrieve info","Username:" + this.username + "password" + this.userPassword);
-            Boolean res = true;
+            Log.d("Retrieve info","Username:" + this.userEmail + "password" + this.userPassword);
 
             //validate user's info from the database
-            //res = this.model.checkUserLoginCredentials(username, userPassword);
-            if (this.username.equals("test@gmail.com") && this.userPassword.equals("123456")){
-                res = true;
-            }else{
-                res = false;
-            }
+            if (this.model.signIn(this.userEmail, this.userPassword)){
 
-            if (res){
+                curr_user = this.model.getCurrentUser();
                 this.view.showLoginSuccess();
                 this.view.goToCreateRecipeScreen();
-            }else {
+
+            }else{
                 this.view.showLoginFailure();
             }
 
