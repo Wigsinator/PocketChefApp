@@ -14,9 +14,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
     private DatabaseReference db;
+    private FirebaseAuth mAuth;
 
     public CreateAccountModel(DatabaseReference db){
         this.db = db;
+        this.mAuth = FirebaseAuth.getInstance();
     }
 
     public boolean passwordStrong(String password){
@@ -28,17 +30,22 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
     }
 
     public boolean isUsernameUnique(String username){
-        return ! (db.child(username).getRoot() == null);
+        return (db.child(username).child(username) != null);
     }
 
     public boolean addNewUser(String email,String userPassword){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
-                mAuth.createUserWithEmailAndPassword(email, userPassword);
-                FirebaseUser new_user = mAuth.getCurrentUser();
+                FirebaseAuth.AuthStateListener listener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                    }
+                };
+                mAuth.addAuthStateListener(listener);
+                this.mAuth.createUserWithEmailAndPassword(email, userPassword);
+                this.mAuth.signInWithEmailAndPassword(email, userPassword);
                 //add user to recipe database
-                this.db.child("recipes").child(new_user.getUid().toString()).setValue("");
                 return true;
             }
         }
@@ -47,16 +54,18 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
 
     public boolean setUsername(String username){
         if (isUsernameUnique(username)) {
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseUser new_user = mAuth.getCurrentUser();
+            FirebaseUser new_user = this.mAuth.getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(username).build();
             new_user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        Log.d("email and username", new_user.getEmail() + new_user.getDisplayName());
                         Log.d("profile update", "User profile updated.");
-                        Log.d("displayname", "displayname is: " + new_user.getDisplayName());
+                    }
+                    else{
+                        Log.d("profile update", "user profile did not update");
                     }
                 }
             });
@@ -68,5 +77,9 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
     public void storeUserInfo(String userName, String firstName, String lastName, String phone) {
         String fullname = firstName.concat((" ").concat((lastName)));
         db.child("usernames/" + userName).setValue(fullname);
+    }
+
+    public FirebaseAuth getmAuth(){
+        return this.mAuth;
     }
 }

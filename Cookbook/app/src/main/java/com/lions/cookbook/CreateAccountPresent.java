@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class CreateAccountPresent implements CreateAccountContract.CreateAccountMVPPresenter{
 
@@ -22,7 +24,6 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     CreateAccountPresent(CreateAccountContract.CreateAccountMVPView nView,CreateAccountContract.CreateAccountMVPModel nModel) {
         this.view = nView;
         this.model = nModel;
-
     }
 
     @Override
@@ -62,12 +63,14 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
 
             if (res){
                 this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
+                FirebaseAuth mAuth = this.model.getmAuth();
+                Log.d("present username is", mAuth.getCurrentUser().getDisplayName() + "in present");
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
+                mAuth.signOut();
             }else {
                 this.view.showCreateAccountFailure();
             }
-
         }
 
     }
