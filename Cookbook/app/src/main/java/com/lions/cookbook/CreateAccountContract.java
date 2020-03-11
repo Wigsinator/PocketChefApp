@@ -17,7 +17,7 @@ public interface CreateAccountContract {
         //add new user to the database
         boolean addNewUser(String username,String userPassword);
         void storeUserInfo(String userName, String firstName, String lastName, String phone);
-        void setUsername(String username);
+        boolean setUsername(String username);
         }
 
 
