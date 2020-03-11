@@ -42,6 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_activity);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         model = new CreateAccountModel(mDatabase);
@@ -63,8 +64,8 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
     @Override
     public void goToLoginScreen(){
-    	//Intent intent = new Intent(this, UserLoginActivity.class);
-        //startActivity(intent);
+    	Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
         Toast.makeText(this, "Taking user to Log in Screen", Toast.LENGTH_SHORT).show();
     }
 
