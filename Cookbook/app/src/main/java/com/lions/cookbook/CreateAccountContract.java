@@ -11,8 +11,6 @@ public interface CreateAccountContract {
 
         void handleCreateAccountClicked(View view);
 
-        void handleGoToLoginScreen(View view);
-
     }
 
     interface CreateAccountMVPModel {
