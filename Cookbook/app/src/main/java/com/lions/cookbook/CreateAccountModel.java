@@ -44,6 +44,7 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
         FirebaseUser new_user = mAuth.getCurrentUser();
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(username).build();
+        new_user.updateProfile(profileUpdates);
     }
 
     public void storeUserInfo(String userName, String firstName, String lastName, String phone) {
