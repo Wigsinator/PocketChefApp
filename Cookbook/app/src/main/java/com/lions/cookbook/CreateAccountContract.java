@@ -17,7 +17,9 @@ public interface CreateAccountContract {
 
     interface CreateAccountMVPModel {
         //add new user to the database
-        Boolean addNewUser(String username,String userPassword);
+        boolean addNewUser(String username,String userPassword);
+        void storeUserInfo(String userName, String firstName, String lastName, String phone);
+        void setUsername(String username);
         }
 
 

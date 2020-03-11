@@ -42,6 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_activity);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         model = new CreateAccountModel(mDatabase);

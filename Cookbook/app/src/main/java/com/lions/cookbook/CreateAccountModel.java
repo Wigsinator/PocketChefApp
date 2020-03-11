@@ -17,15 +17,15 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
         this.db = db;
     }
 
-    public Boolean passwordStrong(String password){
+    public boolean passwordStrong(String password){
         return (password.length() >= 6);
     }
 
-    public Boolean validEmail(String email){
+    public boolean validEmail(String email){
         return (email.endsWith("@gmail.com"));
     }
 
-    public Boolean addNewUser(String email,String userPassword){
+    public boolean addNewUser(String email,String userPassword){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if (passwordStrong(userPassword)){
             if (validEmail(email)){

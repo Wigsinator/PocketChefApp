@@ -20,8 +20,8 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
 
 
     CreateAccountPresent(CreateAccountContract.CreateAccountMVPView nView,CreateAccountContract.CreateAccountMVPModel nModel) {
-        view = nView;
-        model = nModel;
+        this.view = nView;
+        this.model = nModel;
 
     }
 
@@ -30,11 +30,11 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     	//Get Input from user
         boolean any_errors = false;
 
-        //this.username = this.view.getUsername();
+        this.username = this.view.getUsername();
         this.userPassword = this.view.getPassword();
-    	//this.userFirstName = this.view.getFirstName();
-    	//this.userLastName = this.view.getLastName();
-    	//this.userPhoneNumber = this.view.getPhoneNumber();
+    	this.userFirstName = this.view.getFirstName();
+    	this.userLastName = this.view.getLastName();
+    	this.userPhoneNumber = this.view.getPhoneNumber();
     	this.userEmail = this.view.getEmail();
 
 
@@ -42,15 +42,25 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             any_errors = true;
         }else if (this.userPassword == null || this.userPassword.equals("")){
             any_errors = true;
+        }else if (this.username == null || this.username.equals("")){
+            any_errors = true;
+        }else if(this.userFirstName == null ||this.userFirstName.equals("")){
+            any_errors = true;
+        }else if(this.userLastName == null ||this.userLastName.equals("")){
+            any_errors = true;
+        }else if(this.userPhoneNumber == null ||this.userPhoneNumber.equals("")){
+            any_errors = true;
         }
+
 
         if (any_errors){
             this.view.showUnfilledError();
         } else{
-            Log.d("Retrieve info","Username:" + this.userEmail + "password" + this.userPassword);
         	//add new user's info to the database
-            Boolean res = model.addNewUser(this.userEmail,this.userPassword);
-         
+            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword);
+            this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
+            this.model.setUsername(this.username);
+
             if (res){
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
