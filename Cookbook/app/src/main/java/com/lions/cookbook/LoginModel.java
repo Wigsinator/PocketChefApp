@@ -1,5 +1,7 @@
 package com.lions.cookbook;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
@@ -13,8 +15,9 @@ public class LoginModel implements LoginContract.LoginModel{
     }
 
     public boolean signIn(String email, String password){
-        Task<AuthResult> signInIsSuccessful = mAuth.signInWithEmailAndPassword(email, password);
-        return signInIsSuccessful.isSuccessful();
+        mAuth.signInWithEmailAndPassword(email, password);
+        Log.d("currUser", mAuth.getCurrentUser().getEmail());
+        return mAuth.getCurrentUser() != null && (mAuth.getCurrentUser().getEmail().equals(email));
     }
 
     //returns FirebaseUser if someone signed in, returns null otw
