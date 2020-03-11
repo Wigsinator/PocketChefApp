@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
@@ -30,19 +31,13 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
     }
 
     public boolean isUsernameUnique(String username){
-        return (db.child(username).child(username) != null);
-    }
+        Query result = db.child("users").orderByChild("username").equalTo(username);
+        return result == null;
+        }
 
     public boolean addNewUser(String email,String userPassword){
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
-                FirebaseAuth.AuthStateListener listener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                    }
-                };
-                mAuth.addAuthStateListener(listener);
                 this.mAuth.createUserWithEmailAndPassword(email, userPassword);
                 this.mAuth.signInWithEmailAndPassword(email, userPassword);
                 //add user to recipe database
@@ -52,34 +47,10 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
         return false;
     }
 
-    public boolean setUsername(String username){
-        if (isUsernameUnique(username)) {
-            FirebaseUser new_user = this.mAuth.getCurrentUser();
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(username).build();
-            new_user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Log.d("email and username", new_user.getEmail() + new_user.getDisplayName());
-                        Log.d("profile update", "User profile updated.");
-                    }
-                    else{
-                        Log.d("profile update", "user profile did not update");
-                    }
-                }
-            });
-            return true;
-        }
-        return false;
-    }
-
-    public void storeUserInfo(String userName, String firstName, String lastName, String phone) {
+    public void storeUserInfo(String userName, String firstName, String lastName) {
+        FirebaseUser curr_user = mAuth.getCurrentUser();
         String fullname = firstName.concat((" ").concat((lastName)));
-        db.child("usernames/" + userName).setValue(fullname);
-    }
-
-    public FirebaseAuth getmAuth(){
-        return this.mAuth;
+        db.child("users").child(curr_user.getUid()).child("username").setValue(userName);
+        db.child("users").child(curr_user.getUid()).child("fullname").setValue(fullname);
     }
 }

@@ -18,9 +18,8 @@ public interface CreateAccountContract {
     interface CreateAccountMVPModel {
         //add new user to the database
         boolean addNewUser(String username,String userPassword);
-        void storeUserInfo(String userName, String firstName, String lastName, String phone);
-        boolean setUsername(String username);
-        FirebaseAuth getmAuth();
+        void storeUserInfo(String userName, String firstName, String lastName);
+        boolean isUsernameUnique(String username);
         }
 
 

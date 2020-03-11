@@ -53,21 +53,18 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             any_errors = true;
         }
 
-
         if (any_errors){
             this.view.showUnfilledError();
         } else{
         	//add new user's info to the database
             Boolean res = this.model.addNewUser(this.userEmail,this.userPassword)
-                    && this.model.setUsername(this.username);
+                    && this.model.isUsernameUnique(this.username);
 
             if (res){
-                this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
-                FirebaseAuth mAuth = this.model.getmAuth();
-                Log.d("present username is", mAuth.getCurrentUser().getDisplayName() + "in present");
+                this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName);
+                Log.d("present username is", FirebaseAuth.getInstance().getCurrentUser().getDisplayName() );
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
-                mAuth.signOut();
             }else {
                 this.view.showCreateAccountFailure();
             }
