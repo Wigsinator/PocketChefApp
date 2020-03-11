@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
     private DatabaseReference db;
@@ -32,7 +33,7 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
                 mAuth.createUserWithEmailAndPassword(email, userPassword);
                 FirebaseUser new_user = mAuth.getCurrentUser();
                 //add user to recipe database
-                db.child("recipes").child(new_user.getUid().toString()).setValue("");
+                this.db.child("recipes").child(new_user.getUid().toString()).setValue("");
                 return true;
             }
         }
@@ -49,6 +50,9 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
 
     public void storeUserInfo(String userName, String firstName, String lastName, String phone) {
         String fullname = firstName.concat((" ").concat((lastName)));
-        db.child("usernames").child(userName).setValue(fullname, phone);
+        ArrayList<String> name_and_number = new ArrayList<String>();
+        name_and_number.add(fullname);
+        name_and_number.add(phone);
+        this.db.child("usernames").child(userName).setValue(name_and_number);
     }
 }
