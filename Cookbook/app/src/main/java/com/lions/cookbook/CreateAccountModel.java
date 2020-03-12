@@ -31,9 +31,13 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
                 mAuth.createUserWithEmailAndPassword(email, userPassword);
+                /*
+
                 FirebaseUser new_user = mAuth.getCurrentUser();
                 //add user to recipe database
-                this.db.child("recipes").child(new_user.getUid().toString()).setValue("");
+                db.child("recipes").child(new_user.getUid().toString()).setValue("");
+
+                */
                 return true;
             }
         }
