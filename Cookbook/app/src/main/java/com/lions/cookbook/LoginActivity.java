@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
+import android.content.Context;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
@@ -25,6 +26,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);//set layout name with actual name
+
+        PreferencesProvider.init(this);
+
 
         model = new LoginModel();
         LoginPresenter = new LoginPresent(this,model);

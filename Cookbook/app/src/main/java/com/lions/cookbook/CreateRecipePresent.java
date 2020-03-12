@@ -12,12 +12,23 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     //private RecipeModel firebase_db;
     private List<String> recipesteps;
 
+
+    //instantiate a sessionManager which stores current user's login info
+    SessionManager mPreferences = new SessionManager();
+    String curr_userEmail = mPreferences.getLoggedInUserEmail();
+
+
+
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeMVPModel model){
         nView = view;
         nModel = model;
     }
     @Override
     public void handleCreateRecipeClicked(View view) {
+
+        Log.d("Retrieve info","in the create Recipe Presenter: email: " + mPreferences.getLoggedInUserEmail() + " login state:" + mPreferences.isUserLogin());
+
+
         if (conductEmptyErrorChecks()){ //Check if any fields are empty
             nView.showUnfilledError();
         } else if (conductUniqueNameCheck()){ //Check if name is unique

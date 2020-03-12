@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import android.content.SharedPreferences;
+import android.content.Context;import android.content.Context;
 
 public class LoginPresent implements LoginContract.LoginPresenter {
 
@@ -19,11 +21,13 @@ public class LoginPresent implements LoginContract.LoginPresenter {
 
     private FirebaseUser curr_user;
 
-   // UserPreferences mDatabase = new UserPreferencesImpl();
+    SessionManager mPreferences = new SessionManager();
+
 
     public LoginPresent(LoginContract.LoginView nView,LoginContract.LoginModel nModel) {
         this.view = nView;
         this.model = nModel;
+
     }
 
     @Override
@@ -41,10 +45,16 @@ public class LoginPresent implements LoginContract.LoginPresenter {
             this.view.showUnfilledError();
 
         } else{
-            Log.d("Retrieve info","Username:" + this.userEmail + "password" + this.userPassword);
 
             //validate user's info from the database
             if (this.model.signIn(this.userEmail, this.userPassword)){
+
+                //save current user's login state
+                mPreferences.setUserLogin(true);
+                mPreferences.setLoggedInUserEmail(this.userEmail);
+
+                //this line can be successfully printed
+                Log.d("Retrieve info","in the login Presenter: email: " + mPreferences.getLoggedInUserEmail() + " login state:" + mPreferences.isUserLogin());
 
                 curr_user = this.model.getCurrentUser();
                 this.view.showLoginSuccess();
