@@ -56,11 +56,9 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             this.view.showUnfilledError();
         } else{
         	//add new user's info to the database
-            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword);
+            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName);
 
             if (res){
-                this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName);
-                Log.d("present username is", FirebaseAuth.getInstance().getCurrentUser().getDisplayName() );
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
             }else {
