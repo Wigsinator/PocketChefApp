@@ -44,8 +44,11 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         model1 = new CookBookModel(mDatabase);
         presenter = new CookBookPresent(this, model1);
 
+        //populate all other info of the current user
+        //set the values of textview
+
         //Populate with List of Recipe names
-        final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
+        final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, presenter.getRecipeNames());
         RecipeList.setAdapter(arrayAdapter);
         RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

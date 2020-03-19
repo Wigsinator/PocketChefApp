@@ -12,12 +12,15 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     //private RecipeModel firebase_db;
     private List<String> recipesteps;
 
+
+
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeMVPModel model){
         nView = view;
         nModel = model;
     }
     @Override
     public void handleCreateRecipeClicked(View view) {
+
         if (conductEmptyErrorChecks()){ //Check if any fields are empty
             nView.showUnfilledError();
         } else if (conductUniqueNameCheck()){ //Check if name is unique
