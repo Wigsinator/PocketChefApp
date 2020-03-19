@@ -2,6 +2,7 @@ package com.lions.cookbook;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,6 +39,16 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
         }
 
 
+    }
+
+    @Override
+    public void handleDeletePressed(String recipeName) {
+        if (nModel.deleteRecipe(recipeName)){
+            nView.showDeleteSuccess();
+            nView.goToCookBookScreen();
+        } else {
+            nView.showDeleteFailure();
+        }
     }
 
     @Override

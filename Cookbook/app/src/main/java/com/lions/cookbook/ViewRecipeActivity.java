@@ -136,4 +136,26 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         Spinner mySpinner = (Spinner) findViewById(R.id.newMeasurementTypes);
         return mySpinner.getSelectedItem().toString();
     }
+
+    @Override
+    public void deletePressed(View view) {
+        presenter.handleDeletePressed(getOriginalRecipe().getTitle());
+    }
+
+    @Override
+    public void goToCookBookScreen() {
+        Intent intent = new Intent(this, CookBookActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Taking user to CookBook Screen", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDeleteSuccess() {
+        Toast.makeText(this, "Successful Deletion.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDeleteFailure() {
+        Toast.makeText(this, "Deletion Failure.", Toast.LENGTH_SHORT).show();
+    }
 }
