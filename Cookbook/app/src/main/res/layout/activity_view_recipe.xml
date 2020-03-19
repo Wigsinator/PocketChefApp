@@ -28,11 +28,76 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="5dp"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:text="Insert Recipe Title Here">
             </TextView>
+
+            <LinearLayout
+                android:id="@+id/authorIndication"
+                android:layout_width="340dp"
+                android:layout_gravity="center"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/by"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    android:text="By:"/>
+
+                <Button
+                    android:id="@+id/RecipeAuthor"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toRightOf="@+id/by"
+                    android:text="username"
+                    android:background="#00FFFFFF"
+                    android:textSize="13dp"
+                    android:textColor="#124FA9"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!--  Info about Publishing  -->
+            <TextView
+                android:id="@+id/publishNotes"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="3dp"
+                android:text="Toggle this button if you would like your recipe to be public or private. You can change this at any time!"
+                android:textColor="#787878"
+                android:textSize="15dp"
+                android:textAlignment="center"/>
+
+            <!--  Toggle Switch for Publishing Choice  -->
+            <Switch
+                android:id="@+id/publishSwitch"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="left"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:text="Publish this recipe?"
+                android:textColor="@color/colorText"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:theme="@style/SwitchTheme" />
 
             <!--   Recipe Serving Size-->
             <RelativeLayout

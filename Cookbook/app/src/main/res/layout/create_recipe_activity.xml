@@ -248,21 +248,38 @@
                         android:onClick="@{presenter::handleAddSteps;}"/>
                 </RelativeLayout>
 
-                <!--            <com.google.android.material.button.MaterialButton-->
-                <!--                android:id="@+id/btnStepNew"-->
-                <!--                android:layout_width="250dp"-->
-                <!--                android:layout_height="56dp"-->
-                <!--                android:layout_marginTop="10dp"-->
-                <!--                android:layout_marginBottom="20dp"-->
-                <!--                android:layout_gravity="center"-->
-                <!--                android:textAllCaps="true"-->
-                <!--                android:textColor="#4d4d4d"-->
-                <!--                android:textSize="18dp"-->
-                <!--                app:backgroundTint="#c4c4c4"-->
-                <!--                app:iconGravity="textStart"-->
-                <!--                app:icon="@drawable/ic_add"-->
-                <!--                app:iconPadding="5dp"-->
-                <!--                app:iconTint="#4d4d4d"-->
+                <!--  Info about Publishing  -->
+                <TextView
+                    android:id="@+id/publishNotes"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="3dp"
+                    android:text="Toggle this button if you would like your recipe to be public or private. You can change this at any time!"
+                    android:textColor="#787878"
+                    android:textSize="15dp"
+                    android:textAlignment="center"/>
+
+                <!--  Toggle Switch for Publishing Choice  -->
+                <Switch
+                    android:id="@+id/publishSwitch"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="left"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="Publish this recipe?"
+                    android:textColor="@color/colorText"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:theme="@style/SwitchTheme" />
 
                 <!--         Button to Create the Recipe-->
                 <Button
