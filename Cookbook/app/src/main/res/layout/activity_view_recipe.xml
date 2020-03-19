@@ -9,7 +9,7 @@
     tools:context=".ViewRecipeActivity">
 
     <ScrollView android:layout_marginTop="10dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="45dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/scrollView">
@@ -60,7 +60,7 @@
                     android:text="username"
                     android:background="#00FFFFFF"
                     android:textSize="13dp"
-                    android:textColor="#124FA9"
+                    android:textColor="@color/colorBlue"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -79,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_toLeftOf="@+id/Recommended"
+                    android:backgroundTint="@color/colorGreen"
                     android:background="@drawable/view_recipe_serving_size"
                     />
 
