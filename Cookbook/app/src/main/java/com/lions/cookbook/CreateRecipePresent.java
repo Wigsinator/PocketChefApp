@@ -13,11 +13,6 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     private List<String> recipesteps;
 
 
-    //instantiate a sessionManager which stores current user's login info
-    SessionManager mPreferences = new SessionManager();
-    String curr_userEmail = mPreferences.getLoggedInUserEmail();
-
-
 
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeMVPModel model){
         nView = view;
@@ -25,9 +20,6 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     }
     @Override
     public void handleCreateRecipeClicked(View view) {
-
-        Log.d("Retrieve info","in the create Recipe Presenter: email: " + mPreferences.getLoggedInUserEmail() + " login state:" + mPreferences.isUserLogin());
-
 
         if (conductEmptyErrorChecks()){ //Check if any fields are empty
             nView.showUnfilledError();

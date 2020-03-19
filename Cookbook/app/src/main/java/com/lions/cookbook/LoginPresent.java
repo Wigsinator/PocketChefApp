@@ -21,7 +21,7 @@ public class LoginPresent implements LoginContract.LoginPresenter {
 
     private FirebaseUser curr_user;
 
-    SessionManager mPreferences = new SessionManager();
+    private SessionManager mPreferences = new SessionManager();
 
 
     public LoginPresent(LoginContract.LoginView nView,LoginContract.LoginModel nModel) {

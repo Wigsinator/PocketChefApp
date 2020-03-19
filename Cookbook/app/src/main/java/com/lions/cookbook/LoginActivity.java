@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     private LoginPresent LoginPresenter;
     private LoginModel model;
 
+    private SessionManager LoginPref;
+
 
 
     @Override
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         setContentView(R.layout.login_activity);//set layout name with actual name
 
         PreferencesProvider.init(this);
+        this.LoginPref = new SessionManager();
 
 
         model = new LoginModel();
@@ -36,6 +39,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
         btnLogin = (Button) this.findViewById(R.id.login_btn);
         btnSignup = (Button) this.findViewById(R.id.signUpLink);
+
+        //if the current user is already logged-in
+        if (this.LoginPref.isUserLogin()){
+            goToCookBookScreen();
+            Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
+        }
 
         //set event handler to sign up button
         btnSignup.setOnClickListener(new OnClickListener() {
@@ -53,8 +62,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
             }
         });
 
-        //init
-        // loginPresent = new LoginPresenterCompl(this);
     }
 
     @Override
