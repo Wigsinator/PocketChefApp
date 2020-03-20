@@ -14,11 +14,11 @@ public class PrivateUserProfileContract {
     }
 
     interface PrivateUserProfileModel {
-        String getCurrentFirstname();
-        String getCurrentLastname();
-        String getCurrentUsername();
-        String getCurrentPhonenumber();
-        String getCurrentEmail();
+        String getCurrUserFirstname();
+        String getCurrUserLastname();
+        String getCurrUserUsername();
+        String getCurrUserPhonenumber();
+        String getCurrUserEmail();
         ArrayList<String> getAllUserRecipes();
 
         void signOut();
