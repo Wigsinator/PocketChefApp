@@ -29,7 +29,7 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
             DatabaseReference ref = mDatabase.child("recipes").push();
             String id = ref.getKey();
             ref.setValue(new_recipe);
-            mDatabase.child("users").child(user.getUid()).child("cookbook").push().setValue(id);
+            mDatabase.child("users").child(user.getUid()).child("cookbook").child(id).setValue(new_recipe.getTitle());
             return true;
         } catch (Exception e) {
             return false;
