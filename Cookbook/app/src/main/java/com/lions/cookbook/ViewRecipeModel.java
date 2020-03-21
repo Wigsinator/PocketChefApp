@@ -25,4 +25,9 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
         Recipe new_recipe = new Recipe(title, username, serving_size, ingredients, fake_tags, steps); //Note: Tags feature has not been added
         return new_recipe;
     }
+
+    @Override
+    public Boolean publishStateUpdate(Boolean isPublished, String RecipeName) {
+        return true;
+    }
 }

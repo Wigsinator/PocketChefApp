@@ -13,6 +13,9 @@ public interface ViewRecipeContract {
         void updateIngredients(ArrayList<Ingredient> ingredients);
         void alterPressed(View view);
         String getUnits();
+        void showToggleChanged();
+        void showToggleSuccess();
+        void showToggleFailure();
     }
 
     interface ViewRecipeMVPPresenter{
@@ -21,8 +24,10 @@ public interface ViewRecipeContract {
         List<Ingredient> sizeScaleIngredients(List<Ingredient> ingredients, int originalSize, int NewSize);
         List<Ingredient> unitConversionIngredients(List<Ingredient> ingredients, String units); //units: Metric or Imperial
         Boolean checkEnteredServingSize();
+        void toggleSwitchChange(Boolean isToggleOn, String RecipeName);
     }
     interface ViewRecipeMVPModel{
         Recipe getRecipe(String recipeName);
+        Boolean publishStateUpdate(Boolean isPublished, String RecipeName); //isPublished = true if switched to published, false if switching to notPublished. Return True once completed
     }
 }

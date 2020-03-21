@@ -209,4 +209,15 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
         }
         return any_errors;
     }
+
+    @Override
+    public void toggleSwitchChange(Boolean isToggleOn, String RecipeName) {
+        nView.showToggleChanged();
+        Boolean status = nModel.publishStateUpdate(isToggleOn, RecipeName);
+        if (status){
+            nView.showToggleSuccess();
+        } else {
+            nView.showToggleFailure();
+        }
+    }
 }

@@ -10,14 +10,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.lions.cookbook.databinding.ActivityViewRecipeBinding;
+import com.lions.cookbook.databinding.ViewRecipeActivityBinding;
 
 import org.w3c.dom.Text;
 
@@ -37,11 +39,12 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_recipe);
+        setContentView(R.layout.view_recipe_activity);
 
         //Set binding for createRecipe_activity and presenter
         //ActivityViewRecipeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_view_recipe);
         //binding.setPresenter(this.presenter);
+
 
         //Set up values
         model = new ViewRecipeModel();
@@ -96,6 +99,15 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
                     }
                 });
 
+        //Set up listener for public/private toggler
+        Switch mySwitch = (Switch)  findViewById(R.id.publishSwitch);
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                presenter.toggleSwitchChange(isChecked, getOriginalRecipe().getTitle());
+            }
+        });
     }
 
     @Override
@@ -135,5 +147,21 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     public String getUnits() {
         Spinner mySpinner = (Spinner) findViewById(R.id.newMeasurementTypes);
         return mySpinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public void showToggleChanged() {
+        Toast.makeText(this, "Publish status updating...", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void showToggleSuccess() {
+        Toast.makeText(this, "Publish status update complete", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToggleFailure() {
+        Toast.makeText(this, "Publish status update failed", Toast.LENGTH_SHORT).show();
     }
 }
