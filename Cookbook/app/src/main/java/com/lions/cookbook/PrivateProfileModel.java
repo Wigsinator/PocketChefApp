@@ -16,7 +16,8 @@ public class PrivateProfileModel{
     FirebaseAuth mAuth;
     DatabaseReference db;
     String foundUsername;
-    String foundFullname;
+    String[] foundFullname;
+    String foundPhoneNumber;
     ArrayList<Recipe> foundRecipes;
 
     public PrivateProfileModel(DatabaseReference db){
@@ -47,12 +48,12 @@ public class PrivateProfileModel{
         return foundUsername;
     }
 
-    public String getFoundFullname(){
+    public void findFullname(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener fullNameListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                foundFullname = dataSnapshot.child("users").child(profileOwner.getUid()).child("fullname").getValue(String.class);
+                foundFullname = dataSnapshot.child("users").child(profileOwner.getUid()).child("fullname").getValue(String.class).split(" ");
             }
 
             @Override
@@ -61,12 +62,38 @@ public class PrivateProfileModel{
             }
         };
         db.addListenerForSingleValueEvent(fullNameListener);
-        return foundFullname;
+    }
+
+    public String getFirstName(){
+        findFullname();
+        return foundFullname[0];
+    }
+
+    public String getLastName(){
+        findFullname();
+        return foundFullname[1];
     }
 
     public String getEmail(){
         FirebaseUser currUser = mAuth.getCurrentUser();
         return currUser.getEmail();
+    }
+
+    public String getPhoneNumber(){
+        FirebaseUser profileOwner = mAuth.getCurrentUser();
+        ValueEventListener phoneListener = new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                foundPhoneNumber = dataSnapshot.child("users").child(profileOwner.getUid()).child("phone").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                foundPhoneNumber = null;
+            }
+        };
+        db.addListenerForSingleValueEvent(phoneListener);
+        return foundPhoneNumber;
     }
 
     public ArrayList<Recipe> getRecipes(){
@@ -86,7 +113,7 @@ public class PrivateProfileModel{
         };
         db.addListenerForSingleValueEvent(recipeListener);
         return foundRecipes;
-    };
+    }
 
     public void changePassword(String newPassword){
         FirebaseUser currUser = mAuth.getCurrentUser();
@@ -97,4 +124,5 @@ public class PrivateProfileModel{
         FirebaseUser currUser = mAuth.getCurrentUser();
         db.child("users").child(currUser.getUid()).child("fullName").setValue(newName);
     }
+
 }
