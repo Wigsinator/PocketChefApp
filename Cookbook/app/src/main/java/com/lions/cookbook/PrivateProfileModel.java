@@ -4,11 +4,9 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
@@ -16,9 +14,9 @@ public class PrivateProfileModel{
     FirebaseAuth mAuth;
     DatabaseReference db;
     String foundUsername;
-    String[] foundFullname;
+    String foundFullname;
     String foundPhoneNumber;
-    ArrayList<Recipe> foundRecipes;
+    ArrayList<String> foundRecipes;
 
     public PrivateProfileModel(DatabaseReference db){
         this.mAuth = FirebaseAuth.getInstance();
@@ -48,12 +46,12 @@ public class PrivateProfileModel{
         return foundUsername;
     }
 
-    public void findFullname(){
+    public String getFullname(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener fullNameListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                foundFullname = dataSnapshot.child("users").child(profileOwner.getUid()).child("fullname").getValue(String.class).split(" ");
+                foundFullname = dataSnapshot.child("users").child(profileOwner.getUid()).child("fullname").getValue(String.class);
             }
 
             @Override
@@ -62,16 +60,7 @@ public class PrivateProfileModel{
             }
         };
         db.addListenerForSingleValueEvent(fullNameListener);
-    }
-
-    public String getFirstName(){
-        findFullname();
-        return foundFullname[0];
-    }
-
-    public String getLastName(){
-        findFullname();
-        return foundFullname[1];
+        return foundFullname;
     }
 
     public String getEmail(){
@@ -96,13 +85,13 @@ public class PrivateProfileModel{
         return foundPhoneNumber;
     }
 
-    public ArrayList<Recipe> getRecipes(){
+    public ArrayList<String> getRecipes(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot recipeSnapshot: dataSnapshot.child("users").child(profileOwner.getUid()).child("cookbook").getChildren()) {
-                    foundRecipes.add(recipeSnapshot.getValue(Recipe.class));
+                    foundRecipes.add(recipeSnapshot.getValue(Recipe.class).getTitle());
                 }
             }
 
