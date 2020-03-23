@@ -28,7 +28,7 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
 
     @Override
     public void handleCreateAccountClicked(View view) {
-    	//Get Input from user
+        //Get Input from user
         boolean any_errors = false;
 
         this.username = this.view.getUsername();
@@ -37,6 +37,7 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     	this.userLastName = this.view.getLastName();
     	this.userPhoneNumber = this.view.getPhoneNumber();
     	this.userEmail = this.view.getEmail();
+
 
         if (this.userEmail == null || this.userEmail.equals("")){
             any_errors = true;
@@ -55,8 +56,9 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
         if (any_errors){
             this.view.showUnfilledError();
         } else{
-        	//add new user's info to the database
-            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName);
+
+            //add new user's info to the database
+            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
 
             if (res){
                 this.view.showCreateAccountSuccess();

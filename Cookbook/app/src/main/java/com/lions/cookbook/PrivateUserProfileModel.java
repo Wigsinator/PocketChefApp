@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class PrivateUserProfileModel implements PrivateUserProfileContract.PrivateUserProfileModel {
     FirebaseAuth mAuth;
     DatabaseReference db;
+    //these variables below hold user info read from db
     String foundUsername;
     String foundFullname;
     String foundPhoneNumber;
@@ -88,6 +89,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         return foundPhoneNumber;
     }
 
+
     public ArrayList<String> getRecipes(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener recipeListener = new ValueEventListener() {
@@ -110,6 +112,12 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
     public void changePassword(String newPassword){
         FirebaseUser currUser = mAuth.getCurrentUser();
         currUser.updatePassword(newPassword);
+    }
+
+    public void changePhoneNumber(String newNumber){
+        FirebaseUser currUser = mAuth.getCurrentUser();
+        db.child("users").child(currUser.getUid()).child("phone").setValue(newNumber);
+
     }
 
     public void changeName(String newName){
