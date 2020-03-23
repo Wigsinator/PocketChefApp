@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
@@ -33,13 +35,23 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
 
 
         return RecipeList;
-
-
     }
 
     @Override
     public List<String> getRecipeImages() {
         return null;
+    }
+
+    public void deleteRecipe(String recipeTitle, Boolean isShared){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        mDatabase.child("recipes").child(user.getUid()).child(recipeTitle).removeValue();
+        /*This is still theoretical.
+        if (isShared) {
+
+            mDatabase.child("shared_recipes").child(user.getUid()).child(recipeTitle).removeValue();
+        }
+        */
     }
 
 }

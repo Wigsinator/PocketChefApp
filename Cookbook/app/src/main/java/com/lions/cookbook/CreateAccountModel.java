@@ -1,40 +1,58 @@
 package com.lions.cookbook;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccountModel implements CreateAccountContract.CreateAccountMVPModel {
     private DatabaseReference db;
+    private FirebaseAuth mAuth;
 
     public CreateAccountModel(DatabaseReference db){
         this.db = db;
-    }
+        this.mAuth = FirebaseAuth.getInstance();
+        }
 
-    public Boolean passwordStrong(String password){
+    public boolean passwordStrong(String password){
         return (password.length() >= 6);
     }
 
-    public Boolean validEmail(String email){
-        return (email.endsWith("@gmail.com"));
+    public boolean validEmail(String email){
+        return (email.endsWith(".com"));
     }
 
-    public Boolean addNewUser(String email,String userPassword){
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public boolean addNewUser(String email,String userPassword, String username, String firstname, String lastname){
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
-                mAuth.createUserWithEmailAndPassword(email, userPassword);
-                FirebaseUser new_user = mAuth.getCurrentUser();
-                //add user to recipe database
-                db.child("recipes").child(new_user.getUid().toString()).setValue("");
+
+                OnCompleteListener accountCreationListener = new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        storeUserInfo(username, firstname, lastname );
+                    }
+                };
+                mAuth.createUserWithEmailAndPassword(email, userPassword).addOnCompleteListener(accountCreationListener);
                 return true;
+                }
             }
-        }
         return false;
+    }
+
+    public void storeUserInfo(String userName, String firstName, String lastName) {
+        FirebaseUser curr_user = mAuth.getCurrentUser();
+        Log.d("new user", this.mAuth.getCurrentUser().getEmail());
+        String fullname = firstName.concat((" ").concat((lastName)));
+        db.child("users").child(curr_user.getUid()).child("username").setValue(userName);
+        db.child("users").child(curr_user.getUid()).child("fullname").setValue(fullname);
     }
 }
