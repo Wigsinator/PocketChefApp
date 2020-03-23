@@ -21,8 +21,12 @@ public class PrivateUserProfileContract {
         String getPhoneNumber();
         String getEmail();
         ArrayList<String> getRecipes();
-
         void signOut();
+        void findFullname();
+        void findUsername();
+        void findPhoneNumber();
+        void findRecipes();
+        void notifyAllObservers();
     }
 
 
