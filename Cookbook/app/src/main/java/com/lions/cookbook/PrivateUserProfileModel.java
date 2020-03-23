@@ -133,7 +133,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot recipeSnapshot: dataSnapshot.getChildren()) {
-                    recipes.add(recipeSnapshot.getValue(Recipe.class).getTitle());
+                    recipes.add(recipeSnapshot.getValue(String.class));
                 }
                 notifyAllObservers();
             }
@@ -143,7 +143,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
                 recipes = null;
             }
         };
-        db.child("users").child("users").child(profileOwner.getUid()).child("cookbook").addValueEventListener(recipeListener);
+        db.child("users").child(profileOwner.getUid()).child("cookbook").addValueEventListener(recipeListener);
     }
 
     public void setPassword(String newPassword){
