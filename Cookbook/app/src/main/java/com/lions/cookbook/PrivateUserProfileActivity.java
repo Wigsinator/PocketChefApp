@@ -114,7 +114,14 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         }
 
 
-       // this.phoneNumber.setText(model.getPhoneNumber());
+        String foundPhoneNum = model.getPhoneNumber();
+        //Log.d("TEST", "the phone number of the current user is");
+        //Log.d("TEST", foundPhoneNum);
+        if ( (foundPhoneNum!= null) && (!foundPhoneNum.equals(""))) {
+            this.phoneNumber.setText(foundPhoneNum);
+        }
+
+
         String foundEmail = model.getEmail();
         if ( (foundEmail!= null) && (!foundEmail.equals(""))) {
             this.email.setText(foundEmail);
