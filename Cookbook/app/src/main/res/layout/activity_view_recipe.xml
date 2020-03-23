@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,11 +26,43 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="5dp"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:text="Insert Recipe Title Here">
             </TextView>
+
+            <LinearLayout
+                android:id="@+id/authorIndication"
+                android:layout_width="340dp"
+                android:layout_gravity="center"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/by"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorText"
+                    android:text="By:"/>
+
+                <Button
+                    android:id="@+id/RecipeAuthor"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toRightOf="@+id/by"
+                    android:text="username"
+                    android:background="#00FFFFFF"
+                    android:textSize="13dp"
+                    android:textColor="#124FA9"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <!--   Recipe Serving Size-->
             <RelativeLayout
