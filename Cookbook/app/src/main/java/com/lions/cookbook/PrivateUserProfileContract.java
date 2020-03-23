@@ -11,7 +11,10 @@ public class PrivateUserProfileContract {
         void handleLogoutClicked();
         ArrayList getRecipeNames();
         void handleRecipeClicked(String recipeName);
-
+        String getEmail();
+        String[] getFullName();
+        String getUsername();
+        String getPhoneNumber();
     }
 
     interface PrivateUserProfileModel {

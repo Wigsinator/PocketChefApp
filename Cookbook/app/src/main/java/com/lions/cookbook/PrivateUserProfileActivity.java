@@ -103,18 +103,17 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
 
 
         //Populate other info to the UI
-        String foundFullname = model.getFullname();
+        String[] foundFullname = presenter.getFullName();
         //Log.d("TEST", "the full name of the current user is");
         //Log.d("TEST", foundFullname);
-        if ( (foundFullname!= null) && (!foundFullname.equals(""))){
-            String[] arrOfnames = foundFullname.split(" ", 3);
+        if ( (foundFullname!= null) && (foundFullname.length > 1)){
             //set values for the textView
-            this.firstName.setText(arrOfnames[0]);
-            this.lastName.setText(arrOfnames[1]);
+            this.firstName.setText(foundFullname[0]);
+            this.lastName.setText(foundFullname[1]);
         }
 
 
-        String foundPhoneNum = model.getPhoneNumber();
+        String foundPhoneNum = presenter.getPhoneNumber();
         //Log.d("TEST", "the phone number of the current user is");
         //Log.d("TEST", foundPhoneNum);
         if ( (foundPhoneNum!= null) && (!foundPhoneNum.equals(""))) {
@@ -122,12 +121,12 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         }
 
 
-        String foundEmail = model.getEmail();
+        String foundEmail = presenter.getEmail();
         if ( (foundEmail!= null) && (!foundEmail.equals(""))) {
             this.email.setText(foundEmail);
         }
 
-        String foundUsername = model.getUsername();
+        String foundUsername = presenter.getUsername();
         if ( (foundUsername!= null) && (!foundUsername.equals(""))) {
             this.username.setText(foundUsername);
         }

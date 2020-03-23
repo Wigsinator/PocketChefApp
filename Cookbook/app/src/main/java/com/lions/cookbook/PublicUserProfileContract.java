@@ -9,6 +9,8 @@ public class PublicUserProfileContract {
     interface PublicUserProfilePresenter{
         ArrayList getRecipeNames();
         void handleRecipeClicked(String recipeName);
+        String getFullName();
+        String getUsername();
 
     }
 
