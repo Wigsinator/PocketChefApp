@@ -127,7 +127,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
             this.email.setText(foundEmail);
         }
 
-        String foundUsername = model.getEmail();
+        String foundUsername = model.getUsername();
         if ( (foundUsername!= null) && (!foundUsername.equals(""))) {
             this.username.setText(foundUsername);
         }
