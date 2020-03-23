@@ -1,6 +1,8 @@
 package com.lions.cookbook;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 /**
  * Defines contract between View {@link //CreateAccountActivity} and Presenter {@link //CreateAccountPresent}
@@ -11,14 +13,13 @@ public interface CreateAccountContract {
 
         void handleCreateAccountClicked(View view);
 
-        void handleGoToLoginScreen(View view);
-
     }
 
     interface CreateAccountMVPModel {
         //add new user to the database
-        Boolean addNewUser(String username,String userPassword);
-        }
+        boolean addNewUser(String username,String userPassword, String userName, String firstName, String lastname, String phone);
+        void storeUserInfo(String userName, String firstName, String lastName, String phone);
+    }
 
 
     interface CreateAccountMVPView{
@@ -33,8 +34,8 @@ public interface CreateAccountContract {
         String getPassword();
         String getFirstName();
         String getLastName();
-        String getEmail();   
-        String getPhoneNumber();   
+        String getEmail();
+        String getPhoneNumber();
     }
 
 
