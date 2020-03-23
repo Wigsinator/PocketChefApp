@@ -12,14 +12,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
-public class PrivateProfileModel{
+public class PrivateUserProfileModel implements PrivateUserProfileContract.PrivateUserProfileModel {
     FirebaseAuth mAuth;
     DatabaseReference db;
     String foundUsername;
     String foundFullname;
     ArrayList<Recipe> foundRecipes;
 
-    public PrivateProfileModel(DatabaseReference db){
+    public PrivateUserProfileModel(DatabaseReference db){
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
     }

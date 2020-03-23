@@ -9,31 +9,25 @@ public class PrivateUserProfileContract {
 
     interface PrivateUserProfilePresenter{
         void handleLogoutClicked();
-        ArrayList getUserRecipes();
+        ArrayList getRecipeNames();
+        void handleRecipeClicked(String recipeName);
 
     }
 
     interface PrivateUserProfileModel {
-        String getCurrUserFirstname();
-        String getCurrUserLastname();
-        String getCurrUserUsername();
-        String getCurrUserPhonenumber();
-        String getCurrUserEmail();
-        ArrayList<String> getAllUserRecipes();
+
+        String getFoundFullname();
+        String getUsername();
+        //String getPhonenumber();
+        String getEmail();
+        //ArrayList<String> getRecipes();
 
         void signOut();
     }
 
 
     interface PrivateUserProfileView{
-        void goToCreateAccountScreen();
-        void goToCookBookScreen();
-        String getEmail();
-        String getPassword();
-        void goToLoginScreen();
-        void showUnfilledError();
-        void showLoginFailure();
-        void showLoginSuccess();
+        void goToViewRecipe(String clickedRecipe);
 
 }
 

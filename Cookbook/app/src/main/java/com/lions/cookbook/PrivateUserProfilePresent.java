@@ -1,5 +1,6 @@
 package com.lions.cookbook;
 
+import android.util.Log;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     }
 
     @Override
-    public ArrayList getUserRecipes() {
+    public ArrayList getRecipeNames() {
         //return nModel.getRecipeNamesDB();
         return null;
     }
@@ -28,6 +29,14 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     public void handleLogoutClicked() {
         this.UserPref.clearUser();
         nView.goToLoginScreen();
+        nModel.signOut();
+    }
+
+    @Override
+    public void handleRecipeClicked(String recipeName) {
+        Log.d("TEST", "Finish getting recipe");
+        nView.goToViewRecipe(recipeName);
+        Log.d("TEST", "able to go to view recipe");
     }
 
 

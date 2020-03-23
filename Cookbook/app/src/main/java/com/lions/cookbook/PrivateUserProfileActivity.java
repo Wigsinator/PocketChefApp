@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +15,7 @@ import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.FirebaseDatabase;import android.widget.TextView;
 
 public class PrivateUserProfileActivity extends AppCompatActivity implements PrivateUserProfileContract.PrivateUserProfileView{
     private PrivateUserProfilePresent presenter;
@@ -28,23 +29,38 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
     private Button followersBtn;
     private Button logoutBtn;
 
+    private TextView firstName;
+    private TextView lastName;
+    private TextView username;
+    private TextView phoneNumber;
+    private TextView email;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_account_private_activity);//set layout name with actual name
+        setContentView(R.layout.view_account_private_activity);
 
-        //Set up values
+        //Set up MVP
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        this.model = new PrivateUserProfileModel(mDatabase);
-        this.presenter = new PrivateUserProfilePresent(this, this.model);
+        model = new PrivateUserProfileModel(mDatabase);
+        presenter = new PrivateUserProfilePresent(this, model);
 
+        //set up textView
+        this.firstName = (TextView) findViewById(R.id.firstName);
+        this.lastName = (TextView) findViewById(R.id.lastName);
+        this.username = (TextView) findViewById(R.id.username);
+        this.phoneNumber = (TextView) findViewById(R.id.phoneNumber);
+        this.email = (TextView) findViewById(R.id.email);
+
+
+        //set up event handlers for the buttons
         this.dietaryBtn = (Button) this.findViewById(R.id.dietaryBtn);
         this.dietaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // this.presenter.handleLogoutClicked();
+               //handler
             }
         });
 
@@ -52,7 +68,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         this.settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //this.presenter.handleLogoutClicked();
+                //handler
             }
         });
 
@@ -60,7 +76,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         this.followingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // this.presenter.handleLogoutClicked();
+               //handler
             }
         });
 
@@ -68,7 +84,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         this.followersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //this.presenter.handleLogoutClicked();
+                //handler
             }
         });
 
@@ -78,11 +94,18 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         this.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                this.presenter.handleLogoutClicked();
+                presenter.handleLogoutClicked();
             }
         });
 
-        //Populate other info
+
+        //Populate other info to the UI
+        String fullname = model.getFoundFullname();
+        String[] arrOfnames = fullname.split(" ", 3);
+
+        //set values for the textView
+        this.firstName.setText(arrOfnames[0]);
+        this.lastName.setText(arrOfnames[1]);
 
 
         //Populate with List of Recipe names
@@ -114,9 +137,26 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
                                 Intent intent2 = new Intent(PrivateUserProfileActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
                                 break;
+
+                            case R.id.navigation_account:
+                                Intent intent3 = new Intent(PrivateUserProfileActivity.this, PrivateUserProfileActivity.class);
+                                startActivity(intent3);
+                                break;
+
                         }
                         return false;
                     }
                 });
+    }
+
+
+    @Override
+    public void goToViewRecipe(String clickedRecipe) {
+        Intent intent = new Intent(this, ViewRecipeActivity.class);
+        intent.putExtra("RECIPE", clickedRecipe);
+        Log.d("TEST", "Created recipe to be transferred to new intent");
+        startActivity(intent);
+        Log.d("TEST", "Starting new intent");
+
     }
 }
