@@ -18,6 +18,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     String userPhoneNumber;
     String userUsername;
     String userFullName;
+    String[] arrOfNames;
     ArrayList<String> recipeNames;
 
 
@@ -35,6 +36,14 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
         this.userUsername = username;
         this.userPhoneNumber = phone;
         this.recipeNames = recipes;
+        if (this.userFullName != null){
+            this.arrOfNames = this.userFullName.split(" ", 3);
+        }
+        Log.d("retrived number", "presenter got number:");
+        if (this.userPhoneNumber != null) {
+            Log.d("number", this.userPhoneNumber);
+        }
+
     }
 
     @Override
@@ -54,14 +63,13 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
 
     @Override
     public String[] getFullName(){
-        String fullname = this.userFullName;
-        String[] arrOfnames = fullname.split(" ", 3);
-        return arrOfnames;
+        //String fullname = this.userFullName;
+        //String[] arrOfnames = fullname.split(" ", 3);
+        return this.arrOfNames;
     }
 
     @Override
-    public String getEmail(){
-        return this.userEmail;
+    public String getEmail(){ return this.userEmail;
     }
 
     @Override
