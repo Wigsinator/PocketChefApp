@@ -20,7 +20,5 @@ public interface CookBookContract {
         ArrayList<String> getRecipeNames(); //Retrieve Recipe names from Model
         void handleCreateRecipeClicked();
         void handleRecipeClicked(String recipeName);
-
-
     }
 }
