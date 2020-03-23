@@ -18,7 +18,8 @@ import java.util.Observer;
 public class PrivateUserProfileModel implements PrivateUserProfileContract.PrivateUserProfileModel {
     FirebaseAuth mAuth;
     DatabaseReference db;
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private ArrayList<PrivateProfileObserver> observers = new ArrayList<PrivateProfileObserver>();
+    private String email;
     //these variables below hold user info read from db
     private String username;
     private String fullname;
@@ -29,6 +30,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
     public PrivateUserProfileModel(DatabaseReference db){
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
+        this.email = getEmail();
         findUsername();
         findFullname();
         findPhoneNumber();
@@ -62,13 +64,13 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         return this.recipes;
     }
 
-    public void attach(Observer observer){
+    public void addObserver(PrivateProfileObserver observer){
         this.observers.add(observer);
     }
 
     public void notifyAllObservers(){
-        for (Observer observer : this.observers) {
-            observer.update();
+        for (PrivateProfileObserver observer : this.observers) {
+            observer.update(this.email, this.phoneNumber, this.username, this.fullname, this.recipes);
         }
     }
 

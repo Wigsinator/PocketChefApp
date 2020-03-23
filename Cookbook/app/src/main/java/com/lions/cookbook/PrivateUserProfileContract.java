@@ -29,6 +29,7 @@ public class PrivateUserProfileContract {
         void findUsername();
         void findPhoneNumber();
         void findRecipes();
+        void addObserver(PrivateProfileObserver observer);
         void notifyAllObservers();
     }
 
