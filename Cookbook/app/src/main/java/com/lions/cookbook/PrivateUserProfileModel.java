@@ -18,6 +18,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
     String foundPhoneNumber;
     ArrayList<String> foundRecipes;
 
+
     public PrivateUserProfileModel(DatabaseReference db){
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
@@ -46,6 +47,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         return foundUsername;
     }
 
+
     public String getFullname(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener fullNameListener = new ValueEventListener() {
@@ -62,6 +64,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         db.addListenerForSingleValueEvent(fullNameListener);
         return foundFullname;
     }
+
 
     public String getEmail(){
         FirebaseUser currUser = mAuth.getCurrentUser();
