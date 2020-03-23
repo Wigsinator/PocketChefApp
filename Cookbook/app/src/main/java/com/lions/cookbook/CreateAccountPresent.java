@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class CreateAccountPresent implements CreateAccountContract.CreateAccountMVPPresenter{
 
@@ -22,7 +24,6 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     CreateAccountPresent(CreateAccountContract.CreateAccountMVPView nView,CreateAccountContract.CreateAccountMVPModel nModel) {
         this.view = nView;
         this.model = nModel;
-
     }
 
     @Override
@@ -36,7 +37,6 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     	this.userLastName = this.view.getLastName();
     	this.userPhoneNumber = this.view.getPhoneNumber();
     	this.userEmail = this.view.getEmail();
-
 
         if (this.userEmail == null || this.userEmail.equals("")){
             any_errors = true;
@@ -52,27 +52,19 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             any_errors = true;
         }
 
-
         if (any_errors){
             this.view.showUnfilledError();
         } else{
         	//add new user's info to the database
-            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword);
-
+            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName);
 
             if (res){
-                this.model.storeUserInfo(this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
-                this.model.setUsername(this.username);
-
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
             }else {
                 this.view.showCreateAccountFailure();
             }
-
         }
 
     }
-
-
 }
