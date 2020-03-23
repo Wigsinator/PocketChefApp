@@ -13,6 +13,7 @@ public interface ViewRecipeContract {
         void updateIngredients(ArrayList<Ingredient> ingredients);
         void alterPressed(View view);
         String getUnits();
+        void goToViewAuthorProfile(String authorUsername);
     }
 
     interface ViewRecipeMVPPresenter{
@@ -21,6 +22,7 @@ public interface ViewRecipeContract {
         List<Ingredient> sizeScaleIngredients(List<Ingredient> ingredients, int originalSize, int NewSize);
         List<Ingredient> unitConversionIngredients(List<Ingredient> ingredients, String units); //units: Metric or Imperial
         Boolean checkEnteredServingSize();
+        void handleAuthorProfileClicked(String authorUsername);
     }
     interface ViewRecipeMVPModel{
         Recipe getRecipe(String recipeName);

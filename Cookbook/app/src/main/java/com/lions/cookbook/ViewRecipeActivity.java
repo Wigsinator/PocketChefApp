@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -33,6 +34,8 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     private ArrayList<String> ingredients_list;
     private ArrayAdapter<String> ingredientsAdapter;
     private Recipe originalRecipe;
+
+    private Button authorBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,19 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         //Populate Serving size
         TextView servingSize = findViewById(R.id.ServingSize);
         servingSize.setText(String.valueOf(recipeClicked.getServingSize()));
+
+        //set the author's username to the button
+        this.authorBtn = (Button) this.findViewById(R.id.RecipeAuthor);
+        //String authorUsername = model.getUsername();
+        //this.authorBtn.setText(authorUsername);
+
+        //set up event handlers for the author button
+        this.authorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //presenter.handleAuthorProfileClicked(authorUsername);
+            }
+        });
 
         //Set up Navigation panel
         BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -140,5 +156,14 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     public String getUnits() {
         Spinner mySpinner = (Spinner) findViewById(R.id.newMeasurementTypes);
         return mySpinner.getSelectedItem().toString();
+    }
+
+    public void goToViewAuthorProfile(String authorUsername) {
+        Intent intent = new Intent(this, PublicUserProfileActivity.class);
+        intent.putExtra("USERNAME", authorUsername);
+
+        startActivity(intent);
+        Log.d("TEST", "Starting new intent");
+
     }
 }
