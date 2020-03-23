@@ -104,6 +104,8 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
 
         //Populate other info to the UI
         String foundFullname = model.getFullname();
+        //Log.d("TEST", "the full name of the current user is");
+        //Log.d("TEST", foundFullname);
         if ( (foundFullname!= null) && (!foundFullname.equals(""))){
             String[] arrOfnames = foundFullname.split(" ", 3);
             //set values for the textView
@@ -127,7 +129,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         ArrayList<String> foundRecipes = presenter.getRecipeNames();
         if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
             //Populate with List of Recipe names
-            final ListView RecipeList = (ListView) findViewById(R.id.recipeList); //Fill in with actual id of List view
+            final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
             arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
             RecipeList.setAdapter(arrayAdapter);
             RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

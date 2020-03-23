@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PrivateUserProfilePresent implements PrivateUserProfileContract.PrivateUserProfilePresenter{
 
@@ -22,6 +23,9 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     @Override
     public ArrayList getRecipeNames() {
         return nModel.getRecipes();
+        //String[] filler_recipes = {"Spaghetti", "Whole Wheat Bread", "Bread Pudding", "Chow Mein"};
+        //ArrayList<String> RecipeList = new ArrayList<>(Arrays.asList(filler_recipes));
+        //return RecipeList;
     }
 
     @Override

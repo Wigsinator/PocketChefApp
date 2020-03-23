@@ -110,39 +110,33 @@
 60                android:value="com.google.firebase.components.ComponentRegistrar" />
 60-->[com.google.firebase:firebase-database:19.2.1] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/3bb9fab9565f3c13da1b0de3227d5105/firebase-database-19.2.1/AndroidManifest.xml:34:17-82
 61        </service>
-62        <service
-62-->[androidx.room:room-runtime:2.2.3] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/601a396371f38f7fedf0f642626af645/room-runtime-2.2.3/AndroidManifest.xml:25:9-27:40
-63            android:name="androidx.room.MultiInstanceInvalidationService"
-63-->[androidx.room:room-runtime:2.2.3] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/601a396371f38f7fedf0f642626af645/room-runtime-2.2.3/AndroidManifest.xml:26:13-74
-64            android:exported="false" />
-64-->[androidx.room:room-runtime:2.2.3] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/601a396371f38f7fedf0f642626af645/room-runtime-2.2.3/AndroidManifest.xml:27:13-37
-65
-66        <activity
-66-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-67            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-67-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
-68            android:exported="false"
-68-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-69            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-69-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-70
-71        <provider
-71-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
-72            android:name="com.google.firebase.provider.FirebaseInitProvider"
-72-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
-73            android:authorities="com.lions.cookbook.firebaseinitprovider"
-73-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
-74            android:exported="false"
-74-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
-75            android:initOrder="100" />
-75-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
-76
-77        <meta-data
-77-->[com.google.android.gms:play-services-basement:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/ccfca4b44f8da668b53c0ebe1789e9fb/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-78            android:name="com.google.android.gms.version"
-78-->[com.google.android.gms:play-services-basement:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/ccfca4b44f8da668b53c0ebe1789e9fb/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-79            android:value="@integer/google_play_services_version" />
-79-->[com.google.android.gms:play-services-basement:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/ccfca4b44f8da668b53c0ebe1789e9fb/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
-80    </application>
-81
-82</manifest>
+62
+63        <activity
+63-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+64            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+64-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+65            android:exported="false"
+65-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+66            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+66-->[com.google.android.gms:play-services-base:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/503246db64dcbb120c121745b36c75fd/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+67
+68        <provider
+68-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
+69            android:name="com.google.firebase.provider.FirebaseInitProvider"
+69-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+70            android:authorities="com.lions.cookbook.firebaseinitprovider"
+70-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+71            android:exported="false"
+71-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
+72            android:initOrder="100" />
+72-->[com.google.firebase:firebase-common:19.3.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/f7d6c862530c0131d86f945f017cdf21/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
+73
+74        <meta-data
+74-->[com.google.android.gms:play-services-basement:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/ccfca4b44f8da668b53c0ebe1789e9fb/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+75            android:name="com.google.android.gms.version"
+75-->[com.google.android.gms:play-services-basement:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/ccfca4b44f8da668b53c0ebe1789e9fb/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+76            android:value="@integer/google_play_services_version" />
+76-->[com.google.android.gms:play-services-basement:17.0.0] /Users/CYANG/.gradle/caches/transforms-2/files-2.1/ccfca4b44f8da668b53c0ebe1789e9fb/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+77    </application>
+78
+79</manifest>
