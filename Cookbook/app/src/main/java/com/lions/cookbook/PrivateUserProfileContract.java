@@ -16,11 +16,11 @@ public class PrivateUserProfileContract {
 
     interface PrivateUserProfileModel {
 
-        String getFoundFullname();
+        String getFullname();
         String getUsername();
-        //String getPhonenumber();
+        String getPhoneNumber();
         String getEmail();
-        //ArrayList<String> getRecipes();
+        ArrayList<String> getRecipes();
 
         void signOut();
     }
@@ -28,6 +28,7 @@ public class PrivateUserProfileContract {
 
     interface PrivateUserProfileView{
         void goToViewRecipe(String clickedRecipe);
+        void goToLoginScreen();
 
 }
 

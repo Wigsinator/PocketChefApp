@@ -63,8 +63,8 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
     @Override
     public void goToLoginScreen(){
-    	//Intent intent = new Intent(this, UserLoginActivity.class);
-        //startActivity(intent);
+    	Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
         Toast.makeText(this, "Taking user to Log in Screen", Toast.LENGTH_SHORT).show();
     }
 

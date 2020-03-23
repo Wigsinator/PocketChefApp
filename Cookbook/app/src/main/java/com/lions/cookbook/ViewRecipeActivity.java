@@ -91,6 +91,11 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
                                 Intent intent2 = new Intent(ViewRecipeActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
                                 break;
+
+                            case R.id.navigation_account:
+                                Intent intent3 = new Intent(ViewRecipeActivity.this, PrivateUserProfileActivity.class);
+                                startActivity(intent3);
+                                break;
                         }
                         return false;
                     }

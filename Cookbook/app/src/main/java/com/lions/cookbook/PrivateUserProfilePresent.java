@@ -21,8 +21,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
 
     @Override
     public ArrayList getRecipeNames() {
-        //return nModel.getRecipeNamesDB();
-        return null;
+        return nModel.getRecipes();
     }
 
     @Override
@@ -38,6 +37,5 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
         nView.goToViewRecipe(recipeName);
         Log.d("TEST", "able to go to view recipe");
     }
-
 
 }

@@ -16,6 +16,9 @@ import android.widget.ListView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class PrivateUserProfileActivity extends AppCompatActivity implements PrivateUserProfileContract.PrivateUserProfileView{
     private PrivateUserProfilePresent presenter;
@@ -100,25 +103,41 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
 
 
         //Populate other info to the UI
-        String fullname = model.getFoundFullname();
-        String[] arrOfnames = fullname.split(" ", 3);
+        String foundFullname = model.getFullname();
+        if ( (foundFullname!= null) && (!foundFullname.equals(""))){
+            String[] arrOfnames = foundFullname.split(" ", 3);
+            //set values for the textView
+            this.firstName.setText(arrOfnames[0]);
+            this.lastName.setText(arrOfnames[1]);
+        }
 
-        //set values for the textView
-        this.firstName.setText(arrOfnames[0]);
-        this.lastName.setText(arrOfnames[1]);
+
+       // this.phoneNumber.setText(model.getPhoneNumber());
+        String foundEmail = model.getEmail();
+        if ( (foundEmail!= null) && (!foundEmail.equals(""))) {
+            this.email.setText(foundEmail);
+        }
+
+        String foundUsername = model.getEmail();
+        if ( (foundUsername!= null) && (!foundUsername.equals(""))) {
+            this.username.setText(foundUsername);
+        }
 
 
-        //Populate with List of Recipe names
-        final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, presenter.getRecipeNames());
-        RecipeList.setAdapter(arrayAdapter);
-        RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String recipeName = (String) RecipeList.getItemAtPosition(i);
-                presenter.handleRecipeClicked(recipeName);
-            }
-        });
+        ArrayList<String> foundRecipes = presenter.getRecipeNames();
+        if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
+            //Populate with List of Recipe names
+            final ListView RecipeList = (ListView) findViewById(R.id.recipeList); //Fill in with actual id of List view
+            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
+            RecipeList.setAdapter(arrayAdapter);
+            RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String recipeName = (String) RecipeList.getItemAtPosition(i);
+                    presenter.handleRecipeClicked(recipeName);
+                }
+            });
+        }
 
 
         //Set up Navigation panel
@@ -158,5 +177,12 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         startActivity(intent);
         Log.d("TEST", "Starting new intent");
 
+    }
+
+    @Override
+    public void goToLoginScreen(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show();
     }
 }

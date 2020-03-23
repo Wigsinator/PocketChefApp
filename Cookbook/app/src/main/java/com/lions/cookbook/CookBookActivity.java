@@ -45,7 +45,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         presenter = new CookBookPresent(this, model1);
 
         //Populate with List of Recipe names
-        final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
+        final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, presenter.getRecipeNames());
         RecipeList.setAdapter(arrayAdapter);
         RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,6 +71,10 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
                             case R.id.navigation_cookbook:
                                 Intent intent2 = new Intent(CookBookActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
+                                break;
+                            case R.id.navigation_account:
+                                Intent intent3 = new Intent(CookBookActivity.this, PrivateUserProfileActivity.class);
+                                startActivity(intent3);
                                 break;
                         }
                         return false;
