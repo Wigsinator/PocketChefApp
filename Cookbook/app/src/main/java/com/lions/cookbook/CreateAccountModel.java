@@ -34,6 +34,7 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
     public boolean addNewUser(String email,String userPassword, String username, String firstname, String lastname){
         if (passwordStrong(userPassword)){
             if (validEmail(email)){
+
                 OnCompleteListener accountCreationListener = new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
