@@ -4,11 +4,9 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
@@ -17,7 +15,8 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
     DatabaseReference db;
     String foundUsername;
     String foundFullname;
-    ArrayList<Recipe> foundRecipes;
+    String foundPhoneNumber;
+    ArrayList<String> foundRecipes;
 
     public PrivateUserProfileModel(DatabaseReference db){
         this.mAuth = FirebaseAuth.getInstance();
@@ -47,7 +46,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         return foundUsername;
     }
 
-    public String getFoundFullname(){
+    public String getFullname(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener fullNameListener = new ValueEventListener() {
             @Override
@@ -69,13 +68,30 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         return currUser.getEmail();
     }
 
-    public ArrayList<Recipe> getRecipes(){
+    public String getPhoneNumber(){
+        FirebaseUser profileOwner = mAuth.getCurrentUser();
+        ValueEventListener phoneListener = new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                foundPhoneNumber = dataSnapshot.child("users").child(profileOwner.getUid()).child("phone").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                foundPhoneNumber = null;
+            }
+        };
+        db.addListenerForSingleValueEvent(phoneListener);
+        return foundPhoneNumber;
+    }
+
+    public ArrayList<String> getRecipes(){
         FirebaseUser profileOwner = mAuth.getCurrentUser();
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot recipeSnapshot: dataSnapshot.child("users").child(profileOwner.getUid()).child("cookbook").getChildren()) {
-                    foundRecipes.add(recipeSnapshot.getValue(Recipe.class));
+                    foundRecipes.add(recipeSnapshot.getValue(Recipe.class).getTitle());
                 }
             }
 
@@ -86,7 +102,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         };
         db.addListenerForSingleValueEvent(recipeListener);
         return foundRecipes;
-    };
+    }
 
     public void changePassword(String newPassword){
         FirebaseUser currUser = mAuth.getCurrentUser();
@@ -97,4 +113,5 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         FirebaseUser currUser = mAuth.getCurrentUser();
         db.child("users").child(currUser.getUid()).child("fullName").setValue(newName);
     }
+
 }
