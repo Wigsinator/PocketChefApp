@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class PrivateUserProfileActivity extends AppCompatActivity implements PrivateUserProfileContract.PrivateUserProfileView{
+public class PrivateUserProfileActivity extends AppCompatActivity implements PrivateUserProfileContract.PrivateUserProfileView, PrivateProfileActivityObserver{
     private PrivateUserProfilePresent presenter;
     private PrivateUserProfileModel model;
     private DatabaseReference mDatabase;
@@ -38,6 +38,12 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
     private TextView phoneNumber;
     private TextView email;
 
+    private String userEmail;
+    private String userPhoneNumber;
+    private String userUsername;
+    private String[] userFullName;
+    private ArrayList<String> recipeNames;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,8 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         mDatabase = FirebaseDatabase.getInstance().getReference();
         model = new PrivateUserProfileModel(mDatabase);
         presenter = new PrivateUserProfilePresent(this, model);
+
+        presenter.addObserver(this);//add the activity to observer list
 
         //set up textView
         this.firstName = (TextView) findViewById(R.id.firstName);
@@ -102,51 +110,6 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
         });
 
 
-        //Populate other info to the UI
-        String[] foundFullname = presenter.getFullName();
-        //Log.d("TEST", "the full name of the current user is");
-        //Log.d("TEST", foundFullname);
-        if ( (foundFullname!= null) && (foundFullname.length > 1)){
-            //set values for the textView
-            this.firstName.setText(foundFullname[0]);
-            this.lastName.setText(foundFullname[1]);
-        }
-
-
-        String foundPhoneNum = presenter.getPhoneNumber();
-        //Log.d("TEST", "the phone number of the current user is");
-        //Log.d("TEST", foundPhoneNum);
-        if ( (foundPhoneNum!= null) && (!foundPhoneNum.equals(""))) {
-            this.phoneNumber.setText(foundPhoneNum);
-        }
-
-
-        String foundEmail = presenter.getEmail();
-        if ( (foundEmail!= null) && (!foundEmail.equals(""))) {
-            this.email.setText(foundEmail);
-        }
-
-        String foundUsername = presenter.getUsername();
-        if ( (foundUsername!= null) && (!foundUsername.equals(""))) {
-            this.username.setText(foundUsername);
-        }
-
-
-        ArrayList<String> foundRecipes = presenter.getRecipeNames();
-        if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
-            //Populate with List of Recipe names
-            final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
-            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
-            RecipeList.setAdapter(arrayAdapter);
-            RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String recipeName = (String) RecipeList.getItemAtPosition(i);
-                    presenter.handleRecipeClicked(recipeName);
-                }
-            });
-        }
-
 
         //Set up Navigation panel
         BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -176,15 +139,63 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
                 });
     }
 
+    @Override
+    public void update(String email, String phone, String username, String[] Fullname, ArrayList<String> recipes){
+        this.userEmail = email;
+        this.userFullName = Fullname;
+        this.userUsername = username;
+        this.userPhoneNumber = phone;
+        this.recipeNames = recipes;
+
+        //Populate other info to the UI
+        String[] foundFullname = this.userFullName;
+        if ( (foundFullname!= null) && (foundFullname.length > 0)){
+            //set values for the textView
+            this.firstName.setText(foundFullname[0]);
+            this.lastName.setText(foundFullname[1]);
+        }
+
+
+        String foundPhoneNum = this.userPhoneNumber;
+        if ( (foundPhoneNum!= null) && (!foundPhoneNum.equals(""))) {
+            this.phoneNumber.setText(foundPhoneNum);
+        }
+
+
+        String foundEmail = this.userEmail;
+        if ( (foundEmail!= null) && (!foundEmail.equals(""))) {
+            this.email.setText(foundEmail);
+        }
+
+        String foundUsername = this.userUsername;
+        if ( (foundUsername!= null) && (!foundUsername.equals(""))) {
+            this.username.setText(foundUsername);
+        }
+
+
+        ArrayList<String> foundRecipes = this.recipeNames;
+        if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
+            //Populate with List of Recipe names
+            final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
+            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
+            RecipeList.setAdapter(arrayAdapter);
+            RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String recipeName = (String) RecipeList.getItemAtPosition(i);
+                    presenter.handleRecipeClicked(recipeName);
+                }
+            });
+        }
+
+    }
+
 
     @Override
     public void goToViewRecipe(String clickedRecipe) {
         Intent intent = new Intent(this, ViewRecipeActivity.class);
         intent.putExtra("RECIPE", clickedRecipe);
-        Log.d("TEST", "Created recipe to be transferred to new intent");
         startActivity(intent);
-        Log.d("TEST", "Starting new intent");
-
     }
 
     @Override

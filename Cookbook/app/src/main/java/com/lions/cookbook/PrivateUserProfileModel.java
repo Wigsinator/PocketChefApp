@@ -35,7 +35,6 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         findFullname();
         findPhoneNumber();
         findRecipes();
-        Log.d("private profile init", "private profile initialization");
     }
 
     public void signOut(){

@@ -14,6 +14,8 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     private ArrayList RecipeList;
     private SessionManager UserPref;
 
+    private ArrayList<PrivateProfileActivityObserver> observers = new ArrayList<PrivateProfileActivityObserver>();
+
     String userEmail;
     String userPhoneNumber;
     String userUsername;
@@ -29,6 +31,16 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
         this.nModel.addObserver(this);
     }
 
+    public void addObserver(PrivateProfileActivityObserver observer){
+        this.observers.add(observer);
+    }
+
+    public void notifyAllObservers(){
+        for (PrivateProfileActivityObserver observer : this.observers) {
+            observer.update(this.userEmail, this.userPhoneNumber, this.userUsername, this.arrOfNames, this.recipeNames);
+        }
+    }
+
     @Override
     public void update(String email, String phone, String username, String Fullname, ArrayList<String> recipes){
         this.userEmail = email;
@@ -36,22 +48,21 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
         this.userUsername = username;
         this.userPhoneNumber = phone;
         this.recipeNames = recipes;
-        if (this.userFullName != null){
-            this.arrOfNames = this.userFullName.split(" ", 3);
+
+        if(this.userFullName!= null){
+            this.arrOfNames = this.userFullName.split(" ");
         }
-        Log.d("retrived number", "presenter got number:");
-        if (this.userPhoneNumber != null) {
-            Log.d("number", this.userPhoneNumber);
-        }
+
+        notifyAllObservers();
 
     }
 
     @Override
     public ArrayList getRecipeNames() {
-        return this.recipeNames;
-        //String[] filler_recipes = {"Spaghetti", "Whole Wheat Bread", "Bread Pudding", "Chow Mein"};
-        //ArrayList<String> RecipeList = new ArrayList<>(Arrays.asList(filler_recipes));
-        //return RecipeList;
+        //return this.recipeNames;
+        String[] filler_recipes = {"Spaghetti", "Whole Wheat Bread", "Bread Pudding", "Chow Mein"};
+        ArrayList<String> RecipeList = new ArrayList<>(Arrays.asList(filler_recipes));
+        return RecipeList;
     }
 
     @Override
@@ -63,8 +74,6 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
 
     @Override
     public String[] getFullName(){
-        //String fullname = this.userFullName;
-        //String[] arrOfnames = fullname.split(" ", 3);
         return this.arrOfNames;
     }
 
@@ -84,9 +93,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
 
     @Override
     public void handleRecipeClicked(String recipeName) {
-        Log.d("TEST", "Finish getting recipe");
         nView.goToViewRecipe(recipeName);
-        Log.d("TEST", "able to go to view recipe");
     }
 
 }
