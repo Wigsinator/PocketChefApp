@@ -26,7 +26,10 @@ public class CreateRecipeModel implements  CreateRecipeContract.CreateRecipeMVPM
     public Boolean addRecipe(Recipe new_recipe) {
         try {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            mDatabase.child("recipes").child(user.getUid()).child(new_recipe.getTitle()).setValue(new_recipe);
+            DatabaseReference ref = mDatabase.child("recipes").push();
+            String id = ref.getKey();
+            ref.setValue(new_recipe);
+            mDatabase.child("users").child(user.getUid()).child("cookbook").child(id).setValue(new_recipe.getTitle());
             return true;
         } catch (Exception e) {
             return false;
