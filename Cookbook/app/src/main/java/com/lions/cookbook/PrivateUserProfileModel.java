@@ -31,6 +31,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
         this.email = getEmail();
+        this.recipes = new ArrayList<String>();
         findUsername();
         findFullname();
         findPhoneNumber();
