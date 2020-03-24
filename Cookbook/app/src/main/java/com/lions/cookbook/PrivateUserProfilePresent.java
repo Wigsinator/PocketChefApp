@@ -11,7 +11,6 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
 
     private PrivateUserProfileContract.PrivateUserProfileView nView;
     private PrivateUserProfileContract.PrivateUserProfileModel nModel;
-    private ArrayList RecipeList;
     private SessionManager UserPref;
 
     private ArrayList<PrivateProfileActivityObserver> observers = new ArrayList<PrivateProfileActivityObserver>();
@@ -29,6 +28,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
         this.nModel = model;
         //add the observer to the observer array list
         this.nModel.addObserver(this);
+        this.UserPref = new SessionManager();
     }
 
     public void addObserver(PrivateProfileActivityObserver observer){
