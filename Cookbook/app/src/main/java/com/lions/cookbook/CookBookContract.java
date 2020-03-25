@@ -20,8 +20,9 @@ public interface CookBookContract {
     interface CookBookMVPPresenter{
         ArrayList<String> getRecipeNames(); //Retrieve Recipe names from Model
         void handleCreateRecipeClicked();
-        void handleRecipeClicked(String recipeName);
-        void addObserver(CookBookObserver observer);
+        void handleRecipeClicked(int indexClicked);
+        void addObserver(CookBookActivityObserver observer);
         void notifyAllObservers();
+        void update(ArrayList<String> recipes, ArrayList<String> recipeKeys);
     }
 }

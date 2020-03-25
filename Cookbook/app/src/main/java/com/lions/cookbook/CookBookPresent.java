@@ -7,8 +7,9 @@ import java.util.ArrayList;
 public class CookBookPresent implements CookBookContract.CookBookMVPPresenter, CookBookObserver{
     private CookBookContract.CookBookMVPView nView;
     private CookBookContract.CookBookMVPModel nModel;
-    private ArrayList RecipeList;
-    private ArrayList<CookBookObserver> observers = new ArrayList<CookBookObserver>();
+    private ArrayList<String> RecipeList;
+    private ArrayList<String> RecipeKeyList;
+    private ArrayList<CookBookActivityObserver> observers = new ArrayList<CookBookActivityObserver>();
 
     CookBookPresent(CookBookContract.CookBookMVPView view, CookBookContract.CookBookMVPModel model){
         this.nView = view;
@@ -18,13 +19,13 @@ public class CookBookPresent implements CookBookContract.CookBookMVPPresenter, C
     }
 
     @Override
-    public void addObserver(CookBookObserver observer){
+    public void addObserver(CookBookActivityObserver observer){
         this.observers.add(observer);
     }
 
     @Override
     public void notifyAllObservers(){
-        for (CookBookObserver observer : this.observers) {
+        for (CookBookActivityObserver observer : this.observers) {
             observer.update(this.RecipeList);
         }
     }
@@ -39,15 +40,16 @@ public class CookBookPresent implements CookBookContract.CookBookMVPPresenter, C
     }
 
     @Override
-    public void handleRecipeClicked(String recipeName) {
+    public void handleRecipeClicked(int indexClicked) {
         Log.d("TEST", "Finish getting recipe");
-        nView.goToViewRecipe(recipeName);
+        nView.goToViewRecipe(this.RecipeKeyList.get(indexClicked));
         Log.d("TEST", "able to go to view recipe");
     }
 
     @Override
-    public void update(ArrayList<String> recipes) {
+    public void update(ArrayList<String> recipes, ArrayList<String> recipeKeys) {
         this.RecipeList = recipes;
+        this.RecipeKeyList = recipeKeys;
         notifyAllObservers();
     }
 }
