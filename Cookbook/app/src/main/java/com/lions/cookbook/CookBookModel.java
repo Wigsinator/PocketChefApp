@@ -25,11 +25,13 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
 
     private DatabaseReference mDatabase;
     private ArrayList<String> RecipeList;
+    private ArrayList<String> KeyList;
     private ArrayList<CookBookObserver> observers;
 
     public CookBookModel(DatabaseReference database){
         mDatabase = database;
         RecipeList = new ArrayList<>();
+        KeyList = new ArrayList<>();
         observers = new ArrayList<>();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Query myCookbookQuery = mDatabase.child("users").child(uid).child("cookbook").orderByValue();
@@ -38,6 +40,7 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Log.d("Cookbook Read", "ChildAdded: "+dataSnapshot.getKey());
                 RecipeList.add(dataSnapshot.getValue(String.class));
+                KeyList.add(dataSnapshot.getKey());
                 notifyAllObservers();
             }
 
@@ -70,6 +73,10 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
         return RecipeList;
     }
 
+    public ArrayList<String> getKeyList() {
+        return KeyList;
+    }
+
     @Override
     public List<String> getRecipeImages() {
         return null;
@@ -82,7 +89,7 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
 
     public void notifyAllObservers(){
         for (CookBookObserver observer : observers){
-            observer.update(getRecipeNamesDB());
+            observer.update(getRecipeNamesDB(), getKeyList());
         }
     }
 
