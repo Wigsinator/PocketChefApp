@@ -4,7 +4,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 
-public class PublicUserProfileContract {
+public interface PublicUserProfileContract {
 
     interface PublicUserProfilePresenter{
         ArrayList getRecipeNames();
