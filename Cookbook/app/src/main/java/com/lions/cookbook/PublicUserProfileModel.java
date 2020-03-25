@@ -74,8 +74,8 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
                 if (dataSnapshot.exists()){
                     for (DataSnapshot recipeSnapshot : dataSnapshot.child("recipes").getChildren()){
                         recipes.add(recipeSnapshot.getValue(String.class));
-                        notifyAllObservers();
                     }
+                    notifyAllObservers();
 
                 }
             }
