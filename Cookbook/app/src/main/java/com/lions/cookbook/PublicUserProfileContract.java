@@ -9,18 +9,19 @@ public class PublicUserProfileContract {
     interface PublicUserProfilePresenter{
         ArrayList getRecipeNames();
         void handleRecipeClicked(String recipeName);
-       // String getFullName();
-       // String getUsername();
+        void update(String fullname, ArrayList<String> recipes);
 
     }
 
     interface PublicUserProfileModel {
+        String getFullname(String username);
+        ArrayList<String> getRecipes(String username);
+        void findFullname(String username);
+        void findRecipes(String username);
+        void notifyAllObservers();
+        void addObserver(PublicProfileObserver observer);
 
-        String getFullname();
-        String getUsername();
-        ArrayList<String> getRecipes();
     }
-
 
     interface PublicUserProfileView{
         void goToViewRecipe(String clickedRecipe);
