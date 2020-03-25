@@ -33,6 +33,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         this.LoginPref = new SessionManager();
 
 
+        PreferencesProvider.init(this);
+        this.LoginPref = new SessionManager();
+
+
         model = new LoginModel();
         LoginPresenter = new LoginPresent(this,model);
 
