@@ -10,24 +10,41 @@ import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class LoginModel implements LoginContract.LoginModel{
     private FirebaseAuth mAuth;
-    private Boolean signedIn;
+    private boolean signedIn;
+    private ArrayList<LoginObserver> observers = new ArrayList<LoginObserver>();
 
     public LoginModel(){
         mAuth = FirebaseAuth.getInstance();
-        signedIn = false;
+        this.signedIn = false;
     }
 
-    public boolean signIn(String email, String password){
-        OnCompleteListener signinListeneter = new OnCompleteListener() {
+    public void addObserver(LoginObserver observer){
+        this.observers.add(observer);
+    }
+
+    public void notifyObservers(){
+        for (LoginObserver observer: this.observers){
+            observer.update(this.signedIn);
+        }
+    }
+
+    public void signIn(String email, String password){
+        OnCompleteListener signInListeneter = new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 signedIn = true;
+                notifyObservers();
             }
         };
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(signinListeneter);
-        return signedIn;
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(signInListeneter);
+    }
+
+    public boolean getSignedIn(){
+        return this.signedIn;
     }
 
     //returns FirebaseUser if someone signed in, returns null otw
