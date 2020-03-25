@@ -17,9 +17,9 @@ public interface CreateAccountContract {
 
     interface CreateAccountMVPModel {
         //add new user to the database
-        boolean addNewUser(String username,String userPassword, String userName, String firstName, String lastname);
-        void storeUserInfo(String userName, String firstName, String lastName);
-        }
+        boolean addNewUser(String username,String userPassword, String userName, String firstName, String lastname, String phone);
+        void storeUserInfo(String userName, String firstName, String lastName, String phone);
+    }
 
 
     interface CreateAccountMVPView{
@@ -34,9 +34,8 @@ public interface CreateAccountContract {
         String getPassword();
         String getFirstName();
         String getLastName();
-        String getEmail();   
-        String getPhoneNumber();   
+        String getEmail();
+        String getPhoneNumber();
     }
-
 
 }

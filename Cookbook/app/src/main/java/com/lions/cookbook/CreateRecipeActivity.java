@@ -77,6 +77,11 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
                                 Intent intent2 = new Intent(CreateRecipeActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
                                 break;
+
+                            case R.id.navigation_account:
+                                Intent intent3 = new Intent(CreateRecipeActivity.this, PrivateUserProfileActivity.class);
+                                startActivity(intent3);
+                                break;
                         }
                         return false;
                     }
