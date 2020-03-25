@@ -25,10 +25,12 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
 
     private DatabaseReference mDatabase;
     private ArrayList<String> RecipeList;
+    private ArrayList<CookBookObserver> observers;
 
     public CookBookModel(DatabaseReference database){
         mDatabase = database;
         RecipeList = new ArrayList<>();
+        observers = new ArrayList<>();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Query myCookbookQuery = mDatabase.child("users").child(uid).child("cookbook").orderByValue();
         ChildEventListener listener = new ChildEventListener() {
@@ -36,6 +38,7 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Log.d("Cookbook Read", "ChildAdded: "+dataSnapshot.getKey());
                 RecipeList.add(dataSnapshot.getValue(String.class));
+                notifyAllObservers();
             }
 
             @Override
@@ -70,6 +73,17 @@ public class CookBookModel implements CookBookContract.CookBookMVPModel {
     @Override
     public List<String> getRecipeImages() {
         return null;
+    }
+
+    @Override
+    public void addObserver(CookBookObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void notifyAllObservers(){
+        for (CookBookObserver observer : observers){
+            observer.update(getRecipeNamesDB());
+        }
     }
 
     public void deleteRecipe(String recipeTitle, Boolean isShared){
