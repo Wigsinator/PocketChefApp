@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * VIEW: Displays the CookBook Screen
  */
-public class CookBookActivity extends AppCompatActivity implements CookBookContract.CookBookMVPView, CookBookObserver{
+public class CookBookActivity extends AppCompatActivity implements CookBookContract.CookBookMVPView, CookBookActivityObserver{
     private CookBookPresent presenter;
     private CookBookModel model1;
     private DatabaseReference mDatabase;
@@ -85,9 +85,10 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
     }
 
     @Override
-    public void goToViewRecipe(String clickedRecipe) {
+    public void goToViewRecipe(String clickedRecipeKey) {
+        Toast.makeText(this, "TEST: Recipe key:" + clickedRecipeKey, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ViewRecipeActivity.class);
-        intent.putExtra("RECIPE", clickedRecipe);
+        intent.putExtra("RECIPE", clickedRecipeKey);
         startActivity(intent);
     }
 
@@ -103,8 +104,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
             RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String recipeName = (String) RecipeList.getItemAtPosition(i);
-                    presenter.handleRecipeClicked(recipeName);
+                    presenter.handleRecipeClicked(i);
                 }
             });
         }
