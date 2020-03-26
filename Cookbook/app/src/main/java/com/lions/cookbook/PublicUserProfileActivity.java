@@ -15,7 +15,8 @@ import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;import android.widget.TextView;
+import com.google.firebase.database.FirebaseDatabase;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,16 +31,11 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
     private Button dietaryBtn;
     private Button followingBtn;
     private Button followersBtn;
-    private Button logoutBtn;
 
     private TextView firstName;
     private TextView lastName;
     private TextView username;
-    private TextView phoneNumber;
-    private TextView email;
 
-    private String userEmail;
-    private String userPhoneNumber;
     private String userUsername;
     private String[] userFullName;
     private ArrayList<String> recipeNames;
@@ -49,9 +45,11 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_account_private_activity);
+        setContentView(R.layout.view_account_public_activity);
 
         //Set up MVP
+        this.userUsername = getIntent().getStringExtra("USERNAME");
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         model = new PublicUserProfileModel(mDatabase);
         presenter = new PublicUserProfilePresent(this, model);
@@ -62,8 +60,6 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
         this.firstName = (TextView) findViewById(R.id.firstName);
         this.lastName = (TextView) findViewById(R.id.lastName);
         this.username = (TextView) findViewById(R.id.username);
-        this.phoneNumber = (TextView) findViewById(R.id.phoneNumber);
-        this.email = (TextView) findViewById(R.id.email);
 
 
         //set up event handlers for the buttons
@@ -100,8 +96,6 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
         });
 
 
-
-
         //Set up Navigation panel
         BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigationPanel.setOnNavigationItemSelectedListener(
@@ -132,7 +126,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
 
     @Override
     public void update(String[] Fullname, ArrayList<String> recipes){
-        this.userFullName = Fullname;
+        this.userFullName = Fullname;//an array
         this.recipeNames = recipes;
 
         //Populate other info to the UI
