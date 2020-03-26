@@ -14,10 +14,8 @@ public class PublicUserProfileContract {
     }
 
     interface PublicUserProfileModel {
-        String getFullname(String username);
-        ArrayList<String> getRecipes(String username);
-        void findFullname(String username);
-        void findRecipes(String username);
+        void findFullname();
+        void findRecipes();
         void notifyAllObservers();
         void addObserver(PublicProfileObserver observer);
 

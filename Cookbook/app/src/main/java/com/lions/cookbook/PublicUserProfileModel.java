@@ -16,23 +16,17 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
     DatabaseReference db;
     private ArrayList<PublicProfileObserver> observers = new ArrayList<PublicProfileObserver>();
     //these variables below hold user info read from db
+    private String username;
     private String fullname;
     private ArrayList<String> recipes;
 
-    public PublicUserProfileModel(DatabaseReference db){
+    public PublicUserProfileModel(DatabaseReference db, String username){
+        this.username = username;
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
         this.recipes = new ArrayList<String>();
-    }
-
-    public String getFullname(String username){
-        findFullname(username);
-        return this.fullname;
-    }
-
-    public ArrayList<String> getRecipes(String username){
-        findRecipes(username);
-        return this.recipes;
+        findRecipes();
+        findFullname();
     }
 
     public void addObserver(PublicProfileObserver observer){
@@ -45,8 +39,8 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
         }
     }
 
-    public void findFullname(String username){
-        Query query = db.child("users").orderByChild("username").equalTo(username);
+    public void findFullname(){
+        Query query = db.child("users").orderByChild("username").equalTo(this.username);
         ValueEventListener fullNameListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,8 +59,8 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
         query.addValueEventListener(fullNameListener);
     }
 
-    public void findRecipes(String username){
-        Query query = db.child("users").orderByChild("username").equalTo(username);
+    public void findRecipes(){
+        Query query = db.child("users").orderByChild("username").equalTo(this.username);
 
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
