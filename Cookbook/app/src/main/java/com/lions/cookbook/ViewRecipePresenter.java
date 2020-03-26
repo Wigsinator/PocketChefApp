@@ -18,26 +18,16 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     }
 
     @Override
-    public Recipe fetchRecipe(String recipeName) {
-        return nModel.getRecipe(recipeName);
-    }
-
-    @Override
     public void handleAlterPressed() {
-        //Log.d("TEST", "Handle alter pressed");
         if (checkEnteredServingSize()){
             nView.showServingNull();
         } else {
-            Recipe originalRecipe = nView.getOriginalRecipe();
+            Recipe originalRecipe = nModel.getRecipe();
             ArrayList<Ingredient> newList = new ArrayList<Ingredient>(sizeScaleIngredients(originalRecipe.getIngredients(), originalRecipe.getServingSize(), Integer.parseInt(nView.getServingSize())));
-            //Log.d("TEST", "scale done");
             String alterUnits = nView.getUnits();
             ArrayList<Ingredient> unitUpdateList = new ArrayList<>(unitConversionIngredients(newList, alterUnits));
-            //Log.d("TEST", "Units done");
             nView.updateIngredients(unitUpdateList);
         }
-
-
     }
 
     @Override
@@ -53,7 +43,6 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
         }
         return new_list;
     }
-
 
 
     //Conducts the unit conversion so that the final quantity and type match 'units'
@@ -150,18 +139,14 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
                         break;
 
                     default:
-                        //Log.d("TEST", "default");
                         newType = originalType;
                         newQuantity = originalQuantity;
 
 
                 }
-                //Log.d("TEST", "New type" + newType);
-                //Log.d("TEST", "New Quantity" + newQuantity);
                 Ingredient changed = new Ingredient(originalName, newQuantity, newType);
                 new_list.add(changed);
             } else {
-                //Log.d("TEST", "Used original quantity and type for final");
                 Ingredient changed = new Ingredient(originalName, originalQuantity, originalType);
                 new_list.add(changed);
             }
@@ -211,6 +196,14 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     }
 
     @Override
+    public void populateValues(Recipe currentRecipe) {
+        Log.d("Recipe View: ", "Populating Recipe");
+        nView.populateTitle(currentRecipe.getTitle());
+        nView.populateRecipeServing(currentRecipe.getServingSize());
+        nView.populateRecipeIngredients(currentRecipe.getIngredients());
+        nView.populateRecipeSteps(currentRecipe.getSteps());
+    }
+
     public void handleAuthorProfileClicked(String authorUsername){
         nView.goToViewAuthorProfile(authorUsername);
         Log.d("TEST", "able to go to view profile");

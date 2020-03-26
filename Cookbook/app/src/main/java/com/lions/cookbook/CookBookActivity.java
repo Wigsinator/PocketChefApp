@@ -27,11 +27,12 @@ import java.util.List;
 /**
  * VIEW: Displays the CookBook Screen
  */
-public class CookBookActivity extends AppCompatActivity implements CookBookContract.CookBookMVPView{
+public class CookBookActivity extends AppCompatActivity implements CookBookContract.CookBookMVPView, CookBookActivityObserver{
     private CookBookPresent presenter;
     private CookBookModel model1;
     private DatabaseReference mDatabase;
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> recipeNames;
 
     //Good Tutorial on listView: https://abhiandroid.com/ui/listview for texts and pictures
     @Override
@@ -43,18 +44,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         mDatabase = FirebaseDatabase.getInstance().getReference();
         model1 = new CookBookModel(mDatabase);
         presenter = new CookBookPresent(this, model1);
-
-        //Populate with List of Recipe names
-        final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, presenter.getRecipeNames());
-        RecipeList.setAdapter(arrayAdapter);
-        RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String recipeName = (String) RecipeList.getItemAtPosition(i);
-                presenter.handleRecipeClicked(recipeName);
-            }
-        });
+        presenter.addObserver(this);
 
         //Set up Navigation panel
         BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -72,15 +62,16 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
                                 Intent intent2 = new Intent(CookBookActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
                                 break;
+
                             case R.id.navigation_account:
                                 Intent intent3 = new Intent(CookBookActivity.this, PrivateUserProfileActivity.class);
                                 startActivity(intent3);
                                 break;
+
                         }
                         return false;
                     }
                 });
-
     }
 
 
@@ -93,13 +84,29 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
     }
 
     @Override
-    public void goToViewRecipe(String clickedRecipe) {
+    public void goToViewRecipe(String clickedRecipeKey) {
+        Toast.makeText(this, "TEST: Recipe key:" + clickedRecipeKey, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ViewRecipeActivity.class);
-        intent.putExtra("RECIPE", clickedRecipe);
-        Log.d("TEST", "Created recipe to be trasnferd to new intent");
+        intent.putExtra("RECIPE", clickedRecipeKey);
         startActivity(intent);
-        Log.d("TEST", "Starting new intent");
-
     }
 
+    @Override
+    public void update(ArrayList<String> recipes) {
+        this.recipeNames = recipes;
+        ArrayList<String> foundRecipes = this.recipeNames;
+        if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
+            //Populate with List of Recipe names
+            final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
+            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
+            RecipeList.setAdapter(arrayAdapter);
+            RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    presenter.handleRecipeClicked(i);
+                }
+            });
+        }
+
+    }
 }

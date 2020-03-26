@@ -10,6 +10,8 @@ public class Recipe {
     private List<String> tags;
     private List<String> steps;
 
+    private Recipe(){}
+
     public Recipe(String title, String username, int servingSize, List<Ingredient> ingredients, List<String> tags, List<String> steps){
         this.title = title;
         this.username = username;
