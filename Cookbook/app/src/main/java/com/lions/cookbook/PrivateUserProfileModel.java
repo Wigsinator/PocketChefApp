@@ -48,22 +48,6 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         return currUser.getEmail();
     }
 
-    public String getUsername(){
-        return this.username;
-    }
-
-    public String getFullname(){
-        return this.fullname;
-    }
-
-    public String getPhoneNumber(){
-        return this.phoneNumber;
-    }
-
-    public ArrayList<String> getRecipes(){
-        return this.recipes;
-    }
-
     public void addObserver(PrivateProfileObserver observer){
         this.observers.add(observer);
     }
@@ -141,7 +125,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                recipes = null;
+                recipes = new ArrayList<String>();
             }
         };
         db.child("users").child(profileOwner.getUid()).child("cookbook").addValueEventListener(recipeListener);

@@ -18,12 +18,7 @@ public class PrivateUserProfileContract {
     }
 
     interface PrivateUserProfileModel {
-
-        String getFullname();
-        String getUsername();
-        String getPhoneNumber();
         String getEmail();
-        ArrayList<String> getRecipes();
         void signOut();
         void findFullname();
         void findUsername();
