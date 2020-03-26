@@ -51,7 +51,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
         this.userUsername = getIntent().getStringExtra("USERNAME");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        model = new PublicUserProfileModel(mDatabase);
+        model = new PublicUserProfileModel(mDatabase, this.userUsername);
         presenter = new PublicUserProfilePresent(this, model);
 
         presenter.addObserver(this);//add the activity to observer list
