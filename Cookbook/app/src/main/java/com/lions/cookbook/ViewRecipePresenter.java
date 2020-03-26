@@ -12,9 +12,17 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     private ViewRecipeContract.ViewRecipeMVPView nView;
     private ViewRecipeContract.ViewRecipeMVPModel nModel;
 
+    ViewRecipePresenter(ViewRecipeContract.ViewRecipeMVPView view){
+        nView = view;
+    }
+
     ViewRecipePresenter(ViewRecipeContract.ViewRecipeMVPView view, ViewRecipeContract.ViewRecipeMVPModel model){
         nView = view;
         nModel = model;
+    }
+
+    public void setnModel(ViewRecipeContract.ViewRecipeMVPModel nModel) {
+        this.nModel = nModel;
     }
 
     @Override

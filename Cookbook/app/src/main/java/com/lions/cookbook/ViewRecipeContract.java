@@ -26,6 +26,7 @@ public interface ViewRecipeContract {
         Boolean checkEnteredServingSize();
         void populateValues(Recipe theRecipeObject);
         void handleAuthorProfileClicked(String authorUsername);
+        void setnModel(ViewRecipeMVPModel model);
     }
     interface ViewRecipeMVPModel{
         Recipe getRecipe();
