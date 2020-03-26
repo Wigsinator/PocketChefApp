@@ -46,7 +46,7 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
     }
 
     @Override
-    public Boolean deleteRecipe(String recipeName) {
+    public Boolean deleteRecipe() {
         return Boolean.TRUE;
     }
 }

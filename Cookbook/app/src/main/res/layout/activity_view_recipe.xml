@@ -61,8 +61,8 @@
                     android:background="#00FFFFFF"
                     android:textSize="13dp"
                     android:textColor="@color/colorBlue"
-
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
             </LinearLayout>
 
             <!--   Recipe Serving Size-->
@@ -149,7 +149,7 @@
                     android:textSize="13dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
-                    android:onClick="alterPressed"/>
+                    />
             </RelativeLayout>
 
             <!--  Header for Ingredients and Amounts List  -->
@@ -243,7 +243,7 @@
                 android:textSize="18dp"
                 android:backgroundTint="#DF5252"
                 android:text="DELETE RECIPE"
-                android:onClick="@{presenter::handleDeleteRecipeClicked;}"/>
+                />
 
         </LinearLayout>
     </ScrollView>
