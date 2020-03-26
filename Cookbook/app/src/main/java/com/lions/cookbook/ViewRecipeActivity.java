@@ -46,8 +46,9 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
 
         //Set up values
         String recipeKey = getIntent().getStringExtra("RECIPE");
-        presenter = new ViewRecipePresenter(this, model);
         model = new ViewRecipeModel(presenter, recipeKey);
+        presenter = new ViewRecipePresenter(this, model);
+
 
         //Set up button listeners
         //Alter button
