@@ -35,6 +35,8 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     private ArrayAdapter<String> ingredientsAdapter;
 
     private Button authorBtn;
+    private Button alterBtn;
+    private Button deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +51,33 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         presenter.setnModel(model);
 
 
-        //set the author's username to the button
-        this.authorBtn = (Button) this.findViewById(R.id.RecipeAuthor);
-        //String authorUsername = model.getUsername();
-        //this.authorBtn.setText(authorUsername);
-
-        //set up event handlers for the author button
-        this.authorBtn.setOnClickListener(new View.OnClickListener() {
+        //Set up button listeners
+        //Alter button
+        alterBtn = (Button) findViewById(R.id.btnAlterRecipe);
+        alterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //presenter.handleAuthorProfileClicked(authorUsername);
+                presenter.handleAlterPressed();
+            }
+        });
+
+
+        //Delete button
+        deleteBtn = findViewById(R.id.btnDeleteRecipe);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.handleDeletePressed();
+                Log.d("TEST", "Delete clicked 1");
+            }
+        });
+
+        //Username Button
+        authorBtn = findViewById(R.id.RecipeAuthor);
+        authorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.handleAuthorClicked();
             }
         });
 
@@ -124,6 +143,12 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         servingSize.setText(String.valueOf(recipeServingSize));
     }
 
+    @Override
+    public void populateAuthorName(String authorUsername){
+        this.authorBtn = (Button) this.findViewById(R.id.RecipeAuthor);
+        this.authorBtn.setText(authorUsername);
+    }
+
 
     @Override
     public String getServingSize() {
@@ -149,10 +174,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         Toast.makeText(this, "Serving size scaled", Toast.LENGTH_SHORT).show();
 
     }
-    @Override
-    public void alterPressed (View view){
-        presenter.handleAlterPressed();
-    }
+
 
     @Override
     public String getUnits() {
@@ -160,10 +182,30 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         return mySpinner.getSelectedItem().toString();
     }
 
+
+    @Override
+    public void goToCookBookScreen() {
+        Log.d("TEST", "Delete clicked 4");
+        Intent intent = new Intent(this, CookBookActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Taking user to CookBook Screen", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDeleteSuccess() {
+        Log.d("TEST", "Delete clicked 3");
+        Toast.makeText(this, "Successful Deletion.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDeleteFailure() {
+        Toast.makeText(this, "Deletion Failure.", Toast.LENGTH_SHORT).show();
+
+    }
+
     public void goToViewAuthorProfile(String authorUsername) {
         Intent intent = new Intent(this, PublicUserProfileActivity.class);
         intent.putExtra("USERNAME", authorUsername);
-
         startActivity(intent);
         Log.d("TEST", "Starting new intent");
 

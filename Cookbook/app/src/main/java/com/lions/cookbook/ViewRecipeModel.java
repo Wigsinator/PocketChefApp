@@ -44,4 +44,9 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
     public Recipe getRecipe() {
         return this.recipe;
     }
+
+    @Override
+    public Boolean deleteRecipe() {
+        return Boolean.TRUE;
+    }
 }

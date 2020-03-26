@@ -10,25 +10,35 @@ public interface ViewRecipeContract {
         String getServingSize();
         void showServingNull();
         void updateIngredients(ArrayList<Ingredient> ingredients);
-        void alterPressed(View view);
         String getUnits();
+
+        void goToCookBookScreen();
+        void showDeleteSuccess();
+        void showDeleteFailure();
+
         void populateTitle(String recipeTitle);
         void populateRecipeSteps(List<String> recipeSteps);
         void populateRecipeIngredients(List<Ingredient> recipeIngredients);
         void populateRecipeServing(int recipeServingSize);
+        void populateAuthorName(String recipeOwner);
+
         void goToViewAuthorProfile(String authorUsername);
+
     }
 
     interface ViewRecipeMVPPresenter{
         void handleAlterPressed();
+        void handleDeletePressed();
         List<Ingredient> sizeScaleIngredients(List<Ingredient> ingredients, int originalSize, int NewSize);
         List<Ingredient> unitConversionIngredients(List<Ingredient> ingredients, String units); //units: Metric or Imperial
         Boolean checkEnteredServingSize();
         void populateValues(Recipe theRecipeObject);
-        void handleAuthorProfileClicked(String authorUsername);
+        void handleAuthorClicked();
         void setnModel(ViewRecipeMVPModel model);
+
     }
     interface ViewRecipeMVPModel{
+        Boolean deleteRecipe(); // True if successful
         Recipe getRecipe();
     }
 }

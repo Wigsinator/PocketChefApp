@@ -2,6 +2,7 @@ package com.lions.cookbook;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,6 +36,17 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
             String alterUnits = nView.getUnits();
             ArrayList<Ingredient> unitUpdateList = new ArrayList<>(unitConversionIngredients(newList, alterUnits));
             nView.updateIngredients(unitUpdateList);
+        }
+    }
+
+    @Override
+    public void handleDeletePressed() {
+        if (nModel.deleteRecipe()){
+            Log.d("TEST", "Delete clicked 2");
+            nView.showDeleteSuccess();
+            nView.goToCookBookScreen();
+        } else {
+            nView.showDeleteFailure();
         }
     }
 
@@ -210,11 +222,12 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
         nView.populateRecipeServing(currentRecipe.getServingSize());
         nView.populateRecipeIngredients(currentRecipe.getIngredients());
         nView.populateRecipeSteps(currentRecipe.getSteps());
+        nView.populateAuthorName(currentRecipe.getUsername());
     }
 
-    public void handleAuthorProfileClicked(String authorUsername){
-        nView.goToViewAuthorProfile(authorUsername);
-        Log.d("TEST", "able to go to view profile");
-
+    @Override
+    public void handleAuthorClicked() {
+        nView.goToViewAuthorProfile(nModel.getRecipe().getUsername());
     }
+
 }
