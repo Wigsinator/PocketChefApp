@@ -34,6 +34,8 @@ public interface ViewRecipeContract {
         Boolean checkEnteredServingSize();
         void populateValues(Recipe theRecipeObject);
         void handleAuthorClicked();
+        void setnModel(ViewRecipeMVPModel model);
+
     }
     interface ViewRecipeMVPModel{
         Boolean deleteRecipe(); // True if successful

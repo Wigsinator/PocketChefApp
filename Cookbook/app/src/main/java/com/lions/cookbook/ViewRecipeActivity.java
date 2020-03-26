@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.lions.cookbook.databinding.ActivityViewRecipeBinding;
+import com.lions.cookbook.databinding.ActivityViewRecipeBindingImpl;
 
 import org.w3c.dom.Text;
 
@@ -46,8 +46,9 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
 
         //Set up values
         String recipeKey = getIntent().getStringExtra("RECIPE");
+        presenter = new ViewRecipePresenter(this);
         model = new ViewRecipeModel(presenter, recipeKey);
-        presenter = new ViewRecipePresenter(this, model);
+        presenter.setnModel(model);
 
 
         //Set up button listeners
