@@ -9,7 +9,7 @@
     tools:context=".ViewRecipeActivity">
 
     <ScrollView android:layout_marginTop="10dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="45dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/scrollView">
@@ -60,8 +60,9 @@
                     android:text="username"
                     android:background="#00FFFFFF"
                     android:textSize="13dp"
-                    android:textColor="#124FA9"
-                    android:textStyle="bold" />
+                    android:textColor="@color/colorBlue"
+                    android:textStyle="bold"
+                    />
             </LinearLayout>
 
             <!--   Recipe Serving Size-->
@@ -79,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_toLeftOf="@+id/Recommended"
+                    android:backgroundTint="@color/colorGreen"
                     android:background="@drawable/view_recipe_serving_size"
                     />
 
@@ -147,7 +149,7 @@
                     android:textSize="13dp"
                     android:text="Alter"
                     android:textColor="#FFFFFF"
-                    android:onClick="alterPressed"/>
+                    />
             </RelativeLayout>
 
             <!--  Header for Ingredients and Amounts List  -->
@@ -228,6 +230,20 @@
                     android:layout_centerHorizontal="true">
                 </ListView>
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnDeleteRecipe"
+                android:layout_width="330dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"
+                android:backgroundTint="#DF5252"
+                android:text="DELETE RECIPE"
+                />
 
         </LinearLayout>
     </ScrollView>
