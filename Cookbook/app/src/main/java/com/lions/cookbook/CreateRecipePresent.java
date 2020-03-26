@@ -3,6 +3,16 @@ package com.lions.cookbook;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +21,34 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     private CreateRecipeContract.CreateRecipeMVPModel nModel;
     //private RecipeModel firebase_db;
     private List<String> recipesteps;
+    private String username;
+
+
+
+
 
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeMVPModel model){
         nView = view;
         nModel = model;
+        username = null;
+        DatabaseReference users = FirebaseDatabase.getInstance().getReference().child("users");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        users.child(user.getUid()).child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                setUsername((String) dataSnapshot.getValue());
+                Log.d("username", "Username accessed");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("username", "could not access username");
+            }
+        });
     }
     @Override
     public void handleCreateRecipeClicked(View view) {
+
         if (conductEmptyErrorChecks()){ //Check if any fields are empty
             nView.showUnfilledError();
         } else if (conductUniqueNameCheck()){ //Check if name is unique
@@ -26,14 +57,14 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
             //Populate new Recipe object
             String title = nView.getRecipeTitle();
             int serving_size = Integer.parseInt(nView.getServingSize());
-            String username = "Bob"; //CHANGE THIS
             List<Ingredient> ingredients = createIngredientList(nView.getRecipeIngredients());
             List<String> steps = nView.getRecipeSteps();
             List<String> fake_tags = new ArrayList<String>();
             fake_tags.add("Beginner");
-            Recipe new_recipe = new Recipe(title, username, serving_size, ingredients, fake_tags, steps); //Note: Tags feature has not been added
+            while (this.username == null) {} // Just making sure the username is pulled.
+            Recipe new_recipe = new Recipe(title, this.username, serving_size, ingredients, fake_tags, steps); //Note: Tags feature has not been added
             for (int i =0; i<ingredients.size();i++){
-                Log.d("test", new_recipe.getIngredients().get(i).getName());
+                Log.d("ingredient", new_recipe.getIngredients().get(i).getName());
             }
 
             Boolean addSuccess = nModel.addRecipe(new_recipe);
@@ -133,6 +164,10 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
             ingredients.add(new_ingredient);
         }
         return ingredients;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
     }
 
 }

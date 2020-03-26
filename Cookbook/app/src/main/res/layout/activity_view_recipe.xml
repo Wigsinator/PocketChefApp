@@ -61,6 +61,7 @@
                     android:background="#00FFFFFF"
                     android:textSize="13dp"
                     android:textColor="@color/colorBlue"
+
                     android:textStyle="bold" />
             </LinearLayout>
 

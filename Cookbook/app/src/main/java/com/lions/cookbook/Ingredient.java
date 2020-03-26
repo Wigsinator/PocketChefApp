@@ -3,12 +3,14 @@ package com.lions.cookbook;
 public class Ingredient {
     private String name;
     private float quantity;
-    private String quantity_type;
+    private String quantityType;
+
+    private Ingredient(){}
 
     public Ingredient(String name, float quantity, String quantity_type){
         this.name = name;
         this.quantity = quantity;
-        this.quantity_type = quantity_type;
+        this.quantityType = quantity_type;
     }
 
     public void changeName(String name){
@@ -20,7 +22,7 @@ public class Ingredient {
     }
 
     public void changeQuantityType(String quantity_type){
-        this.quantity_type = quantity_type;
+        this.quantityType = quantity_type;
     }
 
     public String getName(){
@@ -32,7 +34,7 @@ public class Ingredient {
     }
 
     public String getQuantityType(){
-        return this.quantity_type;
+        return this.quantityType;
     }
 
 }
