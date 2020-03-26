@@ -23,6 +23,10 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     private List<String> recipesteps;
     private String username;
 
+
+
+
+
     CreateRecipePresent(CreateRecipeContract.CreateRecipeMVPView view, CreateRecipeContract.CreateRecipeMVPModel model){
         nView = view;
         nModel = model;
@@ -44,6 +48,7 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
     }
     @Override
     public void handleCreateRecipeClicked(View view) {
+
         if (conductEmptyErrorChecks()){ //Check if any fields are empty
             nView.showUnfilledError();
         } else if (conductUniqueNameCheck()){ //Check if name is unique

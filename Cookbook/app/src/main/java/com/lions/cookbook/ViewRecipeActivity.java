@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -33,6 +34,8 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     private ArrayList<String> ingredients_list;
     private ArrayAdapter<String> ingredientsAdapter;
 
+    private Button authorBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,19 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         presenter = new ViewRecipePresenter(this, model);
         model = new ViewRecipeModel(presenter, recipeKey);
 
+
+        //set the author's username to the button
+        this.authorBtn = (Button) this.findViewById(R.id.RecipeAuthor);
+        //String authorUsername = model.getUsername();
+        //this.authorBtn.setText(authorUsername);
+
+        //set up event handlers for the author button
+        this.authorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //presenter.handleAuthorProfileClicked(authorUsername);
+            }
+        });
 
         //Set up Navigation panel
         BottomNavigationView navigationPanel = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -60,6 +76,11 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
                             case R.id.navigation_cookbook:
                                 Intent intent2 = new Intent(ViewRecipeActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
+                                break;
+
+                            case R.id.navigation_account:
+                                Intent intent3 = new Intent(ViewRecipeActivity.this, PrivateUserProfileActivity.class);
+                                startActivity(intent3);
                                 break;
                         }
                         return false;
@@ -136,5 +157,14 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     public String getUnits() {
         Spinner mySpinner = (Spinner) findViewById(R.id.newMeasurementTypes);
         return mySpinner.getSelectedItem().toString();
+    }
+
+    public void goToViewAuthorProfile(String authorUsername) {
+        Intent intent = new Intent(this, PublicUserProfileActivity.class);
+        intent.putExtra("USERNAME", authorUsername);
+
+        startActivity(intent);
+        Log.d("TEST", "Starting new intent");
+
     }
 }

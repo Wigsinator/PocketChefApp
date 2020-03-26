@@ -203,4 +203,10 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
         nView.populateRecipeIngredients(currentRecipe.getIngredients());
         nView.populateRecipeSteps(currentRecipe.getSteps());
     }
+
+    public void handleAuthorProfileClicked(String authorUsername){
+        nView.goToViewAuthorProfile(authorUsername);
+        Log.d("TEST", "able to go to view profile");
+
+    }
 }

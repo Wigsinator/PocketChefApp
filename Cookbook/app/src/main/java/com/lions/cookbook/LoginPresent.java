@@ -8,22 +8,49 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import android.content.SharedPreferences;
+import android.content.Context;import android.content.Context;
 
-public class LoginPresent implements LoginContract.LoginPresenter {
+public class LoginPresent implements LoginContract.LoginPresenter, LoginObserver {
 
     private LoginContract.LoginView view;
     private LoginContract.LoginModel model;
 
     private String userEmail;
     private String userPassword;
+    private boolean signedIn;
 
     private FirebaseUser curr_user;
 
-   // UserPreferences mDatabase = new UserPreferencesImpl();
+    private SessionManager mPreferences = new SessionManager();
+
 
     public LoginPresent(LoginContract.LoginView nView,LoginContract.LoginModel nModel) {
         this.view = nView;
         this.model = nModel;
+        this.model.addObserver(this);
+        this.signedIn = false;
+    }
+
+    public void update(boolean signedIn){
+        this.signedIn = signedIn;
+        if (this.signedIn){
+
+            //save current user's login state
+            mPreferences.setUserLogin(true);
+            mPreferences.setLoggedInUserEmail(this.userEmail);
+
+            //this line can be successfully printed
+            Log.d("Retrieve info","in the login Presenter: email: " + mPreferences.getLoggedInUserEmail() + " login state:" + mPreferences.isUserLogin());
+
+            curr_user = this.model.getCurrentUser();
+            this.view.showLoginSuccess();
+            this.view.goToCreateRecipeScreen();
+
+        }else{
+            this.view.showLoginFailure();
+        }
+
     }
 
     @Override
@@ -41,19 +68,9 @@ public class LoginPresent implements LoginContract.LoginPresenter {
             this.view.showUnfilledError();
 
         } else{
-            Log.d("Retrieve info","Username:" + this.userEmail + "password" + this.userPassword);
 
             //validate user's info from the database
-            if (this.model.signIn(this.userEmail, this.userPassword)){
-
-                curr_user = this.model.getCurrentUser();
-                this.view.showLoginSuccess();
-                this.view.goToCreateRecipeScreen();
-
-            }else{
-                this.view.showLoginFailure();
-            }
-
+            this.model.signIn(this.userEmail, this.userPassword);
         }
 
     }

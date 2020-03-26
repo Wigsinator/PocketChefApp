@@ -16,6 +16,7 @@ public interface ViewRecipeContract {
         void populateRecipeSteps(List<String> recipeSteps);
         void populateRecipeIngredients(List<Ingredient> recipeIngredients);
         void populateRecipeServing(int recipeServingSize);
+        void goToViewAuthorProfile(String authorUsername);
     }
 
     interface ViewRecipeMVPPresenter{
@@ -24,6 +25,7 @@ public interface ViewRecipeContract {
         List<Ingredient> unitConversionIngredients(List<Ingredient> ingredients, String units); //units: Metric or Imperial
         Boolean checkEnteredServingSize();
         void populateValues(Recipe theRecipeObject);
+        void handleAuthorProfileClicked(String authorUsername);
     }
     interface ViewRecipeMVPModel{
         Recipe getRecipe();

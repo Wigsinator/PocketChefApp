@@ -10,13 +10,17 @@ public interface LoginContract {
     interface LoginPresenter{
 
         void handleLoginClicked(View view);
+        void update(boolean signedIn);
 
     }
 
     interface LoginModel {
         FirebaseUser getCurrentUser();
         void signOut();
-        boolean signIn(String email, String password);
+        void signIn(String email, String password);
+        boolean getSignedIn();
+        void addObserver(LoginObserver observer);
+        public void notifyObservers();
 }
 
 

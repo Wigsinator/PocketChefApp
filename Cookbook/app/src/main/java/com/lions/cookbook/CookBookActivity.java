@@ -62,13 +62,12 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
                                 Intent intent2 = new Intent(CookBookActivity.this, CookBookActivity.class);
                                 startActivity(intent2);
                                 break;
-                            /*
+
                             case R.id.navigation_account:
                                 Intent intent3 = new Intent(CookBookActivity.this, PrivateUserProfileActivity.class);
                                 startActivity(intent3);
                                 break;
 
-                             */
                         }
                         return false;
                     }
