@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public interface PublicUserProfileContract {
 
     interface PublicUserProfilePresenter{
-        ArrayList getRecipeNames();
         void handleRecipeClicked(String recipeName);
         void update(String fullname, ArrayList<String> recipes);
 
