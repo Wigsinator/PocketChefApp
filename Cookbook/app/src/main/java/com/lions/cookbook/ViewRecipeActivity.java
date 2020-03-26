@@ -41,8 +41,8 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
 
         //Set up values
         String recipeKey = getIntent().getStringExtra("RECIPE");
-        model = new ViewRecipeModel(presenter, recipeKey);
         presenter = new ViewRecipePresenter(this, model);
+        model = new ViewRecipeModel(presenter, recipeKey);
 
 
         //Set up Navigation panel

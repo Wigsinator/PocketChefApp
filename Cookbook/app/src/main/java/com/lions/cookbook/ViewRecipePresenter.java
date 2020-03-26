@@ -197,6 +197,7 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
 
     @Override
     public void populateValues(Recipe currentRecipe) {
+        Log.d("Recipe View: ", "Populating Recipe");
         nView.populateTitle(currentRecipe.getTitle());
         nView.populateRecipeServing(currentRecipe.getServingSize());
         nView.populateRecipeIngredients(currentRecipe.getIngredients());
