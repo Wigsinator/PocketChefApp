@@ -4,7 +4,7 @@
 March 15, 2020 from 8:30 - 9:30 pm on Google Hangouts
 
 ## Participants
-Michelle, William, Jennifer, Coco, Harsh, Danica 
+Michelle, William, Jennifer, Mengning, Harsh, Danica 
 
 ---
 
