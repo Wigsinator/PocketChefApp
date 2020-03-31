@@ -182,8 +182,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
             RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String recipeName = (String) RecipeList.getItemAtPosition(i);
-                    presenter.handleRecipeClicked(recipeName);
+                    presenter.handleRecipeClicked(i);
                 }
             });
         }
