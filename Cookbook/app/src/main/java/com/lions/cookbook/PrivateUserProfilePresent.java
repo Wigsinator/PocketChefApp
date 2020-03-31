@@ -21,6 +21,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     String userFullName;
     String[] arrOfNames;
     ArrayList<String> recipeNames;
+    private ArrayList<String> RecipeKeyList;
 
 
     PrivateUserProfilePresent(PrivateUserProfileContract.PrivateUserProfileView view, PrivateUserProfileContract.PrivateUserProfileModel model){
@@ -92,8 +93,10 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     }
 
     @Override
-    public void handleRecipeClicked(String recipeName) {
-        nView.goToViewRecipe(recipeName);
+    public void handleRecipeClicked(int indexClicked) {
+        Log.d("TEST", "Finish getting recipe");
+        nView.goToViewRecipe(this.RecipeKeyList.get(indexClicked));
+        Log.d("TEST", "able to go to view recipe");
     }
 
 }

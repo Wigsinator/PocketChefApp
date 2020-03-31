@@ -10,7 +10,7 @@ public class PrivateUserProfileContract {
     interface PrivateUserProfilePresenter{
         void handleLogoutClicked();
         ArrayList getRecipeNames();
-        void handleRecipeClicked(String recipeName);
+        void handleRecipeClicked(int recipeIndex);
         String getEmail();
         String[] getFullName();
         String getUsername();
