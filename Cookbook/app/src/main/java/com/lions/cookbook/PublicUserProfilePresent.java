@@ -15,7 +15,6 @@ public class PublicUserProfilePresent implements PublicUserProfileContract.Publi
 
     private ArrayList<PublicProfileActivityObserver> observers = new ArrayList<PublicProfileActivityObserver>();
 
-    String userUsername;
     String userFullName;
     String[] arrOfNames;
     ArrayList<String> recipeNames;
@@ -57,5 +56,17 @@ public class PublicUserProfilePresent implements PublicUserProfileContract.Publi
     public void handleRecipeClicked(String recipeName) {
         nView.goToViewRecipe(recipeName);
     }
+
+    public String getFirstName(){
+        return "david";
+    }
+    public String getLastName(){
+        return "choy";
+    }
+
+    public String getUsername(){
+        return "davidusername";
+    }
+
 
 }

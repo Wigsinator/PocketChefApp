@@ -27,7 +27,6 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
     private DatabaseReference mDatabase;
     private ArrayAdapter<String> arrayAdapter;
 
-    private Button settingsBtn;
     private Button dietaryBtn;
     private Button followingBtn;
     private Button followersBtn;
@@ -56,10 +55,13 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
 
         presenter.addObserver(this);//add the activity to observer list
 
+        Log.d("TEST", "can you reach here");
         //set up textView
         this.firstName = (TextView) findViewById(R.id.firstName);
         this.lastName = (TextView) findViewById(R.id.lastName);
+
         this.username = (TextView) findViewById(R.id.username);
+        this.username.setText(this.userUsername);
 
 
         //set up event handlers for the buttons
@@ -67,15 +69,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
         this.dietaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //handler
-            }
-        });
 
-        this.settingsBtn = (Button) this.findViewById(R.id.settingsBtn);
-        this.settingsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //handler
             }
         });
 
@@ -126,6 +120,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
 
     @Override
     public void update(String[] Fullname, ArrayList<String> recipes){
+        Log.d("TEST", "I'm in the update function in activity");
         this.userFullName = Fullname;//an array
         this.recipeNames = recipes;
 
@@ -135,6 +130,8 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
             //set values for the textView
             this.firstName.setText(foundFullname[0]);
             this.lastName.setText(foundFullname[1]);
+            // this.firstName.setText(presenter.getFirstName());
+            // this.lastName.setText(presenter.getLastName());
         }
 
 

@@ -204,6 +204,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     }
 
     public void goToViewAuthorProfile(String authorUsername) {
+        Log.d("TEST", "I can get the corroct username: ".concat(authorUsername));
         Intent intent = new Intent(this, PublicUserProfileActivity.class);
         intent.putExtra("USERNAME", authorUsername);
         startActivity(intent);
