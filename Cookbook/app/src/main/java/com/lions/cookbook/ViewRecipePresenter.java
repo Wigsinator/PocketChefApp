@@ -223,11 +223,23 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
         nView.populateRecipeIngredients(currentRecipe.getIngredients());
         nView.populateRecipeSteps(currentRecipe.getSteps());
         nView.populateAuthorName(currentRecipe.getUsername());
+        nView.populatePublished(currentRecipe.getPublished());
     }
 
     @Override
     public void handleAuthorClicked() {
         nView.goToViewAuthorProfile(nModel.getRecipe().getUsername());
+    }
+
+    @Override
+    public void toggleSwitchChange(Boolean isToggleOn) {
+        nView.showToggleChanged();
+        Boolean status = nModel.publishStateUpdate(isToggleOn);
+        if (status){
+            nView.showToggleSuccess();
+        } else {
+            nView.showToggleFailure();
+        }
     }
 
 }
