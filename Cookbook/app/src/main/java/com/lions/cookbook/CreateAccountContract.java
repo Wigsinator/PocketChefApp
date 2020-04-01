@@ -19,6 +19,8 @@ public interface CreateAccountContract {
         //add new user to the database
         void addNewUser(String username,String userPassword, String userName, String firstName, String lastname, String phone);
         void storeUserInfo(String userName, String firstName, String lastName, String phone);
+        void addObserver(CreateAccountObserver observer);
+        void notifyObservers();
     }
 
 
@@ -42,6 +44,7 @@ public interface CreateAccountContract {
         void showInvalidPhoneNumberMessage();
         void showInvalidNameMessage();
         void showInvalidPasswordMessage();
+        void showUserExistsMessage(String error);
     }
 
 }

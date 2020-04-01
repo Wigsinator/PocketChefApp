@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class CreateAccountPresent implements CreateAccountContract.CreateAccountMVPPresenter{
+public class CreateAccountPresent implements CreateAccountContract.CreateAccountMVPPresenter, CreateAccountObserver{
 
     private CreateAccountContract.CreateAccountMVPView view;
     private CreateAccountContract.CreateAccountMVPModel model;
+    private ArrayList<CreateAccountObserver> observers;
 
     private String username;
     private String userPassword;
@@ -21,13 +24,14 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     private String userFirstName;
     private String userLastName;
     private String userPhoneNumber;
-
-
+    private String error_message;
 
 
     CreateAccountPresent(CreateAccountContract.CreateAccountMVPView nView,CreateAccountContract.CreateAccountMVPModel nModel) {
         this.view = nView;
         this.model = nModel;
+        this.observers = new ArrayList<CreateAccountObserver>();
+        this.model.addObserver(this);
     }
 
     @Override
@@ -68,16 +72,21 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
         } else{
 
             //add new user's info to the database
-            Boolean res = this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
+            this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
 
-            if (res){
+            if (this.error_message == null){
                 this.view.showCreateAccountSuccess();
                 this.view.goToLoginScreen();
             }else {
+                this.view.showUserExistsMessage(this.error_message);
                 this.view.showCreateAccountFailure();
             }
         }
 
+    }
+
+    public void update(String error){
+        this.error_message = error;
     }
 
     public boolean validateEmail(String email){

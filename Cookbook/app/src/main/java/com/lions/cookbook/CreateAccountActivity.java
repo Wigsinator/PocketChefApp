@@ -150,4 +150,9 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     public void showInvalidPasswordMessage(){
         Toast.makeText(this, "please enter a stronger password that's at least 6 characters!", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showUserExistsMessage(String error){
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
 }
