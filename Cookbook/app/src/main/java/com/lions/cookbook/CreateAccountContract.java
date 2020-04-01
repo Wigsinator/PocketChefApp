@@ -36,6 +36,12 @@ public interface CreateAccountContract {
         String getLastName();
         String getEmail();
         String getPhoneNumber();
+
+        void showInvalidEmailMessage();
+        void showInvalidUsernameMessage();
+        void showInvalidPhoneNumberMessage();
+        void showInvalidNameMessage();
+        void showInvalidPasswordMessage();
     }
 
 }
