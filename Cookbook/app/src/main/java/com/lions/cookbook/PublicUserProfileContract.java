@@ -1,6 +1,7 @@
 package com.lions.cookbook;
 import android.view.View;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -8,7 +9,7 @@ public interface PublicUserProfileContract {
 
     interface PublicUserProfilePresenter{
         void handleRecipeClicked(String recipeName);
-        void update(String fullname, ArrayList<String> recipes);
+        void update(String fullname, ArrayList<String> recipes, ArrayList<String> recipeIds);
 
     }
 

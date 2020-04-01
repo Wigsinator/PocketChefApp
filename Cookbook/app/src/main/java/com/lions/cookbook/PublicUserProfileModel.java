@@ -23,6 +23,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
     private String username;
     private String fullname;
     private ArrayList<String> recipes;
+    private ArrayList<String> recipeIds;
 
     public PublicUserProfileModel(DatabaseReference db, String username){
         Log.d("TEST", "Can you initialize the model");
@@ -30,6 +31,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
         this.recipes = new ArrayList<String>();
+        this.recipeIds = new ArrayList<String>();
         this.findRecipes();
         this.findFullname();
     }
@@ -40,8 +42,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
 
     public void notifyAllObservers(){
         for (PublicProfileObserver observer : this.observers) {
-            observer.update(this.fullname, this.recipes);
-            //observer.update("david choy", this.recipes);
+            observer.update(this.fullname, this.recipes, this.recipeIds);
         }
     }
 
@@ -87,9 +88,11 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
                     String accountInfoStr = dataSnapshot.getValue().toString();
                     String uid = extractID(accountInfoStr);
                     for (DataSnapshot recipeSnapshot : dataSnapshot.child(uid).child("cookbook").getChildren()){
+                        String recipeId = recipeSnapshot.getKey();
+                        Log.d("recipe key", "recipe key found: ".concat(recipeId));
+                        recipeIds.add(recipeId);
                         String recipeName =  recipeSnapshot.getValue(String.class);
                         recipes.add(recipeName);
-                        Log.d("recipe added", "a recipe was added");
                     }
                     notifyAllObservers();
 

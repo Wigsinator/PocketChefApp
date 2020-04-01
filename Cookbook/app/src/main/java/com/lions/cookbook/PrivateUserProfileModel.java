@@ -25,6 +25,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
     private String fullname;
     private String phoneNumber;
     private ArrayList<String> recipes;
+    private ArrayList<String> recipeIds;
 
 
     public PrivateUserProfileModel(DatabaseReference db){
@@ -32,6 +33,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
         this.db = db;
         this.email = getEmail();
         this.recipes = new ArrayList<String>();
+        this.recipeIds = new ArrayList<String>();
         findUsername();
         findFullname();
         findPhoneNumber();
@@ -54,7 +56,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
 
     public void notifyAllObservers(){
         for (PrivateProfileObserver observer : this.observers) {
-            observer.update(this.email, this.phoneNumber, this.username, this.fullname, this.recipes);
+            observer.update(this.email, this.phoneNumber, this.username, this.fullname, this.recipes, this.recipeIds);
         }
     }
 
@@ -119,6 +121,7 @@ public class PrivateUserProfileModel implements PrivateUserProfileContract.Priva
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot recipeSnapshot: dataSnapshot.getChildren()) {
                     recipes.add(recipeSnapshot.getValue(String.class));
+                    recipeIds.add(recipeSnapshot.getKey());
                 }
                 notifyAllObservers();
             }
