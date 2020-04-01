@@ -234,7 +234,12 @@ public class ViewRecipePresenter implements ViewRecipeContract.ViewRecipeMVPPres
     @Override
     public void toggleSwitchChange(Boolean isToggleOn) {
         nView.showToggleChanged();
-        Boolean status = nModel.publishStateUpdate(isToggleOn);
+        Boolean status;
+        if (isToggleOn){
+            status = nModel.publishRecipe();
+        } else {
+            status = nModel.unpublishRecipe();
+        }
         if (status){
             nView.showToggleSuccess();
         } else {

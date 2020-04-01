@@ -49,16 +49,13 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
         return this.recipe;
     }
 
-    @Override
-    public Boolean publishStateUpdate(Boolean isToggleOn) {
-        return null;
-    }
 
     @Override
     public Boolean deleteRecipe() {
         return Boolean.TRUE;
     }
 
+    @Override
     public Boolean publishRecipe() {
         try{
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -72,6 +69,7 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
         }
     }
 
+    @Override
     public Boolean unpublishRecipe() {
         try{
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();

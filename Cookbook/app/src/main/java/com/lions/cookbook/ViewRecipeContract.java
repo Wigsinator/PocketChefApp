@@ -46,6 +46,7 @@ public interface ViewRecipeContract {
     interface ViewRecipeMVPModel{
         Boolean deleteRecipe(); // True if successful
         Recipe getRecipe();
-        Boolean publishStateUpdate(Boolean isToggleOn); //Returns True if Successful
+        Boolean unpublishRecipe();
+        Boolean publishRecipe();
     }
 }
