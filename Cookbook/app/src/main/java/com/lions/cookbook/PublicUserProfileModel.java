@@ -12,6 +12,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PublicUserProfileModel implements PublicUserProfileContract.PublicUserProfileModel {
     FirebaseAuth mAuth;
@@ -24,6 +25,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
 
     public PublicUserProfileModel(DatabaseReference db, String username){
         Log.d("TEST", "Can you initialize the model");
+        
         this.username = username;
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
