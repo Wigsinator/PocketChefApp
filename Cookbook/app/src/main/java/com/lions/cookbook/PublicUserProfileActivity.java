@@ -38,6 +38,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
     private String userUsername;
     private String[] userFullName;
     private ArrayList<String> recipeNames;
+    private ArrayList<String> recipeKeys;
 
 
     @Override
@@ -119,10 +120,11 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
     }
 
     @Override
-    public void update(String[] Fullname, ArrayList<String> recipes){
+    public void update(String[] Fullname, ArrayList<String> recipes, ArrayList<String> recipeIDs){
         Log.d("TEST", "I'm in the update function in activity");
         this.userFullName = Fullname;//an array
         this.recipeNames = recipes;
+        this.recipeKeys = recipeIDs;
 
         //Populate other info to the UI
         String[] foundFullname = this.userFullName;
@@ -130,8 +132,6 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
             //set values for the textView
             this.firstName.setText(foundFullname[0]);
             this.lastName.setText(foundFullname[1]);
-            // this.firstName.setText(presenter.getFirstName());
-            // this.lastName.setText(presenter.getLastName());
         }
 
 
@@ -144,8 +144,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
             RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String recipeName = (String) RecipeList.getItemAtPosition(i);
-                    presenter.handleRecipeClicked(recipeName);
+                    presenter.handleRecipeClicked(i);
                 }
             });
         }

@@ -81,7 +81,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
     @Override
     public void showUnfilledError(){
-    	Toast.makeText(this, "All fields must be filled in!", Toast.LENGTH_SHORT).show();
+    	Toast.makeText(this, "All fields must be valid input!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -124,7 +124,30 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     	this.userPhoneNumber = findViewById(R.id.phone_number);
     	String value = userPhoneNumber.getText().toString();
     	return value;
-    } 
+    }
 
+    @Override
+    public void showInvalidEmailMessage(){
+        Toast.makeText(this, "please enter a valid gmail!", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void showInvalidUsernameMessage(){
+        Toast.makeText(this, "please enter a valid alphanumeric username!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showInvalidPhoneNumberMessage(){
+        Toast.makeText(this, "please enter a 10-digit valid phone number!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showInvalidNameMessage(){
+        Toast.makeText(this, "please enter a valid name!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showInvalidPasswordMessage(){
+        Toast.makeText(this, "please enter a stronger password that's at least 6 characters!", Toast.LENGTH_SHORT).show();
+    }
 }

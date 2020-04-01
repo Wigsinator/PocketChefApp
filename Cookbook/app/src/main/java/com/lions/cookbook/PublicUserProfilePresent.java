@@ -18,6 +18,7 @@ public class PublicUserProfilePresent implements PublicUserProfileContract.Publi
     String userFullName;
     String[] arrOfNames;
     ArrayList<String> recipeNames;
+    ArrayList<String> recipeIDs;
 
 
     PublicUserProfilePresent(PublicUserProfileContract.PublicUserProfileView view, PublicUserProfileContract.PublicUserProfileModel model){
@@ -34,14 +35,15 @@ public class PublicUserProfilePresent implements PublicUserProfileContract.Publi
 
     public void notifyAllObservers(){
         for (PublicProfileActivityObserver observer : this.observers) {
-            observer.update(this.arrOfNames, this.recipeNames);
+            observer.update(this.arrOfNames, this.recipeNames,this.recipeIDs);
         }
     }
 
     @Override
-    public void update(String Fullname, ArrayList<String> recipes){
+    public void update(String Fullname, ArrayList<String> recipes, ArrayList<String> recipeKeys){
         this.userFullName = Fullname;
         this.recipeNames = recipes;
+        this.recipeIDs =  recipeKeys;
 
         if(this.userFullName!= null){
             this.arrOfNames = this.userFullName.split(" ");
@@ -53,20 +55,13 @@ public class PublicUserProfilePresent implements PublicUserProfileContract.Publi
 
 
     @Override
-    public void handleRecipeClicked(String recipeName) {
-        nView.goToViewRecipe(recipeName);
+    public void handleRecipeClicked(int indexClicked) {
+        Log.d("TEST", "Finish getting recipe");
+        nView.goToViewRecipe(this.recipeIDs.get(indexClicked));
+        Log.d("TEST", "able to go to view recipe");
     }
 
-    public String getFirstName(){
-        return "david";
-    }
-    public String getLastName(){
-        return "choy";
-    }
 
-    public String getUsername(){
-        return "davidusername";
-    }
 
 
 }

@@ -43,6 +43,7 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
     private String userUsername;
     private String[] userFullName;
     private ArrayList<String> recipeNames;
+    private ArrayList<String> recipeIDs;
 
 
     @Override
@@ -140,12 +141,13 @@ public class PrivateUserProfileActivity extends AppCompatActivity implements Pri
     }
 
     @Override
-    public void update(String email, String phone, String username, String[] Fullname, ArrayList<String> recipes){
+    public void update(String email, String phone, String username, String[] Fullname, ArrayList<String> recipes, ArrayList<String> recipeKeys){
         this.userEmail = email;
         this.userFullName = Fullname;
         this.userUsername = username;
         this.userPhoneNumber = phone;
         this.recipeNames = recipes;
+        this.recipeIDs = recipeKeys;
 
         //Populate other info to the UI
         String[] foundFullname = this.userFullName;

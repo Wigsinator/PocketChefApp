@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -19,6 +21,8 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     private String userFirstName;
     private String userLastName;
     private String userPhoneNumber;
+
+
 
 
     CreateAccountPresent(CreateAccountContract.CreateAccountMVPView nView,CreateAccountContract.CreateAccountMVPModel nModel) {
@@ -39,17 +43,23 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
     	this.userEmail = this.view.getEmail();
 
 
-        if (this.userEmail == null || this.userEmail.equals("")){
+        if (!validateEmail(this.userEmail)){
+            this.view.showInvalidEmailMessage();
             any_errors = true;
-        }else if (this.userPassword == null || this.userPassword.equals("")){
+        }else if (!validateName(this.userFirstName)){
+            this.view.showInvalidNameMessage();
             any_errors = true;
-        }else if (this.username == null || this.username.equals("")){
+        }else if (!validateName(this.userLastName)){
+            this.view.showInvalidNameMessage();
             any_errors = true;
-        }else if(this.userFirstName == null ||this.userFirstName.equals("")){
+        }else if(!validatePassword(this.userPassword)){
+            this.view.showInvalidPasswordMessage();
             any_errors = true;
-        }else if(this.userLastName == null ||this.userLastName.equals("")){
+        }else if(!validateUsername(this.username)){
+            this.view.showInvalidUsernameMessage();
             any_errors = true;
-        }else if(this.userPhoneNumber == null ||this.userPhoneNumber.equals("")){
+        }else if(!validatePhoneNumber(this.userPhoneNumber)){
+            this.view.showInvalidPhoneNumberMessage();
             any_errors = true;
         }
 
@@ -68,5 +78,60 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             }
         }
 
+    }
+
+    public boolean validateEmail(String email){
+        if (email == null || email.equals("")){
+            return false;
+        }else {
+            String gmailRegex = "^[\\w.+\\-]+@gmail\\.com$";
+            CharSequence inputStr = email;
+            Pattern pattern = Pattern.compile(gmailRegex, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(inputStr);
+            return matcher.matches();
+        }
+
+    }
+
+    public boolean validateUsername(String Username){
+        if (Username == null || Username.equals("")){
+            return false;
+        }else {
+            String alphanumericRegex = "^[a-zA-Z0-9]+$";
+            Pattern alphanumericPattern = Pattern.compile(alphanumericRegex);
+            Matcher matcher = alphanumericPattern.matcher(Username);
+            return matcher.matches();
+        }
+    }
+
+
+    public boolean validatePassword(String password){
+        if (password == null || password.equals("") || password.length() < 6){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public boolean validatePhoneNumber(String phone){
+        if (phone == null || phone.equals("") || phone.length() < 10){
+            return false;
+        }else {
+            String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(phone);
+            return matcher.matches();
+        }
+    }
+
+    public boolean validateName(String name) {
+        if (name == null || name.equals("")) {
+            return false;
+        } else {
+            String regex = "[a-zA-Z]+";
+            Pattern alphabetPattern = Pattern.compile(regex);
+            Matcher matcher = alphabetPattern.matcher(name);
+            return matcher.matches();
+        }
     }
 }
