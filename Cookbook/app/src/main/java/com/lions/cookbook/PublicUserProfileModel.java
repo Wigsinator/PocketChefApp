@@ -8,11 +8,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class PublicUserProfileModel implements PublicUserProfileContract.PublicUserProfileModel {
     FirebaseAuth mAuth;
@@ -22,6 +23,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
     private String username;
     private String fullname;
     private ArrayList<String> recipes;
+    private ArrayList<String> recipeIds;
 
     public PublicUserProfileModel(DatabaseReference db, String username){
         Log.d("TEST", "Can you initialize the model");
@@ -30,6 +32,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
         this.recipes = new ArrayList<String>();
+        this.recipeIds = new ArrayList<String>();
         this.findRecipes();
         this.findFullname();
     }
@@ -40,9 +43,12 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
 
     public void notifyAllObservers(){
         for (PublicProfileObserver observer : this.observers) {
-            observer.update(this.fullname, this.recipes);
-            //observer.update("david choy", this.recipes);
+            observer.update(this.fullname, this.recipes, this.recipeIds);
         }
+    }
+
+    public String extractID(String accountInfoStr){
+        return accountInfoStr.substring(accountInfoStr.indexOf('{')+1, accountInfoStr.indexOf('='));
     }
 
     public void findFullname(){
@@ -51,13 +57,17 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                    fullname = dataSnapshot.child("fullname").getValue(String.class);
+                    String accountInfoStr = dataSnapshot.getValue().toString();
+                    String uid = extractID(accountInfoStr);
+                    fullname = dataSnapshot.child(uid).child("fullname").getValue(String.class);
+                    if (fullname == null){
+                        Log.d("fnn", "full name was null");
+                    }
                     notifyAllObservers();
-                    if (fullname!= null) {
+                    if (fullname != null) {
                         Log.d("TEST", "got the correct FULL NAME in public profile MODEL:".concat(fullname));
                     }
                 }
-
             }
 
             @Override
@@ -74,9 +84,16 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("inside OnDataChange", "inside recipe OnDataChange");
                 if (dataSnapshot.exists()){
-                    for (DataSnapshot recipeSnapshot : dataSnapshot.child("recipes").getChildren()){
-                        recipes.add(recipeSnapshot.getValue(String.class));
+                    String accountInfoStr = dataSnapshot.getValue().toString();
+                    String uid = extractID(accountInfoStr);
+                    for (DataSnapshot recipeSnapshot : dataSnapshot.child(uid).child("cookbook").getChildren()){
+                        String recipeId = recipeSnapshot.getKey();
+                        Log.d("recipe key", "recipe key found: ".concat(recipeId));
+                        recipeIds.add(recipeId);
+                        String recipeName =  recipeSnapshot.getValue(String.class);
+                        recipes.add(recipeName);
                     }
                     notifyAllObservers();
 
