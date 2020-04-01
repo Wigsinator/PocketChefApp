@@ -17,12 +17,13 @@ public interface CreateAccountContract {
 
     interface CreateAccountMVPModel {
         //add new user to the database
-        void addNewUser(String username,String userPassword, String userName, String firstName, String lastname, String phone);
-        void storeUserInfo(String userName, String firstName, String lastName, String phone);
+        void addNewUser(String email,String userPassword, String username, String firstname, String lastname, String phone);
+        void storeUserInfo(String email, String userName, String firstName, String lastName, String phone);
         void addObserver(CreateAccountObserver observer);
+        void validateUsername(String username);
+        void validateEmail(String email);
         void notifyObservers();
     }
-
 
     interface CreateAccountMVPView{
 

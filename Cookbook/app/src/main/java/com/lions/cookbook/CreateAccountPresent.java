@@ -32,6 +32,7 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
         this.model = nModel;
         this.observers = new ArrayList<CreateAccountObserver>();
         this.model.addObserver(this);
+        this.error_message = "";
     }
 
     @Override
@@ -67,26 +68,28 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             any_errors = true;
         }
 
-        if (any_errors){
+        if (any_errors) {
             this.view.showUnfilledError();
-        } else{
-
-            //add new user's info to the database
-            this.model.addNewUser(this.userEmail,this.userPassword, this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
-
-            if (this.error_message == null){
-                this.view.showCreateAccountSuccess();
-                this.view.goToLoginScreen();
-            }else {
-                this.view.showUserExistsMessage(this.error_message);
-                this.view.showCreateAccountFailure();
-            }
         }
 
+        this.model.validateUsername(this.username);
+        this.model.validateEmail(this.userEmail);
     }
 
     public void update(String error){
         this.error_message = error;
+        if (this.error_message.equals("")){
+            Log.d("successful registration", "successful attempt");
+            this.model.addNewUser(this.userEmail, this.userPassword, this.username, this.userFirstName, this.userLastName, this.userPhoneNumber);
+            this.view.showCreateAccountSuccess();
+            this.view.goToLoginScreen();
+        }
+        else{
+            Log.d("failed registration", "failed attempt");
+            this.view.showUserExistsMessage(this.error_message);
+            this.view.showCreateAccountFailure();
+            this.error_message = ""; //reset error message after failure
+        }
     }
 
     public boolean validateEmail(String email){
@@ -112,7 +115,6 @@ public class CreateAccountPresent implements CreateAccountContract.CreateAccount
             return matcher.matches();
         }
     }
-
 
     public boolean validatePassword(String password){
         if (password == null || password.equals("") || password.length() < 6){
