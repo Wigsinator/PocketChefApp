@@ -29,7 +29,13 @@ public class CreateAccountModel implements CreateAccountContract.CreateAccountMV
     }
 
     public void addObserver(CreateAccountObserver observer){
-        observer.update(this.errorMessage);
+        this.observers.add(observer);
+    }
+
+    public void notifyObservers(){
+        for (CreateAccountObserver observer: this.observers){
+            observer.update(this.errorMessage);
+        }
     }
 
     public void validateUsername(String username){
