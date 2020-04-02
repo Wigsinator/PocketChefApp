@@ -27,7 +27,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
 
     public PublicUserProfileModel(DatabaseReference db, String username){
         Log.d("TEST", "Can you initialize the model");
-        
+
         this.username = username;
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
