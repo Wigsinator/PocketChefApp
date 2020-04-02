@@ -9,6 +9,7 @@ public class Recipe {
     private List<Ingredient> ingredients;
     private List<String> tags;
     private List<String> steps;
+    private Boolean published;
 
     private Recipe(){}
 
@@ -19,6 +20,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.tags = tags;
         this.steps = steps;
+        this.published = false;
     }
 
     public void setTitle(String title){
@@ -45,6 +47,10 @@ public class Recipe {
         this.steps = steps;
     }
 
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
+
     public String getTitle(){
         return this.title;
     }
@@ -65,6 +71,10 @@ public class Recipe {
 
     public List<String> getSteps(){
         return this.steps;
+    }
+
+    public Boolean getPublished() {
+        return published;
     }
 }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,25 +16,30 @@ import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;import android.widget.TextView;
+import com.google.firebase.database.FirebaseDatabase;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class PublicUserProfileActivity extends AppCompatActivity implements PublicUserProfileContract.PublicUserProfileView{
+public class PublicUserProfileActivity extends AppCompatActivity implements PublicUserProfileContract.PublicUserProfileView, PublicProfileActivityObserver{
     private PublicUserProfilePresent presenter;
     private PublicUserProfileModel model;
     private DatabaseReference mDatabase;
     private ArrayAdapter<String> arrayAdapter;
 
-    private TextView firstName;
-    private TextView lastName;
-    private TextView username;
-    private TextView author;
-
     private Button dietaryBtn;
     private Button followingBtn;
     private Button followersBtn;
+
+    private TextView firstName;
+    private TextView lastName;
+    private TextView username;
+
+    private String userUsername;
+    private String[] userFullName;
+    private ArrayList<String> recipeNames;
+    private ArrayList<String> recipeKeys;
 
 
     @Override
@@ -43,16 +49,21 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
         setContentView(R.layout.view_account_public_activity);
 
         //Set up MVP
+        this.userUsername = getIntent().getStringExtra("USERNAME");
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        model = new PublicUserProfileModel(mDatabase);
+        model = new PublicUserProfileModel(mDatabase, this.userUsername);
         presenter = new PublicUserProfilePresent(this, model);
 
+        presenter.addObserver(this);//add the activity to observer list
+
+        Log.d("TEST", "can you reach here");
         //set up textView
         this.firstName = (TextView) findViewById(R.id.firstName);
         this.lastName = (TextView) findViewById(R.id.lastName);
-        this.username = (TextView) findViewById(R.id.username);
-        this.author = (TextView) findViewById(R.id.username);
 
+        this.username = (TextView) findViewById(R.id.username);
+        this.username.setText(this.userUsername);
 
 
         //set up event handlers for the buttons
@@ -60,7 +71,7 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
         this.dietaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //handler
+
             }
         });
 
@@ -79,40 +90,6 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
                 //handler
             }
         });
-
-
-        //Populate other info to the UI
-        String foundFullname = model.getFullname();
-        //Log.d("TEST", "the full name of the current user is");
-        //Log.d("TEST", foundFullname);
-        if ( (foundFullname!= null) && (!foundFullname.equals(""))){
-            String[] arrOfnames = foundFullname.split(" ", 3);
-            //set values for the textView
-            this.firstName.setText(arrOfnames[0]);
-            this.lastName.setText(arrOfnames[1]);
-        }
-
-
-        String foundUsername = model.getUsername();
-        if ( (foundUsername!= null) && (!foundUsername.equals(""))) {
-            this.username.setText(foundUsername);
-        }
-
-
-        ArrayList<String> foundRecipes = presenter.getRecipeNames();
-        if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
-            //Populate with List of Recipe names
-            final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
-            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
-            RecipeList.setAdapter(arrayAdapter);
-            RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String recipeName = (String) RecipeList.getItemAtPosition(i);
-                    presenter.handleRecipeClicked(recipeName);
-                }
-            });
-        }
 
 
         //Set up Navigation panel
@@ -141,18 +118,46 @@ public class PublicUserProfileActivity extends AppCompatActivity implements Publ
                         return false;
                     }
                 });
+    }
+
+    @Override
+    public void update(String[] Fullname, ArrayList<String> recipes, ArrayList<String> recipeIDs){
+        Log.d("TEST", "I'm in the update function in activity");
+        this.userFullName = Fullname;//an array
+        this.recipeNames = recipes;
+        this.recipeKeys = recipeIDs;
+
+        //Populate other info to the UI
+        String[] foundFullname = this.userFullName;
+        if ( (foundFullname!= null) && (foundFullname.length > 0)){
+            //set values for the textView
+            this.firstName.setText(foundFullname[0]);
+            this.lastName.setText(foundFullname[1]);
+        }
 
 
-    }//onCreate() ends
+        ArrayList<String> foundRecipes = this.recipeNames;
+        if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
+            //Populate with List of Recipe names
+            final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
+            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
+            RecipeList.setAdapter(arrayAdapter);
+            RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    presenter.handleRecipeClicked(i);
+                }
+            });
+        }
+
+    }
+
 
     @Override
     public void goToViewRecipe(String clickedRecipe) {
         Intent intent = new Intent(this, ViewRecipeActivity.class);
         intent.putExtra("RECIPE", clickedRecipe);
-        Log.d("TEST", "Created recipe to be transferred to new intent");
         startActivity(intent);
-        Log.d("TEST", "Starting new intent");
-
     }
 
-}//class ends
+}

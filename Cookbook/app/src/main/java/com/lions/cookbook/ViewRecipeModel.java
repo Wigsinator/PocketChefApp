@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,12 +19,14 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
 
     private DatabaseReference mref;
     private Recipe recipe;
+    private String recipeKey;
     private ViewRecipeContract.ViewRecipeMVPPresenter mpresenter;
 
     public ViewRecipeModel(ViewRecipeContract.ViewRecipeMVPPresenter presenter, String recipeKey){
         this.mpresenter = presenter;
         this.recipe = null;
         this.mref = FirebaseDatabase.getInstance().getReference().child("recipes").child(recipeKey);
+        this.recipeKey = recipeKey;
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -45,8 +49,37 @@ public class ViewRecipeModel implements ViewRecipeContract.ViewRecipeMVPModel {
         return this.recipe;
     }
 
+
     @Override
     public Boolean deleteRecipe() {
         return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean publishRecipe() {
+        try{
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            this.recipe.setPublished(true);
+            this.mref.child("published").setValue(true);
+            FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                    .child("published_recipes").child(this.recipeKey).setValue(this.recipe.getTitle());
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean unpublishRecipe() {
+        try{
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            this.recipe.setPublished(false);
+            this.mref.child("published").setValue(false);
+            FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                    .child("published_recipes").child(this.recipeKey).removeValue();
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }

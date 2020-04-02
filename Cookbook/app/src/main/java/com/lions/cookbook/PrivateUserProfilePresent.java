@@ -21,6 +21,7 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     String userFullName;
     String[] arrOfNames;
     ArrayList<String> recipeNames;
+    private ArrayList<String> RecipeKeyList;
 
 
     PrivateUserProfilePresent(PrivateUserProfileContract.PrivateUserProfileView view, PrivateUserProfileContract.PrivateUserProfileModel model){
@@ -37,17 +38,18 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
 
     public void notifyAllObservers(){
         for (PrivateProfileActivityObserver observer : this.observers) {
-            observer.update(this.userEmail, this.userPhoneNumber, this.userUsername, this.arrOfNames, this.recipeNames);
+            observer.update(this.userEmail, this.userPhoneNumber, this.userUsername, this.arrOfNames, this.recipeNames, this.RecipeKeyList);
         }
     }
 
     @Override
-    public void update(String email, String phone, String username, String Fullname, ArrayList<String> recipes){
+    public void update(String email, String phone, String username, String Fullname, ArrayList<String> recipes,ArrayList<String> recipeIDs){
         this.userEmail = email;
         this.userFullName = Fullname;
         this.userUsername = username;
         this.userPhoneNumber = phone;
         this.recipeNames = recipes;
+        this.RecipeKeyList = recipeIDs;
 
         if(this.userFullName!= null){
             this.arrOfNames = this.userFullName.split(" ");
@@ -92,8 +94,10 @@ public class PrivateUserProfilePresent implements PrivateUserProfileContract.Pri
     }
 
     @Override
-    public void handleRecipeClicked(String recipeName) {
-        nView.goToViewRecipe(recipeName);
+    public void handleRecipeClicked(int indexClicked) {
+        Log.d("TEST", "Finish getting recipe");
+        nView.goToViewRecipe(this.RecipeKeyList.get(indexClicked));
+        Log.d("TEST", "able to go to view recipe");
     }
 
 }

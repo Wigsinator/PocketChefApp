@@ -1,26 +1,25 @@
 package com.lions.cookbook;
 import android.view.View;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
-public class PublicUserProfileContract {
+public interface PublicUserProfileContract {
 
     interface PublicUserProfilePresenter{
-        ArrayList getRecipeNames();
-        void handleRecipeClicked(String recipeName);
-       // String getFullName();
-       // String getUsername();
+        void handleRecipeClicked(int recipeName);
+        void update(String fullname, ArrayList<String> recipes, ArrayList<String> recipeIds);
 
     }
 
     interface PublicUserProfileModel {
+        void findFullname();
+        void findRecipes();
+        void notifyAllObservers();
+        void addObserver(PublicProfileObserver observer);
 
-        String getFullname();
-        String getUsername();
-        ArrayList<String> getRecipes();
     }
-
 
     interface PublicUserProfileView{
         void goToViewRecipe(String clickedRecipe);
