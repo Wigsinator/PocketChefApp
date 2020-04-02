@@ -96,7 +96,7 @@
             android:layout_marginTop="605dp"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="210dp"
-            android:background="#10c4c4c4"
+            android:background="@drawable/login_signup_btn"
             android:textSize="15dp"
             android:textColor="@color/colorBlue"
             tools:text="Sign Up Now!" />
