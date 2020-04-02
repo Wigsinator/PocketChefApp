@@ -107,5 +107,5 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
             }
         };
         query.addValueEventListener(recipeListener);
+        }
     }
-}
