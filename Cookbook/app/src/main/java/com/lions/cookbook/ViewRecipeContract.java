@@ -21,8 +21,13 @@ public interface ViewRecipeContract {
         void populateRecipeIngredients(List<Ingredient> recipeIngredients);
         void populateRecipeServing(int recipeServingSize);
         void populateAuthorName(String recipeOwner);
+        void populatePublished(Boolean isPublished);
 
         void goToViewAuthorProfile(String authorUsername);
+
+        void showToggleChanged();
+        void showToggleSuccess();
+        void showToggleFailure();
 
     }
 
@@ -35,10 +40,13 @@ public interface ViewRecipeContract {
         void populateValues(Recipe theRecipeObject);
         void handleAuthorClicked();
         void setnModel(ViewRecipeMVPModel model);
+        void toggleSwitchChange(Boolean isToggleOn);
 
     }
     interface ViewRecipeMVPModel{
         Boolean deleteRecipe(); // True if successful
         Recipe getRecipe();
+        Boolean unpublishRecipe();
+        Boolean publishRecipe();
     }
 }
