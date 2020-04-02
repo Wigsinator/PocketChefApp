@@ -215,3 +215,32 @@ As a user I want to be able to access my recipes that I created inside my cookbo
 **Criteria of Satisfaction:**
 1. All recipes that are associated with a user in the database should be displayed in the cookbook.
 2. Each recipe should retrieve the information stored in the database for the recipe view.
+
+### **LION-101 Maintain User's Login State**
+- Priority: Medium 
+- Points: 3
+
+As a previously logged-in user, I want to be taken to the main app activity when I open the app again so that I don't have to authenticate again.
+
+**Criteria of Satisfaction:**
+1. When a previously logged-in user open the app again, the user will be taken to the main app activity so that they don't have to authenticate again.
+2. If the user wants to switch account, they'll need to explicitly log out.
+
+### **LION-102 Logout**
+- Priority: Medium
+- Points: 1
+
+As a logged-in user, I want to log out of my current account, so that I can switch to another account if I want.
+
+**Criteria of Satisfaction:**
+1. When a user logs out, the user will be redirected back to the login page and will not be able to create a recipe or view other user's recipes.
+
+### **LION-106 View Public User Profile**
+- Priority: Medium
+- Points: 5
+
+As a user, I want to be able to see someone else's user profile so that I can see their posted recipes and other info about that user.
+
+**Criteria of Satisfaction:**
+1. All the published recipes from that user are displayed on their user profile.
+2. Names and other info about that user are also displayed.

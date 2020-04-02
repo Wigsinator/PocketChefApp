@@ -11,9 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +80,16 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
             @Override
             public void onClick(View v) {
                 presenter.handleAuthorClicked();
+            }
+        });
+
+        //Set up listener for public/private toggler
+        Switch mySwitch = (Switch)  findViewById(R.id.publishSwitch);
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                presenter.toggleSwitchChange(isChecked);
             }
         });
 
@@ -149,6 +161,12 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         this.authorBtn.setText(authorUsername);
     }
 
+    @Override
+    public void populatePublished(Boolean isPublished) {
+        Switch mySwitch = (Switch)  findViewById(R.id.publishSwitch);
+        mySwitch.setChecked(isPublished);
+    }
+
 
     @Override
     public String getServingSize() {
@@ -210,5 +228,22 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
         startActivity(intent);
         Log.d("TEST", "Starting new intent");
 
+    }
+
+    //Private/Publish options
+    @Override
+    public void showToggleChanged() {
+        Toast.makeText(this, "Publish status updating...", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void showToggleSuccess() {
+        Toast.makeText(this, "Publish status update complete", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToggleFailure() {
+        Toast.makeText(this, "Publish status update failed", Toast.LENGTH_SHORT).show();
     }
 }
