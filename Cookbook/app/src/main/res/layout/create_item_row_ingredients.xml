@@ -14,7 +14,6 @@
         android:layout_margin="6dp"
         android:textSize="18dp"
         android:background="@drawable/text_frame"
-        android:text="Ingredient"
         android:textColor="@color/colorText"
         android:textStyle="bold"/>
 
@@ -27,7 +26,6 @@
         android:textSize="18dp"
         android:background="@drawable/text_frame"
         android:layout_toRightOf="@id/itemIngredient"
-        android:text="Amt"
         android:textColor="@color/colorText"
         android:textStyle="bold"/>
 
@@ -40,7 +38,6 @@
         android:textSize="18dp"
         android:background="@drawable/text_frame"
         android:layout_toRightOf="@id/itemAmount"
-        android:text="Measurement"
         android:textColor="@color/colorText"
         android:textStyle="bold"/>
 

@@ -10,11 +10,9 @@
             android:id="@+id/stepField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:padding="10dp"
             android:layout_margin="6dp"
             android:background="@drawable/text_frame"
-            android:text="New Step"
             android:textSize="18dp"
             android:textColor="@color/colorText"
             android:textStyle="bold"/>

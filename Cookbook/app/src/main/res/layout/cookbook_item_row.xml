@@ -14,7 +14,6 @@
         android:layout_margin="6dp"
         android:textSize="18dp"
         android:background="@drawable/text_frame"
-        android:text="New Recipe"
         android:textColorHint="@color/colorText"
         android:textStyle="bold"/>
 
