@@ -5,12 +5,12 @@
     <data>
         <variable
             name="presenter"
-            type = "com.lions.cookbook.CreateRecipePresent"/>
+            type = "com.lions.cookbook.PublicUserProfilePresent"/>
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CreateAccountActivity">
+        tools:context=".PublicUserProfileActivity">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -51,18 +51,38 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/usernameLayout"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="5dp"
-                android:text="username"
-                android:textColor="#4d4d4d"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/usernameAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:text="\@ "
+                    android:textColor="@color/colorBlue"
+                    android:textSize="15dp"
+                    android:layout_toLeftof="@+id\username"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginTop="5dp"
+                    android:text="username"
+                    android:textColor="@color/colorBlue"
+                    android:layout_toRightOf="@+id/usernameAt"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/ButtonLayout"
@@ -71,15 +91,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:layout_alignParentBottom="true">
-
-<!--                <Button-->
-<!--                    android:id="@+id/settingsBtn"-->
-<!--                    android:background="@drawable/acct_button_frame"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:drawableLeft="@drawable/ic_acct_settings"-->
-<!--                    android:paddingLeft="10dp"/>-->
-
 
                 <Button
                     android:id="@+id/dietaryBtn"
@@ -111,18 +122,6 @@
                     android:layout_marginStart="20dp"
                     android:paddingLeft="9dp"
                     />
-
-<!--                <Button-->
-<!--                    android:id="@+id/logoutBtn"-->
-<!--                    android:background="@drawable/acct_button_frame"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:drawableLeft="@drawable/ic_acct_logout"-->
-<!--                    android:layout_toRightOf="@id/followersBtn"-->
-<!--                    android:layout_gravity="left"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:paddingLeft="13dp"/>-->
-
             </RelativeLayout>
 
             <ImageView
