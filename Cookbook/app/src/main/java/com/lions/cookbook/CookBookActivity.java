@@ -94,7 +94,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
             //Populate with List of Recipe names
             final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
-            arrayAdapter = new ArrayAdapter<String>(this, R.layout.cookbook_item_row, foundRecipes);
+            arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_row_recipe, foundRecipes);
             RecipeList.setAdapter(arrayAdapter);
             RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
