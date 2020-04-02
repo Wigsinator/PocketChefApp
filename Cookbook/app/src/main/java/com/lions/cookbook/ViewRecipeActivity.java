@@ -20,10 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lions.cookbook.databinding.ActivityViewRecipeBindingImpl;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeContract.ViewRecipeMVPView {
@@ -119,7 +116,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     public void populateRecipeSteps(List<String> recipeSteps){
         recipesteps = new ArrayList<String>(recipeSteps);
         final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recipesteps);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.create_item_row_steps, recipesteps);
         RecipeList.setAdapter(arrayAdapter);
     }
 
