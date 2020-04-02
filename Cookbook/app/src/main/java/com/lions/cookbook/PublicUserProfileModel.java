@@ -27,7 +27,7 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
 
     public PublicUserProfileModel(DatabaseReference db, String username){
         Log.d("TEST", "Can you initialize the model");
-        
+
         this.username = username;
         this.mAuth = FirebaseAuth.getInstance();
         this.db = db;
@@ -88,11 +88,13 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
                 if (dataSnapshot.exists()){
                     String accountInfoStr = dataSnapshot.getValue().toString();
                     String uid = extractID(accountInfoStr);
-                    for (DataSnapshot recipeSnapshot : dataSnapshot.child(uid).child("cookbook").getChildren()){
+                    for (DataSnapshot recipeSnapshot : dataSnapshot.child(uid).child("published_recipes").getChildren()){
                         String recipeId = recipeSnapshot.getKey();
-                        Log.d("recipe key", "recipe key found: ".concat(recipeId));
+                        Log.d("recipe key", "recipe key found for public: ".concat(recipeId));
+                        Log.d("recipe snapshot", "recipe snapshot: ".concat(recipeSnapshot.child(recipeId).toString()));
                         recipeIds.add(recipeId);
-                        String recipeName =  recipeSnapshot.getValue(String.class);
+                        String recipeName = recipeSnapshot.getValue(String.class);
+                        Log.d("recipe title", "recipe title found: ".concat(recipeName));
                         recipes.add(recipeName);
                     }
                     notifyAllObservers();
@@ -105,5 +107,5 @@ public class PublicUserProfileModel implements PublicUserProfileContract.PublicU
             }
         };
         query.addValueEventListener(recipeListener);
-        }
     }
+}
