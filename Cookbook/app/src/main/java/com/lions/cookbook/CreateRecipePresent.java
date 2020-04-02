@@ -61,12 +61,13 @@ public class CreateRecipePresent implements CreateRecipeContract.CreateRecipeMVP
             List<String> steps = nView.getRecipeSteps();
             List<String> fake_tags = new ArrayList<String>();
             fake_tags.add("Beginner");
+            Boolean isPublished = nView.getPublished();
             while (this.username == null) {} // Just making sure the username is pulled.
             Recipe new_recipe = new Recipe(title, this.username, serving_size, ingredients, fake_tags, steps); //Note: Tags feature has not been added
             for (int i =0; i<ingredients.size();i++){
                 Log.d("ingredient", new_recipe.getIngredients().get(i).getName());
             }
-
+            new_recipe.setPublished(isPublished);
             Boolean addSuccess = nModel.addRecipe(new_recipe);
             if (addSuccess){
                 nView.showSuccessfulCreation();

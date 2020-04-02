@@ -22,6 +22,7 @@ public interface CreateRecipeContract {
         ArrayList<String> getRecipeSteps();
         String getRecipeTitle();
         String getNewStep();
+        Boolean getPublished();
         void addNewStep(String new_step);
         String getNewIngredient();
         String getNewIngredientAmount();
