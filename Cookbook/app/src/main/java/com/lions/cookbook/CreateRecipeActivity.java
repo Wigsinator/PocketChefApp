@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 
@@ -146,6 +147,13 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
         EditText text = findViewById(R.id.stepField);
         String aStep = text.getText().toString();
         return aStep;
+    }
+
+    @Override
+    public Boolean getPublished(){
+        Switch toggle = findViewById(R.id.publishSwitch);
+        return toggle.isChecked();
+
     }
 
     @Override
