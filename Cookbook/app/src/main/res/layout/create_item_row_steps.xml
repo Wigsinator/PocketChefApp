@@ -16,6 +16,6 @@
             android:background="@drawable/text_frame"
             android:text="New Step"
             android:textSize="18dp"
-            android:textColorHint="@color/colorText"
+            android:textColor="@color/colorText"
             android:textStyle="bold"/>
 </RelativeLayout>
