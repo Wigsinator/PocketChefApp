@@ -216,6 +216,7 @@
                         android:layout_margin="6dp"
                         android:background="@drawable/text_frame"
                         android:layout_toLeftOf="@id/btnAddStep"
+                        android:paddingLeft="10dp"
                         android:hint="New Step"
                         android:textColorHint="@color/colorText"
                         android:textStyle="bold"/>
