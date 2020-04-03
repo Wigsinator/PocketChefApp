@@ -52,12 +52,13 @@
 
                 <Button
                     android:id="@+id/RecipeAuthor"
-                    android:layout_width="90dp"
+                    android:layout_width="200dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="center_vertical"
+                    android:gravity="left|center_vertical"
                     android:layout_toRightOf="@+id/by"
                     android:text="username"
                     android:background="#00FFFFFF"
+                    android:paddingLeft="5dp"
                     android:textSize="15dp"
                     android:textColor="@color/colorBlue"
                     android:textStyle="bold"
