@@ -127,7 +127,7 @@ public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeC
     public void populateRecipeSteps(List<String> recipeSteps){
         recipesteps = new ArrayList<String>(recipeSteps);
         final ListView RecipeList = (ListView)findViewById(R.id.steps); //Fill in with actual id of List view
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_row_steps, recipesteps);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recipesteps);
         RecipeList.setAdapter(arrayAdapter);
     }
 

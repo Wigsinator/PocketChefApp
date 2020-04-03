@@ -52,7 +52,7 @@ public class CreateRecipeActivity extends AppCompatActivity implements CreateRec
         //Set up display of recipe steps entered
         ListView recipeStepsLV = findViewById(R.id.steps);
         recipeSteps = new ArrayList<>();
-        recipeStepsAdapter = new ArrayAdapter<String>(this, R.layout.item_row_steps, recipeSteps);
+        recipeStepsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recipeSteps);
         recipeStepsLV.setAdapter(recipeStepsAdapter);
 
         //Set up display of ingredients entered
