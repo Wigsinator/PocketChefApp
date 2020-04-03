@@ -1,13 +1,10 @@
 package com.lions.cookbook;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * VIEW: Displays the CookBook Screen
@@ -38,7 +34,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cook_book_activity);
+        setContentView(R.layout.cookbook_activity);
 
         //Set up values
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -98,7 +94,7 @@ public class CookBookActivity extends AppCompatActivity implements CookBookContr
         if( foundRecipes!= null && !foundRecipes.isEmpty() ) {
             //Populate with List of Recipe names
             final ListView RecipeList = (ListView)findViewById(R.id.recipeList); //Fill in with actual id of List view
-            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foundRecipes);
+            arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_row_recipe, foundRecipes);
             RecipeList.setAdapter(arrayAdapter);
             RecipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

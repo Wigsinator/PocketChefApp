@@ -58,6 +58,7 @@
                 android:textSize="15dp"
                 android:textColorHint="#4d4d4d"
                 android:layout_height="match_parent"
+                android:inputType="textPassword"
                 android:id="@+id/user_password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,14 +92,14 @@
         <!--  Sign up Button -->
         <Button
             android:id="@+id/signUpLink"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_marginTop="605dp"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="210dp"
-            android:background="#00c4c4c4"
+            android:background="@drawable/login_signup_btn"
             android:textSize="15dp"
-            android:textColor="#124FA9"
+            android:textColor="@color/colorBlue"
             tools:text="Sign Up Now!" />
 
     </RelativeLayout>

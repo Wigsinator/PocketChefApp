@@ -20,12 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.lions.cookbook.databinding.ActivityViewRecipeBindingImpl;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ViewRecipeActivity extends AppCompatActivity implements ViewRecipeContract.ViewRecipeMVPView {
