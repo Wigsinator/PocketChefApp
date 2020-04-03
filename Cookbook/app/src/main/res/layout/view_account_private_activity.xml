@@ -69,7 +69,7 @@
                     android:text="\@ "
                     android:textColor="@color/colorBlue"
                     android:textSize="15dp"
-                    android:layout_toLeftof="@+id\username"
+                    android:layout_alignParentLeft="true"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -102,7 +102,7 @@
                     android:text="Phone Number:  "
                     android:textColor="@color/colorGreen"
                     android:textSize="15dp"
-                    android:layout_toLeftof="@+id\phoneNumber"
+                    android:layout_alignParentLeft="true"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -136,7 +136,7 @@
                     android:text="email:  "
                     android:textColor="@color/colorGreen"
                     android:textSize="15dp"
-                    android:layout_toLeftof="@+id\email"
+                    android:layout_alignParentLeft="true"
                     android:textStyle="bold"/>
 
                 <TextView

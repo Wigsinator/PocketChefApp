@@ -67,7 +67,7 @@
                     android:text="\@ "
                     android:textColor="@color/colorBlue"
                     android:textSize="15dp"
-                    android:layout_toLeftof="@+id\username"
+                    android:layout_alignParentLeft="true"
                     android:textStyle="bold"/>
 
                 <TextView

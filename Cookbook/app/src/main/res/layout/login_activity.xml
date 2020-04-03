@@ -58,6 +58,7 @@
                 android:textSize="15dp"
                 android:textColorHint="#4d4d4d"
                 android:layout_height="match_parent"
+                android:inputType="textPassword"
                 android:id="@+id/user_password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
